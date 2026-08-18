@@ -1,4 +1,4 @@
-# 🇪🇨 Ecuador Turismo — Semana 2
+# 🇪🇨 Ecuador Turismo 
 
 Portal turístico semántico, accesible y responsive, con validación de formularios en TypeScript.
 
