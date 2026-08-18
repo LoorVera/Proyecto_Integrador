@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="description"
+    content="Organiza tu viaje por Ecuador: arma tu itinerario día a día, elige alojamiento y calcula tu presupuesto con Ecuador Turismo.">
+  <meta name="keywords" content="Turismo Ecuador, Organizador de viaje, Itinerario, Presupuesto, Planificador">
+  <meta name="author" content="Ecuador Turismo Portal">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b1329">
+  <link rel="canonical" href="https://turismo-ecuador.example.com/organizador.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
+  <meta property="og:site_name" content="Ecuador Turismo">
+  <meta property="og:title" content="Organizador de Viaje | Ecuador Turismo">
+  <meta property="og:description" content="Arma tu itinerario y calcula tu presupuesto de viaje por Ecuador.">
+  <meta property="og:url" content="https://turismo-ecuador.example.com/organizador.html">
+  <meta property="og:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Organizador de Viaje | Ecuador Turismo">
+  <meta name="twitter:description" content="Arma tu itinerario y calcula tu presupuesto de viaje por Ecuador.">
+  <meta name="twitter:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+
+  <title>Organizador de Viaje | Ecuador Turismo</title>
+    <!-- Aplica el tema guardado antes de pintar la página -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("tema");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
+  <link rel="stylesheet" href="css/sytle.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+   <header class="site-header" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
+        <div class="logo-icon" aria-hidden="true">EC</div>
+        <span class="logo-text">TURISMO ECUADOR</span>
+      </a>
+
+      <div class="header-actions">
+        <!-- Toggle de tema claro / oscuro -->
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+          aria-label="Activar modo oscuro">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Botón hamburguesa (solo móvil) -->
+        <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
+          aria-controls="site-nav" aria-label="Abrir menú de navegación">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="btn-nav btn-nav-secondary" >INICIO</a></li>
+          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary" aria-current="page">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
+          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
+          <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-layout" role="main">
+
+    <section class="page-hero" aria-labelledby="org-title">
+      <h1 id="org-title" class="page-title">ORGANIZADOR DE VIAJE</h1>
+      <p class="page-subtitle">Arma tu itinerario día a día y calcula tu presupuesto en segundos.</p>
+    </section>
+
+    <div class="org-grid">
+
+      <!-- Columna 1: datos del viaje -->
+      <section class="grid-box" aria-labelledby="org-form-title">
+        <h2 id="org-form-title" class="box-title"><span>DATOS DEL VIAJE</span></h2>
+
+        <form id="org-form" class="stack-form" novalidate aria-label="Formulario de planificación de viaje">
+          <div class="form-group">
+            <label for="org-destino" class="form-label">DESTINO: <span aria-hidden="true">*</span></label>
+            <select id="org-destino" name="destino" class="form-input" required aria-required="true">
+              <option value="">Selecciona un destino…</option>
+              <option value="galapagos">Islas Galápagos</option>
+              <option value="quito">Quito</option>
+              <option value="cotopaxi">Volcán Cotopaxi</option>
+              <option value="quilotoa">Laguna de Quilotoa</option>
+              <option value="banos">Baños de Agua Santa</option>
+              <option value="montanita">Montañita</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="org-dias" class="form-label">DÍAS: <span aria-hidden="true">*</span></label>
+              <input type="number" id="org-dias" name="dias" class="form-input" min="1" max="15" value="3"
+                required aria-required="true">
+            </div>
+            <div class="form-group">
+              <label for="org-personas" class="form-label">VIAJEROS: <span aria-hidden="true">*</span></label>
+              <input type="number" id="org-personas" name="personas" class="form-input" min="1" max="12" value="2"
+                required aria-required="true">
+            </div>
+          </div>
+
+          <fieldset class="form-group">
+            <legend class="form-label">ALOJAMIENTO:</legend>
+            <label class="check-label"><input type="radio" name="org-hotel" value="hostal" checked> Hostal
+              ($25/noche)</label>
+            <label class="check-label"><input type="radio" name="org-hotel" value="hotel"> Hotel
+              ($70/noche)</label>
+            <label class="check-label"><input type="radio" name="org-hotel" value="ecolodge"> Eco-lodge
+              ($90/noche)</label>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend class="form-label">EXTRAS (por persona):</legend>
+            <label class="check-label"><input type="checkbox" name="org-extra" value="45"> Tours guiados
+              (+$45)</label>
+            <label class="check-label"><input type="checkbox" name="org-extra" value="25"> Transporte
+              interprovincial (+$25)</label>
+            <label class="check-label"><input type="checkbox" name="org-extra" value="18"> Seguro de viaje
+              (+$18)</label>
+          </fieldset>
+
+          <button type="submit" class="btn-submit">CALCULAR PRESUPUESTO</button>
+        </form>
+      </section>
+
+      <!-- Columna 2: resultado -->
+      <section class="grid-box" aria-labelledby="org-res-title">
+        <h2 id="org-res-title" class="box-title"><span>TU ITINERARIO</span></h2>
+        <div id="org-resultado" class="org-resultado" aria-live="polite">
+          <p class="empty-msg">Completa el formulario y presiona «Calcular presupuesto» para ver tu plan de viaje.</p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small>Accesibilidad:
+          <kbd aria-label="Tecla Tab">Tab</kbd> /
+          <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /
+          <kbd aria-label="Flechas izquierda y derecha">&#8592; &#8594;</kbd>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

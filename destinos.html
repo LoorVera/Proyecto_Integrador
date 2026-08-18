@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="description"
+    content="Catálogo de destinos turísticos del Ecuador: Galápagos, Quito, Cotopaxi, Baños y más. Organiza tu viaje con Ecuador Turismo.">
+  <meta name="keywords" content="Turismo Ecuador, Galápagos, Quito, Cotopaxi, Baños, Viajes, Reserva Hotel">
+  <meta name="author" content="Ecuador Turismo Portal">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b1329">
+  <link rel="canonical" href="https://turismo-ecuador.example.com/destinos.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
+  <meta property="og:site_name" content="Ecuador Turismo">
+  <meta property="og:title" content="Destinos | Ecuador Turismo">
+  <meta property="og:description" content="Explora los destinos turísticos del Ecuador y organiza tu viaje.">
+  <meta property="og:url" content="https://turismo-ecuador.example.com/destinos.html">
+  <meta property="og:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Destinos | Ecuador Turismo">
+  <meta name="twitter:description" content="Explora los destinos turísticos del Ecuador y organiza tu viaje.">
+  <meta name="twitter:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+
+
+
+  <title>Destinos | Ecuador Turismo</title>
+
+    <!-- Aplica el tema guardado antes de pintar la página -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("tema");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
+  <link rel="stylesheet" href="css/sytle.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header" role="banner">
+    <div class="header-container">
+      <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
+        <div class="logo-icon" aria-hidden="true">EC</div>
+        <span class="logo-text">TURISMO ECUADOR</span>
+      </a>
+
+      <div class="header-actions">
+        <!-- Toggle de tema claro / oscuro -->
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+          aria-label="Activar modo oscuro">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Botón hamburguesa (solo móvil) -->
+        <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
+          aria-controls="site-nav" aria-label="Abrir menú de navegación">
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="btn-nav btn-nav-secondary">INICIO</a></li>
+          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary" aria-current="page">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
+          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
+          <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-layout" role="main">
+
+    <!-- Encabezado de página -->
+    <section class="page-hero" aria-labelledby="destinos-title">
+      <h1 id="destinos-title" class="page-title">DESTINOS TURÍSTICOS DEL ECUADOR</h1>
+      <p class="page-subtitle">Filtra por región, compara costos y planifica tu próxima aventura.</p>
+    </section>
+
+    <!-- Filtro por región + catálogo -->
+    <section aria-labelledby="filtro-title">
+      <h2 id="filtro-title" class="sr-only">Filtrar destinos por región</h2>
+
+      <div class="region-filter" role="group" aria-label="Filtrar destinos por región">
+        <button type="button" class="filter-btn active" data-region="all" aria-pressed="true">TODAS</button>
+        <button type="button" class="filter-btn" data-region="insular" aria-pressed="false">INSULAR</button>
+        <button type="button" class="filter-btn" data-region="sierra" aria-pressed="false">SIERRA</button>
+        <button type="button" class="filter-btn" data-region="costa" aria-pressed="false">COSTA</button>
+        <button type="button" class="filter-btn" data-region="amazonia" aria-pressed="false">AMAZONÍA</button>
+      </div>
+
+      <ul class="destinos-grid" id="destinos-grid" role="list">
+
+        <li class="destino-card" data-region="insular">
+          <article aria-labelledby="dest-galapagos">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=70"
+              alt="Tortuga gigante en las Islas Galápagos" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Región Insular</span>
+              <h3 id="dest-galapagos" class="destino-title">Islas Galápagos</h3>
+              <p class="destino-desc">Laboratorio natural vivo con especies únicas en el mundo.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas de Galápagos">
+                <span class="tag-item" role="listitem">Fauna</span>
+                <span class="tag-item" role="listitem">Buceo</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 120 dólares por día">Desde $120/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=galapagos">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="destino-card" data-region="sierra">
+          <article aria-labelledby="dest-quito">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=800&q=70"
+              alt="Centro Histórico de Quito con la Basílica del Voto Nacional" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Región Sierra</span>
+              <h3 id="dest-quito" class="destino-title">Quito</h3>
+              <p class="destino-desc">Patrimonio colonial a 2.800 m, entre volcanes y cultura viva.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas de Quito">
+                <span class="tag-item" role="listitem">Cultura</span>
+                <span class="tag-item" role="listitem">Patrimonio</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 60 dólares por día">Desde $60/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=quito">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="destino-card" data-region="sierra">
+          <article aria-labelledby="dest-cotopaxi">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=70"
+              alt="Volcán Cotopaxi nevado entre nubes" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Región Sierra</span>
+              <h3 id="dest-cotopaxi" class="destino-title">Volcán Cotopaxi</h3>
+              <p class="destino-desc">Volcán activo, páramo y cóndores a 5.897 m de adrenalina.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas del Cotopaxi">
+                <span class="tag-item" role="listitem">Andinismo</span>
+                <span class="tag-item" role="listitem">Páramo</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 70 dólares por día">Desde $70/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=cotopaxi">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="destino-card" data-region="sierra">
+          <article aria-labelledby="dest-quilotoa">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=70"
+              alt="Laguna de Quilotoa en el cráter de un volcán" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Región Sierra</span>
+              <h3 id="dest-quilotoa" class="destino-title">Laguna de Quilotoa</h3>
+              <p class="destino-desc">Cráter volcánico con una laguna esmeralda de otro planeta.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas de Quilotoa">
+                <span class="tag-item" role="listitem">Trekking</span>
+                <span class="tag-item" role="listitem">Miradores</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 50 dólares por día">Desde $50/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=quilotoa">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="destino-card" data-region="amazonia">
+          <article aria-labelledby="dest-banos">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=70"
+              alt="Cascada Pailón del Diablo en Baños de Agua Santa" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Puerta a la Amazonía</span>
+              <h3 id="dest-banos" class="destino-title">Baños de Agua Santa</h3>
+              <p class="destino-desc">Cascadas, termas y deportes extremos junto al Tungurahua.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas de Baños">
+                <span class="tag-item" role="listitem">Cascadas</span>
+                <span class="tag-item" role="listitem">Rafting</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 55 dólares por día">Desde $55/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=banos">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="destino-card" data-region="costa">
+          <article aria-labelledby="dest-montanita">
+            <img class="destino-img"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=70"
+              alt="Playa de Montañita con olas para surf" loading="lazy">
+            <div class="destino-body">
+              <span class="slide-badge">Región Costa</span>
+              <h3 id="dest-montanita" class="destino-title">Montañita</h3>
+              <p class="destino-desc">Surf, atardeceres dorados y vida nocturna frente al Pacífico.</p>
+              <div class="slide-tags" role="list" aria-label="Etiquetas de Montañita">
+                <span class="tag-item" role="listitem">Surf</span>
+                <span class="tag-item" role="listitem">Playa</span>
+              </div>
+              <div class="destino-footer">
+                <span class="plan-price" aria-label="Desde 45 dólares por día">Desde $45/día</span>
+                <a class="btn-reserve" href="organizador.html?destino=montanita">Planificar viaje</a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+      </ul>
+
+      <p id="destinos-vacio" class="empty-msg" hidden>No hay destinos para esta región.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small>Accesibilidad:
+          <kbd aria-label="Tecla Tab">Tab</kbd> /
+          <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /
+          <kbd aria-label="Flechas izquierda y derecha">&#8592; &#8594;</kbd>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

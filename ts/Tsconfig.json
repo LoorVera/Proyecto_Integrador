@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "outDir": "../js",
+    "rootDir": "./",
+    "strict": true,
+    "noImplicitAny": true,
+    "removeComments": false,
+    "sourceMap": false
+  },
+  "include": ["main.ts"]
+}
