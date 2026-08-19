@@ -19,12 +19,12 @@
   <meta property="og:title" content="Organizador de Viaje | Ecuador Turismo">
   <meta property="og:description" content="Arma tu itinerario y calcula tu presupuesto de viaje por Ecuador.">
   <meta property="og:url" content="https://turismo-ecuador.example.com/organizador.html">
-  <meta property="og:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Organizador de Viaje | Ecuador Turismo">
   <meta name="twitter:description" content="Arma tu itinerario y calcula tu presupuesto de viaje por Ecuador.">
-  <meta name="twitter:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
 
   <title>Organizador de Viaje | Ecuador Turismo</title>
     <!-- Aplica el tema guardado antes de pintar la página -->
@@ -39,7 +39,10 @@
 
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
-  <link rel="stylesheet" href="css/sytle.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <script src="js/main.js" defer></script>
 </head>
 
@@ -53,6 +56,11 @@
         <div class="logo-icon" aria-hidden="true">EC</div>
         <span class="logo-text">TURISMO ECUADOR</span>
       </a>
+
+      <div id="nav-sesion-box" class="header-session" hidden>
+        <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
+        <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
+      </div>
 
       <div class="header-actions">
         <!-- Toggle de tema claro / oscuro -->
@@ -158,12 +166,17 @@
 
     </div>
 
+    <section class="grid-box" aria-label="Mis planes de viaje guardados">
+      <div id="planes-guardados" class="org-resultado" aria-live="polite"></div>
+    </section>
+
   </main>
 
   <footer class="site-footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-bottom">
         <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small><a href="privacidad.html">Política de Privacidad</a></small>
         <small>Accesibilidad:
           <kbd aria-label="Tecla Tab">Tab</kbd> /
           <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /

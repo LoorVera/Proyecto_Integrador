@@ -1,0 +1,49 @@
+/* ==========================================================================
+   3. HEADER + MENÚ HAMBURGUESA + TOGGLE DE TEMA
+   ========================================================================== */
+.site-header { background: var(--color-dark); color: #fff; padding: var(--space-3) var(--space-5); position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow-sm); }
+.header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.logo-box { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; font-weight: 700; font-size: var(--fs-lg); }
+.logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-gold), var(--color-secondary), var(--color-primary)); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); font-weight: 800; color: var(--color-dark); }
+.logo-text { font-size: var(--fs-md); letter-spacing: .02em; white-space: nowrap; }
+
+.header-actions { display: flex; align-items: center; gap: var(--space-2); }
+.header-session { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.header-session[hidden] { display: none; }
+
+/* Toggle de tema */
+.theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .3); border-radius: var(--radius-full); cursor: pointer; font-size: 1.1rem; transition: background var(--transition); }
+.theme-toggle:hover { background: rgba(255, 255, 255, .2); }
+
+/* Botón hamburguesa */
+.menu-toggle { display: inline-flex; flex-direction: column; gap: 5px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .3); border-radius: var(--radius-sm); padding: 10px 9px; cursor: pointer; transition: background var(--transition); }
+.menu-toggle:hover { background: rgba(255, 255, 255, .2); }
+.menu-bar { width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
+.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Nav: oculto en móvil hasta abrir */
+.site-nav { width: 100%; display: none; }
+.site-nav.open { display: block; }
+.nav-links { display: flex; flex-direction: column; gap: var(--space-2); list-style: none; }
+.nav-links .btn-nav { width: 100%; justify-content: center; }
+
+.btn-nav { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: var(--fs-sm); border: 1px solid transparent; transition: var(--transition); }
+.btn-nav-secondary { color: #fff; border-color: rgba(255, 255, 255, .3); }
+.btn-nav-secondary:hover { background: rgba(255, 255, 255, .12); }
+.btn-nav-primary { background: var(--color-primary); color: #fff; }
+.btn-nav-primary:hover { background: var(--color-primary-dark); }
+
+/* ==========================================================================
+   4a. CONTENEDORES DE MAIN
+   ========================================================================== */
+.main-layout { flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: var(--space-6) var(--space-4); display: flex; flex-direction: column; gap: var(--space-7); }
+.content-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+
+/* ==========================================================================
+   6a. CONTENEDORES DE FOOTER
+   ========================================================================== */
+.site-footer { background: var(--color-dark); color: #e5e7eb; padding: var(--space-7) var(--space-5) var(--space-6); margin-top: auto; }
+.footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-6); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-3); border-top: 1px solid rgba(255, 255, 255, .1); padding-top: var(--space-5); font-size: var(--fs-xs); color: #9ca3af; }

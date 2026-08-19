@@ -9,6 +9,16 @@ interface FieldConfig { input: HTMLInputElement | HTMLTextAreaElement; error: HT
 
 interface DestinoData { nombre: string; costoDia: number; highlight: string; }
 
+interface ExperienciaGuardada { autor: string; lugar: string; nota: number; texto: string; }
+interface ReservaGuardada { hotel: string; precio: string; duracion: string; fecha: string; }
+interface PlanGuardado { destino: string; dias: number; personas: number; totalGrupo: number; fecha: string; }
+interface SesionActiva { nombre: string; }
+
+const EXPERIENCIAS_KEY = "experiencias-usuario";
+const RESERVAS_KEY = "reservas-usuario";
+const VIAJES_KEY = "viajes-guardados";
+const SESION_KEY = "sesion-usuario";
+
 const byId = <T extends HTMLElement>(id: string): T | null =>
   document.getElementById(id) as T | null;
 
@@ -16,6 +26,20 @@ const debounce = (fn: () => void, ms: number): (() => void) => {
   let t: number | undefined;
   return () => { window.clearTimeout(t); t = window.setTimeout(fn, ms); };
 };
+
+/* ------------------- Persistencia simulada (localStorage) ---------- */
+function leerArray<T>(key: string): T[] {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T[]) : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function guardarArray<T>(key: string, arr: T[]): void {
+  try { window.localStorage.setItem(key, JSON.stringify(arr)); } catch (err) { /* navegación privada */ }
+}
 
 /* --------------------------- Validadores --------------------------- */
 const required = (campo: string): Validator =>
@@ -95,7 +119,7 @@ function buildFields(defs: Array<[string, string, Validator[]]>): FieldConfig[] 
   return out;
 }
 
-function bindForm(formId: string, fields: FieldConfig[], statusId: string, okMsg: string): void {
+function bindForm(formId: string, fields: FieldConfig[], statusId: string, okMsg: string, onSuccess?: () => void): void {
   const form = byId<HTMLFormElement>(formId);
   const status = byId<HTMLElement>(statusId);
   if (!form || !status) return;
@@ -110,6 +134,7 @@ function bindForm(formId: string, fields: FieldConfig[], statusId: string, okMsg
     status.className = "form-status"; status.textContent = "";
     const idx = fields.map(checkField).findIndex((ok) => !ok);
     if (idx !== -1) { fields[idx].input.focus(); return; }
+    if (onSuccess) onSuccess();
     status.classList.add("success");
     status.textContent = okMsg;
     form.reset();
@@ -122,17 +147,55 @@ function initForms(): void {
   bindForm("login-form", buildFields([
     ["login-email", "login-email-error", [required("El correo"), emailFormat]],
     ["login-password", "login-password-error", [required("La contraseña"), passwordFormat]],
-  ]), "login-message", "✅ Sesión iniciada correctamente. ¡Bienvenido de nuevo!");
+  ]), "login-message", "✅ Sesión iniciada correctamente. ¡Bienvenido de nuevo!", () => {
+    const email = byId<HTMLInputElement>("login-email")?.value.trim() ?? "";
+    guardarSesion(email.split("@")[0] || "Viajero");
+  });
 
   bindForm("register-form", buildFields([
     ["reg-name", "reg-name-error", [required("El nombre"), minLength(3, "El nombre")]],
     ["reg-email", "reg-email-error", [required("El correo"), emailFormat]],
     ["reg-phone", "reg-phone-error", [required("El teléfono"), phoneFormat]],
     ["reg-password", "reg-password-error", [required("La contraseña"), passwordFormat]],
-  ]), "register-form-message", "✅ Cuenta creada con éxito. Revisa tu correo para confirmarla.");
+  ]), "register-form-message", "✅ Cuenta creada con éxito. Revisa tu correo para confirmarla.", () => {
+    const nombre = byId<HTMLInputElement>("reg-name")?.value.trim() || "Viajero";
+    guardarSesion(nombre);
+  });
 
   const regPass = byId<HTMLInputElement>("reg-password");
   if (regPass) regPass.addEventListener("input", () => updateStrength(regPass.value));
+}
+
+/* ------------------- Aceptación de términos (registro) -------------- */
+function initTerminos(): void {
+  const form = byId<HTMLFormElement>("register-form");
+  const checkbox = byId<HTMLInputElement>("reg-terms");
+  const error = byId<HTMLElement>("reg-terms-error");
+  if (!form || !checkbox || !error) return;
+
+  const revisar = (): boolean => {
+    if (!checkbox.checked) {
+      error.textContent = "⚠ Debes aceptar la Política de Privacidad para continuar.";
+      error.classList.add("visible");
+      return false;
+    }
+    error.textContent = "";
+    error.classList.remove("visible");
+    return true;
+  };
+
+  checkbox.addEventListener("change", revisar);
+
+  // Registrado antes que bindForm("register-form", ...): al compartir el mismo
+  // evento "submit" en el mismo formulario, se ejecuta primero y puede frenar
+  // el envío con stopImmediatePropagation() si el checkbox no está marcado.
+  form.addEventListener("submit", (e: Event) => {
+    if (!revisar()) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      checkbox.focus();
+    }
+  });
 }
 
 /* ------------------------- CONTACTO ------------------------------- */
@@ -229,6 +292,51 @@ function initTheme(): void {
   if (btn) {
     btn.addEventListener("click", () => aplicar(root.getAttribute("data-theme") !== "dark"));
   }
+}
+
+/* =============== SESIÓN SIMULADA (localStorage, sin backend) ======= */
+function leerSesion(): SesionActiva | null {
+  try {
+    const raw = window.localStorage.getItem(SESION_KEY);
+    return raw ? (JSON.parse(raw) as SesionActiva) : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function guardarSesion(nombre: string): void {
+  try { window.localStorage.setItem(SESION_KEY, JSON.stringify({ nombre })); } catch (err) { /* navegación privada */ }
+  refrescarNavSesion();
+}
+
+function cerrarSesion(): void {
+  try { window.localStorage.removeItem(SESION_KEY); } catch (err) { /* navegación privada */ }
+  refrescarNavSesion();
+}
+
+function refrescarNavSesion(): void {
+  // El indicador de sesión vive junto al logo (#nav-sesion-box), no dentro del
+  // menú hamburguesa: así se ve siempre, sin depender de abrir el menú en móvil.
+  const nav = byId<HTMLElement>("site-nav");
+  const loginLi = nav?.querySelector<HTMLAnchorElement>('a[href="index.html#login"]')?.closest("li") ?? null;
+  const registroLi = nav?.querySelector<HTMLAnchorElement>('a[href="index.html#registro"]')?.closest("li") ?? null;
+
+  const sesionBox = byId<HTMLElement>("nav-sesion-box");
+  const nombreSpan = byId<HTMLElement>("nav-sesion-nombre");
+  const logoutBtn = byId<HTMLButtonElement>("btn-logout");
+  if (!sesionBox || !nombreSpan || !logoutBtn) return;
+
+  if (!logoutBtn.dataset.bound) {
+    logoutBtn.addEventListener("click", cerrarSesion);
+    logoutBtn.dataset.bound = "true";
+  }
+
+  const sesion = leerSesion();
+  const activo = !!sesion;
+  if (loginLi) loginLi.hidden = activo;
+  if (registroLi) registroLi.hidden = activo;
+  sesionBox.hidden = !activo;
+  if (activo && sesion) nombreSpan.textContent = `Hola, ${sesion.nombre}`;
 }
 
 /* --------------------- Contador de caracteres --------------------- */
@@ -340,9 +448,7 @@ function initModal(): void {
   }
 }
 
-function addExperienceCard(autor: string, lugar: string, nota: number, texto: string): void {
-  const list = byId<HTMLUListElement>("experiences-list-container");
-  if (!list) return;
+function crearExperienciaCard(autor: string, lugar: string, nota: number, texto: string): HTMLLIElement {
   const iniciales = autor.split(" ").map((p) => p.charAt(0)).join("").slice(0, 2).toUpperCase();
   const estrellas = "★".repeat(nota) + "☆".repeat(5 - nota);
   const li = document.createElement("li");
@@ -352,7 +458,25 @@ function addExperienceCard(autor: string, lugar: string, nota: number, texto: st
     `<div class="user-info"><div class="user-name-wrapper"><span class="user-name">${autor}</span>` +
     `<span class="star-rating-static" role="img" aria-label="${nota} de 5 estrellas">${estrellas}</span></div>` +
     `<div class="user-place-tag">${lugar}</div><blockquote class="user-comment">"${texto}"</blockquote></div>`;
-  list.prepend(li);
+  return li;
+}
+
+function addExperienceCard(autor: string, lugar: string, nota: number, texto: string): void {
+  const list = byId<HTMLUListElement>("experiences-list-container");
+  if (!list) return;
+  list.prepend(crearExperienciaCard(autor, lugar, nota, texto));
+
+  const guardadas = leerArray<ExperienciaGuardada>(EXPERIENCIAS_KEY);
+  guardadas.push({ autor, lugar, nota, texto });
+  guardarArray(EXPERIENCIAS_KEY, guardadas);
+}
+
+function cargarExperienciasGuardadas(): void {
+  const list = byId<HTMLUListElement>("experiences-list-container");
+  if (!list) return;
+  for (const exp of leerArray<ExperienciaGuardada>(EXPERIENCIAS_KEY)) {
+    list.prepend(crearExperienciaCard(exp.autor, exp.lugar, exp.nota, exp.texto));
+  }
 }
 
 /* ------------------------- Valoración footer ---------------------- */
@@ -367,6 +491,55 @@ function initRating(): void {
     msg.textContent = sel ? `✅ ¡Gracias! Valoraste con ${sel.value} estrella(s).` : "✅ ¡Gracias por tus comentarios!";
     form.reset();
   });
+}
+
+/* ------------------- Reservas de planes de pago --------------------- */
+function renderizarReservas(): void {
+  const contenedor = byId<HTMLElement>("reservas-guardadas");
+  if (!contenedor) return;
+  const reservas = leerArray<ReservaGuardada>(RESERVAS_KEY);
+  if (reservas.length === 0) { contenedor.innerHTML = ""; return; }
+
+  contenedor.innerHTML =
+    `<h3 class="org-subtitle">Tus reservas</h3>` +
+    `<ul class="budget-list" role="list">` +
+    reservas.map((r, i) =>
+      `<li><span>${r.hotel} (${r.duracion})</span>` +
+      `<span class="budget-list-actions"><strong>${r.precio}</strong>` +
+      `<button type="button" class="btn-quitar" data-idx="${i}" aria-label="Quitar reserva de ${r.hotel}">Quitar</button></span></li>`
+    ).join("") +
+    `</ul>`;
+}
+
+function initReservas(): void {
+  const botones = Array.from(document.querySelectorAll<HTMLButtonElement>(".plans-table button.btn-reserve"));
+  const contenedor = byId<HTMLElement>("reservas-guardadas");
+  if (botones.length === 0 || !contenedor) return;
+
+  botones.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const fila = btn.closest("tr");
+      const hotel = fila?.querySelector<HTMLElement>(".hotel-name")?.textContent?.trim() ?? "Plan seleccionado";
+      const precio = fila?.querySelector<HTMLElement>(".plan-price")?.textContent?.trim() ?? "";
+      const duracion = fila?.querySelector<HTMLElement>(".plan-duration")?.textContent?.trim() ?? "";
+      const reservas = leerArray<ReservaGuardada>(RESERVAS_KEY);
+      reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
+      guardarArray(RESERVAS_KEY, reservas);
+      renderizarReservas();
+    });
+  });
+
+  contenedor.addEventListener("click", (e: Event) => {
+    const boton = (e.target as HTMLElement).closest<HTMLButtonElement>(".btn-quitar");
+    if (!boton) return;
+    const idx = Number(boton.dataset.idx);
+    const reservas = leerArray<ReservaGuardada>(RESERVAS_KEY);
+    reservas.splice(idx, 1);
+    guardarArray(RESERVAS_KEY, reservas);
+    renderizarReservas();
+  });
+
+  renderizarReservas();
 }
 
 /* ================== DESTINOS: filtro por región ==================== */
@@ -422,6 +595,8 @@ function initOrganizador(): void {
   const pre = params.get("destino");
   if (pre && DESTINOS[pre]) select.value = pre;
 
+  let ultimoPlan: PlanGuardado | null = null;
+
   form.addEventListener("submit", (e: Event) => {
     e.preventDefault();
     const data = DESTINOS[select.value];
@@ -432,6 +607,7 @@ function initOrganizador(): void {
       resultado.innerHTML =
         `<p class="form-feedback error" role="alert">⚠ Revisa los datos: elige un destino, ` +
         `días entre 1 y 15 y viajeros entre 1 y 12.</p>`;
+      ultimoPlan = null;
       return;
     }
 
@@ -456,6 +632,8 @@ function initOrganizador(): void {
       plan.push(`Día ${dias}: Desayuno, compras de recuerdos y regreso.`);
     }
 
+    ultimoPlan = { destino: data.nombre, dias, personas, totalGrupo, fecha: new Date().toLocaleDateString("es-EC") };
+
     resultado.innerHTML =
       `<h3 class="org-subtitle">Presupuesto: ${data.nombre}</h3>` +
       `<ul class="budget-list" role="list">` +
@@ -467,21 +645,51 @@ function initOrganizador(): void {
       `<p class="budget-total">Total por persona: <strong>$${totalPersona}</strong></p>` +
       `<p class="budget-total">Total del grupo (${personas} viajero${personas > 1 ? "s" : ""}): <strong>$${totalGrupo}</strong></p>` +
       `<h3 class="org-subtitle">Itinerario sugerido</h3>` +
-      `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>`;
+      `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>` +
+      `<button type="button" id="btn-guardar-plan" class="btn-submit">GUARDAR MI PLAN</button>`;
   });
+
+  resultado.addEventListener("click", (e: Event) => {
+    if (!(e.target as HTMLElement).closest("#btn-guardar-plan") || !ultimoPlan) return;
+    const guardados = leerArray<PlanGuardado>(VIAJES_KEY);
+    guardados.push(ultimoPlan);
+    guardarArray(VIAJES_KEY, guardados);
+    renderizarPlanesGuardados();
+  });
+
+  renderizarPlanesGuardados();
+}
+
+function renderizarPlanesGuardados(): void {
+  const contenedor = byId<HTMLElement>("planes-guardados");
+  if (!contenedor) return;
+  const guardados = leerArray<PlanGuardado>(VIAJES_KEY);
+  if (guardados.length === 0) { contenedor.innerHTML = ""; return; }
+
+  contenedor.innerHTML =
+    `<h3 class="org-subtitle">Mis planes guardados</h3>` +
+    `<ul class="budget-list" role="list">` +
+    guardados.map((p) =>
+      `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span><strong>$${p.totalGrupo}</strong></li>`
+    ).join("") +
+    `</ul>`;
 }
 
 /* ----------------------------- Arranque --------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initMenu();
+  refrescarNavSesion();
+  initTerminos();
   initForms();
   initContacto();
   initPasswordToggles();
   initCharCounter();
   initCarousel();
   initModal();
+  cargarExperienciasGuardadas();
   initRating();
   initDestinosFilter();
+  initReservas();
   initOrganizador();
 });

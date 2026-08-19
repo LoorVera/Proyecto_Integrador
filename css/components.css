@@ -1,105 +1,6 @@
 /* ==========================================================================
-   1. DESIGN TOKENS (claro por defecto + variantes semánticas de tema)
+   4. CARRUSEL + TARJETAS + TABLA DE PLANES
    ========================================================================== */
-:root {
-  --color-primary: #0ea5e9; --color-primary-dark: #0284c7;
-  --color-secondary: #10b981; --color-secondary-dark: #059669;
-  --color-gold: #f59e0b; --color-gold-dark: #d97706;
-  --color-danger: #dc2626;
-  --color-bg: #f4f7fb; --color-surface: #ffffff; --color-dark: #0b1329;
-  --color-ink: #1f2937; --color-muted: #5b6472; --color-border: #e3e8ef;
-  /* Tokens que cambian con el tema */
-  --color-heading: #0b1329;
-  --color-link: #0284c7;
-  --color-ok-text: #059669;
-  --color-gold-text: #d97706;
-  --color-success-text: #065f46;
-  --color-danger-text: #991b1b;
-  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
-  --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem;
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --fs-xs: clamp(.75rem, .72rem + .2vw, .85rem);
-  --fs-sm: clamp(.85rem, .82rem + .25vw, .95rem);
-  --fs-md: clamp(.95rem, .92rem + .3vw, 1.05rem);
-  --fs-lg: clamp(1.1rem, 1rem + .6vw, 1.35rem);
-  --fs-xl: clamp(1.35rem, 1.15rem + 1vw, 1.8rem);
-  --fs-2xl: clamp(1.6rem, 1.3rem + 1.6vw, 2.3rem);
-  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-full: 999px;
-  --shadow-sm: 0 2px 8px rgba(11, 19, 41, .08);
-  --shadow-md: 0 8px 22px rgba(11, 19, 41, .14);
-  --transition: 180ms ease-in-out;
-}
-
-/* ----- TEMA OSCURO manual (toggle) ----- */
-:root[data-theme="dark"] {
-  --color-bg: #0b1329; --color-surface: #131c36;
-  --color-ink: #eef2f7; --color-muted: #a3adc2; --color-border: #2a3554;
-  --color-heading: #eef2f7; --color-link: #7dd3fc; --color-ok-text: #6ee7b7;
-  --color-gold-text: #fbbf24; --color-success-text: #6ee7b7; --color-danger-text: #fca5a5;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, .45); --shadow-md: 0 8px 22px rgba(0, 0, 0, .55);
-}
-/* ----- TEMA OSCURO automático si no hay JS ----- */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-bg: #0b1329; --color-surface: #131c36;
-    --color-ink: #eef2f7; --color-muted: #a3adc2; --color-border: #2a3554;
-    --color-heading: #eef2f7; --color-link: #7dd3fc; --color-ok-text: #6ee7b7;
-    --color-gold-text: #fbbf24; --color-success-text: #6ee7b7; --color-danger-text: #fca5a5;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .45); --shadow-md: 0 8px 22px rgba(0, 0, 0, .55);
-  }
-}
-
-/* ==========================================================================
-   2. BASE (mobile-first)
-   ========================================================================== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-ink); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; transition: background var(--transition), color var(--transition); }
-:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.skip-link { position: absolute; top: -60px; left: var(--space-4); background: var(--color-primary); color: #fff; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); text-decoration: none; z-index: 100; transition: top var(--transition); }
-.skip-link:focus { top: var(--space-4); }
-#login, #planes, #registro, #contacto { scroll-margin-top: 90px; }
-
-/* ==========================================================================
-   3. HEADER + MENÚ HAMBURGUESA + TOGGLE DE TEMA
-   ========================================================================== */
-.site-header { background: var(--color-dark); color: #fff; padding: var(--space-3) var(--space-5); position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow-sm); }
-.header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
-.logo-box { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; font-weight: 700; font-size: var(--fs-lg); }
-.logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-gold), var(--color-secondary), var(--color-primary)); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); font-weight: 800; color: var(--color-dark); }
-
-.header-actions { display: flex; align-items: center; gap: var(--space-2); }
-
-/* Toggle de tema */
-.theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .3); border-radius: var(--radius-full); cursor: pointer; font-size: 1.1rem; transition: background var(--transition); }
-.theme-toggle:hover { background: rgba(255, 255, 255, .2); }
-
-/* Botón hamburguesa */
-.menu-toggle { display: inline-flex; flex-direction: column; gap: 5px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .3); border-radius: var(--radius-sm); padding: 10px 9px; cursor: pointer; transition: background var(--transition); }
-.menu-toggle:hover { background: rgba(255, 255, 255, .2); }
-.menu-bar { width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: transform var(--transition), opacity var(--transition); }
-.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(2) { opacity: 0; }
-.menu-toggle[aria-expanded="true"] .menu-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* Nav: oculto en móvil hasta abrir */
-.site-nav { width: 100%; display: none; }
-.site-nav.open { display: block; }
-.nav-links { display: flex; flex-direction: column; gap: var(--space-2); list-style: none; }
-.nav-links .btn-nav { width: 100%; justify-content: center; }
-
-.btn-nav { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: var(--fs-sm); border: 1px solid transparent; transition: var(--transition); }
-.btn-nav-secondary { color: #fff; border-color: rgba(255, 255, 255, .3); }
-.btn-nav-secondary:hover { background: rgba(255, 255, 255, .12); }
-.btn-nav-primary { background: var(--color-primary); color: #fff; }
-.btn-nav-primary:hover { background: var(--color-primary-dark); }
-
-/* ==========================================================================
-   4. MAIN + CARRUSEL + GRID
-   ========================================================================== */
-.main-layout { flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: var(--space-6) var(--space-4); display: flex; flex-direction: column; gap: var(--space-7); }
-
 .hero-carousel-section { background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); overflow: hidden; }
 .carousel-title-wrapper { padding: var(--space-6) var(--space-4) var(--space-4); text-align: center; }
 .carousel-main-title { font-size: var(--fs-2xl); color: var(--color-heading); }
@@ -128,7 +29,6 @@ body { font-family: var(--font-body); background: var(--color-bg); color: var(--
 .btn-add-experience:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--color-gold-dark); }
 .btn-add-experience-icon { font-size: var(--fs-lg); line-height: 1; }
 
-.content-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
 .grid-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-5); }
 .box-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-4); margin-bottom: var(--space-5); }
 .box-title { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-lg); color: var(--color-heading); margin-bottom: var(--space-5); }
@@ -195,10 +95,8 @@ body { font-family: var(--font-body); background: var(--color-bg); color: var(--
 .form-status.error, .form-feedback.error { display: block; background: rgba(220, 38, 38, .08); border: 1px solid var(--color-danger); color: var(--color-danger-text); }
 
 /* ==========================================================================
-   6. FOOTER
+   6b. RATING + FEEDBACK (footer)
    ========================================================================== */
-.site-footer { background: var(--color-dark); color: #e5e7eb; padding: var(--space-7) var(--space-5) var(--space-6); margin-top: auto; }
-.footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-6); }
 .rating-section { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; max-width: 640px; margin: 0 auto; width: 100%; }
 .rating-title { color: var(--color-gold); font-size: var(--fs-lg); margin-bottom: var(--space-2); }
 .rating-subtitle { color: #9ca3af; margin-bottom: var(--space-5); font-size: var(--fs-sm); }
@@ -213,7 +111,6 @@ body { font-family: var(--font-body); background: var(--color-bg); color: var(--
 .feedback-textarea::placeholder { color: #9ca3af; }
 .btn-submit-feedback { background: var(--color-gold); color: #1a1a1a; border: none; padding: var(--space-3) var(--space-5); border-radius: var(--radius-full); font-weight: 700; cursor: pointer; transition: background var(--transition); }
 .btn-submit-feedback:hover { background: var(--color-gold-dark); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-3); border-top: 1px solid rgba(255, 255, 255, .1); padding-top: var(--space-5); font-size: var(--fs-xs); color: #9ca3af; }
 kbd { background: rgba(255, 255, 255, .12); border-radius: 4px; padding: 2px 6px; font-family: monospace; }
 
 /* ==========================================================================
@@ -227,7 +124,7 @@ dialog.modal-dialog::backdrop { background: rgba(11, 19, 41, .6); backdrop-filte
 .modal-close-btn:hover { color: var(--color-ink); background: var(--color-bg); }
 
 /* ==========================================================================
-   8. PÁGINAS INTERNAS
+   8. PÁGINAS INTERNAS (destinos.html + organizador.html)
    ========================================================================== */
 .page-hero { text-align: center; }
 .page-title { font-size: var(--fs-2xl); color: var(--color-heading); }
@@ -253,39 +150,15 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-primary)
 .org-subtitle { font-size: var(--fs-lg); color: var(--color-heading); margin-top: var(--space-3); }
 .budget-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); margin: var(--space-3) 0; }
 .budget-list li { display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--fs-sm); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); }
+.budget-list-actions { display: flex; align-items: center; gap: var(--space-2); }
+.btn-quitar { background: none; border: none; color: var(--color-danger-text); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; text-decoration: underline; padding: 0; }
+.btn-quitar:hover { color: var(--color-danger); }
 .budget-total { font-size: var(--fs-md); }
 .budget-total strong { color: var(--color-ok-text); font-size: var(--fs-lg); }
 .itinerario-list { margin: var(--space-3) 0 0 var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--fs-sm); }
 
-/* ==========================================================================
-   9. MEDIA QUERIES (mobile-first → min-width)
-   ========================================================================== */
-@media (min-width: 640px) { .destinos-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 768px) {
-  /* En escritorio: hamburguesa desaparece, nav siempre visible en fila */
-  .menu-toggle { display: none; }
-  .site-nav { display: block; width: auto; }
-  .nav-links { flex-direction: row; flex-wrap: wrap; }
-  .nav-links .btn-nav { width: auto; }
-  .cta-banner-wrapper { justify-content: flex-end; }
-  .carousel-frame { min-height: 360px; margin: 0 var(--space-4) var(--space-4); }
-  .slide-description { font-size: var(--fs-md); }
-}
-@media (min-width: 900px) {
-  .content-grid, .org-grid { grid-template-columns: 1fr 1fr; }
-  .main-layout { padding: var(--space-7) var(--space-6); }
-  .carousel-frame { min-height: 420px; }
-}
-@media (min-width: 1024px) { .destinos-grid { grid-template-columns: repeat(3, 1fr); } }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-  html { scroll-behavior: auto; }
-}
-@media (forced-colors: active) {
-  .btn-submit, .btn-reserve, .btn-nav, .btn-add-experience, .filter-btn, .menu-toggle, .theme-toggle { border: 1px solid currentColor; }
-}
-@media print {
-  .site-header, .cta-banner-wrapper, .carousel-btn, .carousel-indicators, .login-section, .rating-section, dialog, .region-filter { display: none; }
-  body { background: #fff; color: #000; }
-}
+.policy-updated { color: var(--color-muted); font-size: var(--fs-xs); font-style: italic; margin-bottom: var(--space-5); }
+.policy-content { display: flex; flex-direction: column; gap: var(--space-5); }
+.policy-content h2 { font-size: var(--fs-lg); color: var(--color-heading); margin-bottom: var(--space-2); }
+.policy-content p, .policy-content li { font-size: var(--fs-sm); color: var(--color-ink); }
+.policy-content ul { margin-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }

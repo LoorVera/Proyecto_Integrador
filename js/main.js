@@ -3,11 +3,31 @@
    main.ts — Validaciones + menú + tema + UX + accesibilidad (TypeScript)
    Compilar:  cd ts && tsc   → genera ../js/main.js
    ============================================================================= */
+const EXPERIENCIAS_KEY = "experiencias-usuario";
+const RESERVAS_KEY = "reservas-usuario";
+const VIAJES_KEY = "viajes-guardados";
+const SESION_KEY = "sesion-usuario";
 const byId = (id) => document.getElementById(id);
 const debounce = (fn, ms) => {
     let t;
     return () => { window.clearTimeout(t); t = window.setTimeout(fn, ms); };
 };
+/* ------------------- Persistencia simulada (localStorage) ---------- */
+function leerArray(key) {
+    try {
+        const raw = window.localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+    }
+    catch (err) {
+        return [];
+    }
+}
+function guardarArray(key, arr) {
+    try {
+        window.localStorage.setItem(key, JSON.stringify(arr));
+    }
+    catch (err) { /* navegación privada */ }
+}
 /* --------------------------- Validadores --------------------------- */
 const required = (campo) => (v) => (v.trim() !== "" ? null : `⚠ ${campo} es obligatorio.`);
 const minLength = (min, campo) => (v) => (v.trim().length >= min ? null : `⚠ ${campo} debe tener al menos ${min} caracteres.`);
@@ -82,7 +102,7 @@ function buildFields(defs) {
     }
     return out;
 }
-function bindForm(formId, fields, statusId, okMsg) {
+function bindForm(formId, fields, statusId, okMsg, onSuccess) {
     const form = byId(formId);
     const status = byId(statusId);
     if (!form || !status)
@@ -100,6 +120,8 @@ function bindForm(formId, fields, statusId, okMsg) {
             fields[idx].input.focus();
             return;
         }
+        if (onSuccess)
+            onSuccess();
         status.classList.add("success");
         status.textContent = okMsg;
         form.reset();
@@ -112,16 +134,54 @@ function initForms() {
     bindForm("login-form", buildFields([
         ["login-email", "login-email-error", [required("El correo"), emailFormat]],
         ["login-password", "login-password-error", [required("La contraseña"), passwordFormat]],
-    ]), "login-message", "✅ Sesión iniciada correctamente. ¡Bienvenido de nuevo!");
+    ]), "login-message", "✅ Sesión iniciada correctamente. ¡Bienvenido de nuevo!", () => {
+        var _a;
+        var _b;
+        const email = (_b = (_a = byId("login-email")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _b !== void 0 ? _b : "";
+        guardarSesion(email.split("@")[0] || "Viajero");
+    });
     bindForm("register-form", buildFields([
         ["reg-name", "reg-name-error", [required("El nombre"), minLength(3, "El nombre")]],
         ["reg-email", "reg-email-error", [required("El correo"), emailFormat]],
         ["reg-phone", "reg-phone-error", [required("El teléfono"), phoneFormat]],
         ["reg-password", "reg-password-error", [required("La contraseña"), passwordFormat]],
-    ]), "register-form-message", "✅ Cuenta creada con éxito. Revisa tu correo para confirmarla.");
+    ]), "register-form-message", "✅ Cuenta creada con éxito. Revisa tu correo para confirmarla.", () => {
+        var _a;
+        const nombre = ((_a = byId("reg-name")) === null || _a === void 0 ? void 0 : _a.value.trim()) || "Viajero";
+        guardarSesion(nombre);
+    });
     const regPass = byId("reg-password");
     if (regPass)
         regPass.addEventListener("input", () => updateStrength(regPass.value));
+}
+/* ------------------- Aceptación de términos (registro) -------------- */
+function initTerminos() {
+    const form = byId("register-form");
+    const checkbox = byId("reg-terms");
+    const error = byId("reg-terms-error");
+    if (!form || !checkbox || !error)
+        return;
+    const revisar = () => {
+        if (!checkbox.checked) {
+            error.textContent = "⚠ Debes aceptar la Política de Privacidad para continuar.";
+            error.classList.add("visible");
+            return false;
+        }
+        error.textContent = "";
+        error.classList.remove("visible");
+        return true;
+    };
+    checkbox.addEventListener("change", revisar);
+    // Registrado antes que bindForm("register-form", ...): al compartir el mismo
+    // evento "submit" en el mismo formulario, se ejecuta primero y puede frenar
+    // el envío con stopImmediatePropagation() si el checkbox no está marcado.
+    form.addEventListener("submit", (e) => {
+        if (!revisar()) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            checkbox.focus();
+        }
+    });
 }
 /* ------------------------- CONTACTO ------------------------------- */
 function initContacto() {
@@ -215,6 +275,57 @@ function initTheme() {
     if (btn) {
         btn.addEventListener("click", () => aplicar(root.getAttribute("data-theme") !== "dark"));
     }
+}
+/* =============== SESIÓN SIMULADA (localStorage, sin backend) ======= */
+function leerSesion() {
+    try {
+        const raw = window.localStorage.getItem(SESION_KEY);
+        return raw ? JSON.parse(raw) : null;
+    }
+    catch (err) {
+        return null;
+    }
+}
+function guardarSesion(nombre) {
+    try {
+        window.localStorage.setItem(SESION_KEY, JSON.stringify({ nombre }));
+    }
+    catch (err) { /* navegación privada */ }
+    refrescarNavSesion();
+}
+function cerrarSesion() {
+    try {
+        window.localStorage.removeItem(SESION_KEY);
+    }
+    catch (err) { /* navegación privada */ }
+    refrescarNavSesion();
+}
+function refrescarNavSesion() {
+    var _a, _b;
+    var _c, _d;
+    // El indicador de sesión vive junto al logo (#nav-sesion-box), no dentro del
+    // menú hamburguesa: así se ve siempre, sin depender de abrir el menú en móvil.
+    const nav = byId("site-nav");
+    const loginLi = (_c = (_a = nav === null || nav === void 0 ? void 0 : nav.querySelector('a[href="index.html#login"]')) === null || _a === void 0 ? void 0 : _a.closest("li")) !== null && _c !== void 0 ? _c : null;
+    const registroLi = (_d = (_b = nav === null || nav === void 0 ? void 0 : nav.querySelector('a[href="index.html#registro"]')) === null || _b === void 0 ? void 0 : _b.closest("li")) !== null && _d !== void 0 ? _d : null;
+    const sesionBox = byId("nav-sesion-box");
+    const nombreSpan = byId("nav-sesion-nombre");
+    const logoutBtn = byId("btn-logout");
+    if (!sesionBox || !nombreSpan || !logoutBtn)
+        return;
+    if (!logoutBtn.dataset.bound) {
+        logoutBtn.addEventListener("click", cerrarSesion);
+        logoutBtn.dataset.bound = "true";
+    }
+    const sesion = leerSesion();
+    const activo = !!sesion;
+    if (loginLi)
+        loginLi.hidden = activo;
+    if (registroLi)
+        registroLi.hidden = activo;
+    sesionBox.hidden = !activo;
+    if (activo && sesion)
+        nombreSpan.textContent = `Hola, ${sesion.nombre}`;
 }
 /* --------------------- Contador de caracteres --------------------- */
 function initCharCounter() {
@@ -332,10 +443,7 @@ function initModal() {
         });
     }
 }
-function addExperienceCard(autor, lugar, nota, texto) {
-    const list = byId("experiences-list-container");
-    if (!list)
-        return;
+function crearExperienciaCard(autor, lugar, nota, texto) {
     const iniciales = autor.split(" ").map((p) => p.charAt(0)).join("").slice(0, 2).toUpperCase();
     const estrellas = "★".repeat(nota) + "☆".repeat(5 - nota);
     const li = document.createElement("li");
@@ -345,7 +453,24 @@ function addExperienceCard(autor, lugar, nota, texto) {
             `<div class="user-info"><div class="user-name-wrapper"><span class="user-name">${autor}</span>` +
             `<span class="star-rating-static" role="img" aria-label="${nota} de 5 estrellas">${estrellas}</span></div>` +
             `<div class="user-place-tag">${lugar}</div><blockquote class="user-comment">"${texto}"</blockquote></div>`;
-    list.prepend(li);
+    return li;
+}
+function addExperienceCard(autor, lugar, nota, texto) {
+    const list = byId("experiences-list-container");
+    if (!list)
+        return;
+    list.prepend(crearExperienciaCard(autor, lugar, nota, texto));
+    const guardadas = leerArray(EXPERIENCIAS_KEY);
+    guardadas.push({ autor, lugar, nota, texto });
+    guardarArray(EXPERIENCIAS_KEY, guardadas);
+}
+function cargarExperienciasGuardadas() {
+    const list = byId("experiences-list-container");
+    if (!list)
+        return;
+    for (const exp of leerArray(EXPERIENCIAS_KEY)) {
+        list.prepend(crearExperienciaCard(exp.autor, exp.lugar, exp.nota, exp.texto));
+    }
 }
 /* ------------------------- Valoración footer ---------------------- */
 function initRating() {
@@ -360,6 +485,55 @@ function initRating() {
         msg.textContent = sel ? `✅ ¡Gracias! Valoraste con ${sel.value} estrella(s).` : "✅ ¡Gracias por tus comentarios!";
         form.reset();
     });
+}
+/* ------------------- Reservas de planes de pago --------------------- */
+function renderizarReservas() {
+    const contenedor = byId("reservas-guardadas");
+    if (!contenedor)
+        return;
+    const reservas = leerArray(RESERVAS_KEY);
+    if (reservas.length === 0) {
+        contenedor.innerHTML = "";
+        return;
+    }
+    contenedor.innerHTML =
+        `<h3 class="org-subtitle">Tus reservas</h3>` +
+            `<ul class="budget-list" role="list">` +
+            reservas.map((r, i) => `<li><span>${r.hotel} (${r.duracion})</span>` +
+                `<span class="budget-list-actions"><strong>${r.precio}</strong>` +
+                `<button type="button" class="btn-quitar" data-idx="${i}" aria-label="Quitar reserva de ${r.hotel}">Quitar</button></span></li>`).join("") +
+            `</ul>`;
+}
+function initReservas() {
+    const botones = Array.from(document.querySelectorAll(".plans-table button.btn-reserve"));
+    const contenedor = byId("reservas-guardadas");
+    if (botones.length === 0 || !contenedor)
+        return;
+    botones.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            var _a, _b, _c, _d, _e, _f;
+            var _g, _h, _j;
+            const fila = btn.closest("tr");
+            const hotel = (_g = (_b = (_a = fila === null || fila === void 0 ? void 0 : fila.querySelector(".hotel-name")) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _g !== void 0 ? _g : "Plan seleccionado";
+            const precio = (_h = (_d = (_c = fila === null || fila === void 0 ? void 0 : fila.querySelector(".plan-price")) === null || _c === void 0 ? void 0 : _c.textContent) === null || _d === void 0 ? void 0 : _d.trim()) !== null && _h !== void 0 ? _h : "";
+            const duracion = (_j = (_f = (_e = fila === null || fila === void 0 ? void 0 : fila.querySelector(".plan-duration")) === null || _e === void 0 ? void 0 : _e.textContent) === null || _f === void 0 ? void 0 : _f.trim()) !== null && _j !== void 0 ? _j : "";
+            const reservas = leerArray(RESERVAS_KEY);
+            reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
+            guardarArray(RESERVAS_KEY, reservas);
+            renderizarReservas();
+        });
+    });
+    contenedor.addEventListener("click", (e) => {
+        const boton = e.target.closest(".btn-quitar");
+        if (!boton)
+            return;
+        const idx = Number(boton.dataset.idx);
+        const reservas = leerArray(RESERVAS_KEY);
+        reservas.splice(idx, 1);
+        guardarArray(RESERVAS_KEY, reservas);
+        renderizarReservas();
+    });
+    renderizarReservas();
 }
 /* ================== DESTINOS: filtro por región ==================== */
 function initDestinosFilter() {
@@ -413,6 +587,7 @@ function initOrganizador() {
     const pre = params.get("destino");
     if (pre && DESTINOS[pre])
         select.value = pre;
+    let ultimoPlan = null;
     form.addEventListener("submit", (e) => {
         var _a, _b, _c;
         var _d, _e, _f;
@@ -424,6 +599,7 @@ function initOrganizador() {
             resultado.innerHTML =
                 `<p class="form-feedback error" role="alert">⚠ Revisa los datos: elige un destino, ` +
                     `días entre 1 y 15 y viajeros entre 1 y 12.</p>`;
+            ultimoPlan = null;
             return;
         }
         const hotelKey = (_f = (_c = form.querySelector("input[name='org-hotel']:checked")) === null || _c === void 0 ? void 0 : _c.value) !== null && _f !== void 0 ? _f : "hostal";
@@ -446,6 +622,7 @@ function initOrganizador() {
                 plan.push(`Día ${d}: ${data.highlight}.`);
             plan.push(`Día ${dias}: Desayuno, compras de recuerdos y regreso.`);
         }
+        ultimoPlan = { destino: data.nombre, dias, personas, totalGrupo, fecha: new Date().toLocaleDateString("es-EC") };
         resultado.innerHTML =
             `<h3 class="org-subtitle">Presupuesto: ${data.nombre}</h3>` +
                 `<ul class="budget-list" role="list">` +
@@ -457,20 +634,49 @@ function initOrganizador() {
                 `<p class="budget-total">Total por persona: <strong>$${totalPersona}</strong></p>` +
                 `<p class="budget-total">Total del grupo (${personas} viajero${personas > 1 ? "s" : ""}): <strong>$${totalGrupo}</strong></p>` +
                 `<h3 class="org-subtitle">Itinerario sugerido</h3>` +
-                `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>`;
+                `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>` +
+                `<button type="button" id="btn-guardar-plan" class="btn-submit">GUARDAR MI PLAN</button>`;
     });
+    resultado.addEventListener("click", (e) => {
+        if (!e.target.closest("#btn-guardar-plan") || !ultimoPlan)
+            return;
+        const guardados = leerArray(VIAJES_KEY);
+        guardados.push(ultimoPlan);
+        guardarArray(VIAJES_KEY, guardados);
+        renderizarPlanesGuardados();
+    });
+    renderizarPlanesGuardados();
+}
+function renderizarPlanesGuardados() {
+    const contenedor = byId("planes-guardados");
+    if (!contenedor)
+        return;
+    const guardados = leerArray(VIAJES_KEY);
+    if (guardados.length === 0) {
+        contenedor.innerHTML = "";
+        return;
+    }
+    contenedor.innerHTML =
+        `<h3 class="org-subtitle">Mis planes guardados</h3>` +
+            `<ul class="budget-list" role="list">` +
+            guardados.map((p) => `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span><strong>$${p.totalGrupo}</strong></li>`).join("") +
+            `</ul>`;
 }
 /* ----------------------------- Arranque --------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     initMenu();
+    refrescarNavSesion();
+    initTerminos();
     initForms();
     initContacto();
     initPasswordToggles();
     initCharCounter();
     initCarousel();
     initModal();
+    cargarExperienciasGuardadas();
     initRating();
     initDestinosFilter();
+    initReservas();
     initOrganizador();
 });

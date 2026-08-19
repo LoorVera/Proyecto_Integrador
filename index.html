@@ -22,14 +22,14 @@
   <meta property="og:description"
     content="Lugares turísticos, experiencias de viajeros y planes de pago accesibles en Ecuador.">
   <meta property="og:url" content="https://turismo-ecuador.example.com/">
-  <meta property="og:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80">
 
   <!-- ===== Twitter Card ===== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ecuador Turismo | Explora la Magia del Ecuador">
   <meta name="twitter:description"
     content="Lugares turísticos, experiencias de viajeros y planes de pago accesibles en Ecuador.">
-  <meta name="twitter:image" content="https://turismo-ecuador.example.com/img/og-ecuador.jpg">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80">
 
   <title>Ecuador Turismo | Explora la Magia del Ecuador</title>
     <!-- Aplica el tema guardado antes de pintar la página -->
@@ -61,7 +61,10 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/sytle.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <script src="js/main.js" defer></script>
 </head>
 
@@ -78,6 +81,11 @@
         <div class="logo-icon" aria-hidden="true">EC</div>
         <span class="logo-text">TURISMO ECUADOR</span>
       </a>
+
+      <div id="nav-sesion-box" class="header-session" hidden>
+        <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
+        <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
+      </div>
 
       <div class="header-actions">
         <!-- Toggle de tema claro / oscuro -->
@@ -351,6 +359,8 @@
             </tbody>
           </table>
         </div>
+
+        <div id="reservas-guardadas" class="org-resultado" aria-live="polite"></div>
       </section>
 
     </div>
@@ -442,6 +452,16 @@
           <span id="reg-password-error" class="form-error" role="alert"></span>
         </div>
 
+        <div class="form-group">
+          <label class="check-label" for="reg-terms">
+            <input type="checkbox" id="reg-terms" name="terms" required aria-required="true"
+              aria-describedby="reg-terms-error">
+            He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>
+            y los Términos y Condiciones.
+          </label>
+          <span id="reg-terms-error" class="form-error" role="alert"></span>
+        </div>
+
         <button type="submit" class="btn-submit btn-submit-gold">CREAR MI CUENTA</button>
         <div id="register-form-message" class="form-status" role="status" aria-live="polite"></div>
       </form>
@@ -529,6 +549,7 @@
 
       <div class="footer-bottom">
         <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small><a href="privacidad.html">Política de Privacidad</a></small>
         <small>Accesibilidad:
           <kbd aria-label="Tecla Tab">Tab</kbd> /
           <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /
