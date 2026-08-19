@@ -8,6 +8,7 @@ index.html         → Landing principal: carrusel de destinos, experiencias de 
                       planes de pago, login, registro y contacto
 destinos.html       → Catálogo de destinos filtrable por región
 organizador.html    → Organizador de viaje: calcula presupuesto e itinerario día a día
+privacidad.html     → Política de Privacidad
 css/variables.css   → Design tokens (colores, tipografía, espaciado) y reset base
 css/layout.css      → Header, nav y contenedores estructurales (main, footer)
 css/components.css  → Botones, tarjetas, formularios, modal, carrusel y estilos de páginas internas
@@ -25,7 +26,6 @@ sitemap.xml         → Mapa del sitio para buscadores
 
 ## 🛠️ Compilar TypeScript
 ```bash
-npm install -g typescript   # solo la primera vez
-cd ts
-tsc                         # genera ../js/main.js
+npm install     # instala TypeScript como dependencia local (solo la primera vez)
+npm run build   # genera js/main.js
 ```
