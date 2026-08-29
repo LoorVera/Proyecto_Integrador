@@ -52,49 +52,53 @@
 
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-    <header class="site-header" role="banner">
+    <header class="site-header">
     <div class="header-container">
-      <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
-        <div class="logo-icon" aria-hidden="true">EC</div>
-        <span class="logo-text">TURISMO ECUADOR</span>
-      </a>
+      <div class="header-top">
+        <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
+          <img class="logo-icon" src="img/logo.png" alt="" aria-hidden="true" width="40" height="40">
+          <span class="logo-text">TURISMO ECUADOR</span>
+        </a>
 
-      <div id="nav-sesion-box" class="header-session" hidden>
-        <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
-        <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
-      </div>
+        <div class="header-actions-group">
+          <div id="nav-sesion-box" class="header-session" hidden>
+            <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
+            <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
+          </div>
 
-      <div class="header-actions">
-        <!-- Toggle de tema claro / oscuro -->
-        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
-          aria-label="Activar modo oscuro">
-          <span class="theme-icon" aria-hidden="true">🌙</span>
-        </button>
+          <div class="header-actions">
+            <!-- Toggle de tema claro / oscuro -->
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+              aria-label="Activar modo oscuro">
+              <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
 
-        <!-- Botón hamburguesa (solo móvil) -->
-        <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
-          aria-controls="site-nav" aria-label="Abrir menú de navegación">
-          <span class="menu-bar" aria-hidden="true"></span>
-          <span class="menu-bar" aria-hidden="true"></span>
-          <span class="menu-bar" aria-hidden="true"></span>
-        </button>
+            <!-- Botón hamburguesa (solo móvil) -->
+            <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
+              aria-controls="site-nav" aria-label="Abrir menú de navegación">
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="btn-nav btn-nav-secondary">INICIO</a></li>
-          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
-          <li><a href="organizador.html" class="btn-nav btn-nav-secondary" aria-current="page">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="destinos.html" class="btn-nav btn-nav-secondary" aria-current="page">DESTINOS</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
           <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
-          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
           <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
           <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
+          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main-content" class="main-layout" role="main">
+  <main id="main-content" class="main-layout">
 
     <!-- Encabezado de página -->
     <section class="page-hero" aria-labelledby="destinos-title">
@@ -125,10 +129,10 @@
               <span class="slide-badge">Región Insular</span>
               <h3 id="dest-galapagos" class="destino-title">Islas Galápagos</h3>
               <p class="destino-desc">Laboratorio natural vivo con especies únicas en el mundo.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas de Galápagos">
-                <span class="tag-item" role="listitem">Fauna</span>
-                <span class="tag-item" role="listitem">Buceo</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas de Galápagos">
+                <li class="tag-item">Fauna</li>
+                <li class="tag-item">Buceo</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 120 dólares por día">Desde $120/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=galapagos">Planificar viaje</a>
@@ -146,10 +150,10 @@
               <span class="slide-badge">Región Sierra</span>
               <h3 id="dest-quito" class="destino-title">Quito</h3>
               <p class="destino-desc">Patrimonio colonial a 2.800 m, entre volcanes y cultura viva.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas de Quito">
-                <span class="tag-item" role="listitem">Cultura</span>
-                <span class="tag-item" role="listitem">Patrimonio</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas de Quito">
+                <li class="tag-item">Cultura</li>
+                <li class="tag-item">Patrimonio</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 60 dólares por día">Desde $60/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=quito">Planificar viaje</a>
@@ -167,10 +171,10 @@
               <span class="slide-badge">Región Sierra</span>
               <h3 id="dest-cotopaxi" class="destino-title">Volcán Cotopaxi</h3>
               <p class="destino-desc">Volcán activo, páramo y cóndores a 5.897 m de adrenalina.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas del Cotopaxi">
-                <span class="tag-item" role="listitem">Andinismo</span>
-                <span class="tag-item" role="listitem">Páramo</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas del Cotopaxi">
+                <li class="tag-item">Andinismo</li>
+                <li class="tag-item">Páramo</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 70 dólares por día">Desde $70/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=cotopaxi">Planificar viaje</a>
@@ -188,10 +192,10 @@
               <span class="slide-badge">Región Sierra</span>
               <h3 id="dest-quilotoa" class="destino-title">Laguna de Quilotoa</h3>
               <p class="destino-desc">Cráter volcánico con una laguna esmeralda de otro planeta.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas de Quilotoa">
-                <span class="tag-item" role="listitem">Trekking</span>
-                <span class="tag-item" role="listitem">Miradores</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas de Quilotoa">
+                <li class="tag-item">Trekking</li>
+                <li class="tag-item">Miradores</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 50 dólares por día">Desde $50/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=quilotoa">Planificar viaje</a>
@@ -209,10 +213,10 @@
               <span class="slide-badge">Puerta a la Amazonía</span>
               <h3 id="dest-banos" class="destino-title">Baños de Agua Santa</h3>
               <p class="destino-desc">Cascadas, termas y deportes extremos junto al Tungurahua.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas de Baños">
-                <span class="tag-item" role="listitem">Cascadas</span>
-                <span class="tag-item" role="listitem">Rafting</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas de Baños">
+                <li class="tag-item">Cascadas</li>
+                <li class="tag-item">Rafting</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 55 dólares por día">Desde $55/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=banos">Planificar viaje</a>
@@ -230,10 +234,10 @@
               <span class="slide-badge">Región Costa</span>
               <h3 id="dest-montanita" class="destino-title">Montañita</h3>
               <p class="destino-desc">Surf, atardeceres dorados y vida nocturna frente al Pacífico.</p>
-              <div class="slide-tags" role="list" aria-label="Etiquetas de Montañita">
-                <span class="tag-item" role="listitem">Surf</span>
-                <span class="tag-item" role="listitem">Playa</span>
-              </div>
+              <ul class="slide-tags" aria-label="Etiquetas de Montañita">
+                <li class="tag-item">Surf</li>
+                <li class="tag-item">Playa</li>
+              </ul>
               <div class="destino-footer">
                 <span class="plan-price" aria-label="Desde 45 dólares por día">Desde $45/día</span>
                 <a class="btn-reserve" href="organizador.html?destino=montanita">Planificar viaje</a>
@@ -249,7 +253,7 @@
 
   </main>
 
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-bottom">
         <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>

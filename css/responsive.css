@@ -1,11 +1,15 @@
 /* ==========================================================================
    9. MEDIA QUERIES (mobile-first → min-width)
    ========================================================================== */
+@media (min-width: 400px) { .form-row { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 640px) { .destinos-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 768px) {
   /* En escritorio: hamburguesa desaparece, nav siempre visible en fila */
   .menu-toggle { display: none; }
   .site-nav { display: block; width: auto; }
+  /* Logo más grande a la izquierda; título centrado en la barra superior */
+  .logo-icon { width: 64px; height: 64px; }
+  .logo-text { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: var(--fs-lg); }
   .nav-links { flex-direction: row; flex-wrap: wrap; }
   .nav-links .btn-nav { width: auto; }
   .cta-banner-wrapper { justify-content: flex-end; }

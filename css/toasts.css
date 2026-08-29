@@ -1,0 +1,10 @@
+.c-toast-container { }
+.c-toast { }
+.c-toast--success { }
+.c-toast--error { }
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

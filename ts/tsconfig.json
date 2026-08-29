@@ -8,5 +8,5 @@
     "removeComments": false,
     "sourceMap": false
   },
-  "include": ["main.ts"]
+  "include": ["main.ts", "playground.ts"]
 }

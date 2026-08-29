@@ -2,11 +2,13 @@
    3. HEADER + MENÚ HAMBURGUESA + TOGGLE DE TEMA
    ========================================================================== */
 .site-header { background: var(--color-dark); color: #fff; padding: var(--space-3) var(--space-5); position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow-sm); }
-.header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
-.logo-box { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; font-weight: 700; font-size: var(--fs-lg); }
-.logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-gold), var(--color-secondary), var(--color-primary)); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); font-weight: 800; color: var(--color-dark); }
+.header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-3); }
+.header-top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.logo-box { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; font-weight: 700; font-size: var(--fs-lg); z-index: 1; }
+.logo-icon { width: 40px; height: 40px; border-radius: var(--radius-md); background: #fff; padding: 3px; object-fit: contain; display: block; }
 .logo-text { font-size: var(--fs-md); letter-spacing: .02em; white-space: nowrap; }
 
+.header-actions-group { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; z-index: 1; }
 .header-actions { display: flex; align-items: center; gap: var(--space-2); }
 .header-session { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
 .header-session[hidden] { display: none; }
@@ -32,8 +34,8 @@
 .btn-nav { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); text-decoration: none; font-weight: 600; font-size: var(--fs-sm); border: 1px solid transparent; transition: var(--transition); }
 .btn-nav-secondary { color: #fff; border-color: rgba(255, 255, 255, .3); }
 .btn-nav-secondary:hover { background: rgba(255, 255, 255, .12); }
-.btn-nav-primary { background: var(--color-primary); color: #fff; }
-.btn-nav-primary:hover { background: var(--color-primary-dark); }
+.btn-nav-primary { background: var(--color-primary-dark); color: #fff; }
+.btn-nav-primary:hover { background: var(--color-primary-darker); }
 
 /* ==========================================================================
    4a. CONTENEDORES DE MAIN
@@ -47,3 +49,4 @@
 .site-footer { background: var(--color-dark); color: #e5e7eb; padding: var(--space-7) var(--space-5) var(--space-6); margin-top: auto; }
 .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-6); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-3); border-top: 1px solid rgba(255, 255, 255, .1); padding-top: var(--space-5); font-size: var(--fs-xs); color: #9ca3af; }
+.footer-bottom a { color: #7dd3fc; } /* .site-footer siempre usa --color-dark, sin importar el tema */

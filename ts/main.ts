@@ -8,6 +8,7 @@ type Validator = (value: string) => string | null;
 interface FieldConfig { input: HTMLInputElement | HTMLTextAreaElement; error: HTMLElement; rules: Validator[]; }
 
 interface DestinoData { nombre: string; costoDia: number; highlight: string; }
+interface HospedajeData { nombre: string; precio: number; }
 
 interface ExperienciaGuardada { autor: string; lugar: string; nota: number; texto: string; }
 interface ReservaGuardada { hotel: string; precio: string; duracion: string; fecha: string; }
@@ -410,6 +411,10 @@ function initCarousel(): void {
     frame.addEventListener("mouseleave", jugar);
     frame.addEventListener("focusin", parar);
     frame.addEventListener("focusout", jugar);
+    frame.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); irA(actual - 1); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); irA(actual + 1); }
+    });
   }
   document.addEventListener("visibilitychange", () => (document.hidden ? parar() : jugar()));
   jugar();
@@ -441,7 +446,11 @@ function initModal(): void {
       const lugar = byId<HTMLInputElement>("exp-place")?.value.trim() ?? "";
       const nota = Number(byId<HTMLSelectElement>("exp-rating")?.value ?? 5);
       const texto = byId<HTMLTextAreaElement>("exp-comment")?.value.trim() ?? "";
-      if (autor && lugar && texto) addExperienceCard(autor, lugar, nota, texto);
+      if (!autor || !lugar || !texto) {
+        byId<HTMLInputElement | HTMLTextAreaElement>(!autor ? "exp-author" : !lugar ? "exp-place" : "exp-comment")?.focus();
+        return;
+      }
+      addExperienceCard(autor, lugar, nota, texto);
       form.reset();
       cerrarModal();
     });
@@ -577,7 +586,7 @@ const DESTINOS: Record<string, DestinoData> = {
   montanita: { nombre: "Montañita", costoDia: 45, highlight: "Clase de surf y atardecer en la playa" },
 };
 
-const HOSPEDAJE: Record<string, { nombre: string; precio: number }> = {
+const HOSPEDAJE: Record<string, HospedajeData> = {
   hostal: { nombre: "Hostal", precio: 25 },
   hotel: { nombre: "Hotel", precio: 70 },
   ecolodge: { nombre: "Eco-lodge", precio: 90 },
@@ -657,6 +666,17 @@ function initOrganizador(): void {
     renderizarPlanesGuardados();
   });
 
+  const planesGuardadosBox = byId<HTMLElement>("planes-guardados");
+  planesGuardadosBox?.addEventListener("click", (e: Event) => {
+    const boton = (e.target as HTMLElement).closest<HTMLButtonElement>(".btn-quitar");
+    if (!boton) return;
+    const idx = Number(boton.dataset.idx);
+    const guardados = leerArray<PlanGuardado>(VIAJES_KEY);
+    guardados.splice(idx, 1);
+    guardarArray(VIAJES_KEY, guardados);
+    renderizarPlanesGuardados();
+  });
+
   renderizarPlanesGuardados();
 }
 
@@ -667,10 +687,11 @@ function renderizarPlanesGuardados(): void {
   if (guardados.length === 0) { contenedor.innerHTML = ""; return; }
 
   contenedor.innerHTML =
-    `<h3 class="org-subtitle">Mis planes guardados</h3>` +
     `<ul class="budget-list" role="list">` +
-    guardados.map((p) =>
-      `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span><strong>$${p.totalGrupo}</strong></li>`
+    guardados.map((p, i) =>
+      `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span>` +
+      `<span class="budget-list-actions"><strong>$${p.totalGrupo}</strong>` +
+      `<button type="button" class="btn-quitar" data-idx="${i}" aria-label="Quitar plan de ${p.destino}">Quitar</button></span></li>`
     ).join("") +
     `</ul>`;
 }

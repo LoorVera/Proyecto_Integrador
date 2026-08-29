@@ -14,7 +14,7 @@
 .slide-badge { display: inline-block; width: fit-content; margin-bottom: var(--space-3); background: var(--color-gold); color: #1a1a1a; padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; }
 .slide-title { font-size: var(--fs-xl); margin-bottom: var(--space-2); }
 .slide-description { max-width: 62ch; opacity: .92; margin-bottom: var(--space-4); font-size: var(--fs-sm); }
-.slide-tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.slide-tags { display: flex; gap: var(--space-2); flex-wrap: wrap; list-style: none; }
 .tag-item { background: rgba(255, 255, 255, .15); border: 1px solid rgba(255, 255, 255, .28); padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); font-size: var(--fs-xs); }
 .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, .15); border: 1px solid rgba(255, 255, 255, .3); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--transition); }
 .carousel-btn:hover { background: rgba(255, 255, 255, .32); }
@@ -55,8 +55,8 @@
 .hotel-location { font-size: var(--fs-xs); color: var(--color-muted); }
 .plan-price { font-weight: 800; color: var(--color-ok-text); font-size: var(--fs-lg); }
 .plan-duration { background: rgba(14, 165, 233, .1); color: var(--color-link); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
-.btn-reserve { display: inline-block; background: var(--color-secondary); color: #fff; border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: background var(--transition); text-decoration: none; font-size: var(--fs-sm); }
-.btn-reserve:hover { background: var(--color-secondary-dark); }
+.btn-reserve { display: inline-block; background: var(--color-secondary-dark); color: #fff; border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: background var(--transition); text-decoration: none; font-size: var(--fs-sm); }
+.btn-reserve:hover { background: var(--color-secondary-darker); }
 
 /* ==========================================================================
    5. FORMULARIOS
@@ -85,8 +85,8 @@
 .strength-bar[data-level="2"] { width: 50%; background: var(--color-gold); }
 .strength-bar[data-level="3"] { width: 75%; background: var(--color-secondary); }
 .strength-bar[data-level="4"] { width: 100%; background: var(--color-secondary-dark); }
-.btn-submit { background: var(--color-primary); color: #fff; border: none; padding: var(--space-4); border-radius: var(--radius-md); font-size: var(--fs-md); font-weight: 700; cursor: pointer; transition: background var(--transition); }
-.btn-submit:hover { background: var(--color-primary-dark); }
+.btn-submit { background: var(--color-primary-dark); color: #fff; border: none; padding: var(--space-4); border-radius: var(--radius-md); font-size: var(--fs-md); font-weight: 700; cursor: pointer; transition: background var(--transition); }
+.btn-submit:hover { background: var(--color-primary-darker); }
 .btn-submit-gold { background: var(--color-gold); color: #1a1a1a; }
 .btn-submit-gold:hover { background: var(--color-gold-dark); }
 .form-status, .form-feedback { display: none; padding: var(--space-3); border-radius: var(--radius-sm); font-size: var(--fs-sm); text-align: center; }
@@ -103,12 +103,13 @@
 .star-rating-fieldset { border: none; display: flex; flex-direction: row-reverse; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-5); }
 .star-rating-fieldset legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
 .star-rating-fieldset input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.star-rating-fieldset label { font-size: 2rem; color: #4b5563; cursor: pointer; transition: var(--transition); }
+.star-rating-fieldset label { font-size: 2rem; color: #8b93a3; cursor: pointer; transition: var(--transition); }
 .star-rating-fieldset label:hover, .star-rating-fieldset label:hover ~ label, .star-rating-fieldset input[type="radio"]:checked ~ label { color: var(--color-gold); }
 .star-rating-fieldset input[type="radio"]:focus-visible + label { outline: 3px solid var(--color-primary); border-radius: 4px; }
 .feedback-textarea { width: 100%; min-height: 90px; padding: var(--space-3); border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, .2); background: rgba(0, 0, 0, .25); color: #fff; font-family: inherit; font-size: var(--fs-sm); resize: vertical; margin-bottom: var(--space-4); }
 .feedback-textarea.light { background: var(--color-bg); color: var(--color-ink); border-color: var(--color-border); }
 .feedback-textarea::placeholder { color: #9ca3af; }
+.feedback-textarea.light::placeholder { color: #6b7280; }
 .btn-submit-feedback { background: var(--color-gold); color: #1a1a1a; border: none; padding: var(--space-3) var(--space-5); border-radius: var(--radius-full); font-weight: 700; cursor: pointer; transition: background var(--transition); }
 .btn-submit-feedback:hover { background: var(--color-gold-dark); }
 kbd { background: rgba(255, 255, 255, .12); border-radius: 4px; padding: 2px 6px; font-family: monospace; }
@@ -132,7 +133,7 @@ dialog.modal-dialog::backdrop { background: rgba(11, 19, 41, .6); backdrop-filte
 .region-filter { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
 .filter-btn { padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); border: 1.5px solid var(--color-border); background: var(--color-surface); color: var(--color-muted); font-weight: 700; font-size: var(--fs-xs); letter-spacing: .05em; cursor: pointer; transition: var(--transition); }
 .filter-btn:hover { border-color: var(--color-primary); color: var(--color-link); }
-.filter-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+.filter-btn.active { background: var(--color-primary-dark); border-color: var(--color-primary-dark); color: #fff; }
 .destinos-grid { list-style: none; display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
 .destino-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition); }
 .destino-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
@@ -143,7 +144,7 @@ dialog.modal-dialog::backdrop { background: rgba(11, 19, 41, .6); backdrop-filte
 .destino-footer { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); }
 .empty-msg { color: var(--color-muted); text-align: center; padding: var(--space-6); font-size: var(--fs-sm); }
 .org-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); align-items: start; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
 .check-label { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-sm); color: var(--color-ink); cursor: pointer; }
 input[type="radio"], input[type="checkbox"] { accent-color: var(--color-primary); width: 18px; height: 18px; flex-shrink: 0; }
 .org-resultado { display: flex; flex-direction: column; gap: var(--space-3); }

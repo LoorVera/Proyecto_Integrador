@@ -400,6 +400,16 @@ function initCarousel() {
         frame.addEventListener("mouseleave", jugar);
         frame.addEventListener("focusin", parar);
         frame.addEventListener("focusout", jugar);
+        frame.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                irA(actual - 1);
+            }
+            else if (e.key === "ArrowRight") {
+                e.preventDefault();
+                irA(actual + 1);
+            }
+        });
     }
     document.addEventListener("visibilitychange", () => (document.hidden ? parar() : jugar()));
     jugar();
@@ -429,15 +439,18 @@ function initModal() {
         cerrarModal(); });
     if (form) {
         form.addEventListener("submit", (e) => {
-            var _a, _b, _c, _d;
-            var _e, _f, _g, _h;
+            var _a, _b, _c, _d, _e;
+            var _f, _g, _h, _j;
             e.preventDefault();
-            const autor = (_e = (_a = byId("exp-author")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _e !== void 0 ? _e : "";
-            const lugar = (_f = (_b = byId("exp-place")) === null || _b === void 0 ? void 0 : _b.value.trim()) !== null && _f !== void 0 ? _f : "";
-            const nota = Number((_g = (_c = byId("exp-rating")) === null || _c === void 0 ? void 0 : _c.value) !== null && _g !== void 0 ? _g : 5);
-            const texto = (_h = (_d = byId("exp-comment")) === null || _d === void 0 ? void 0 : _d.value.trim()) !== null && _h !== void 0 ? _h : "";
-            if (autor && lugar && texto)
-                addExperienceCard(autor, lugar, nota, texto);
+            const autor = (_f = (_a = byId("exp-author")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _f !== void 0 ? _f : "";
+            const lugar = (_g = (_b = byId("exp-place")) === null || _b === void 0 ? void 0 : _b.value.trim()) !== null && _g !== void 0 ? _g : "";
+            const nota = Number((_h = (_c = byId("exp-rating")) === null || _c === void 0 ? void 0 : _c.value) !== null && _h !== void 0 ? _h : 5);
+            const texto = (_j = (_d = byId("exp-comment")) === null || _d === void 0 ? void 0 : _d.value.trim()) !== null && _j !== void 0 ? _j : "";
+            if (!autor || !lugar || !texto) {
+                (_e = byId(!autor ? "exp-author" : !lugar ? "exp-place" : "exp-comment")) === null || _e === void 0 ? void 0 : _e.focus();
+                return;
+            }
+            addExperienceCard(autor, lugar, nota, texto);
             form.reset();
             cerrarModal();
         });
@@ -645,6 +658,17 @@ function initOrganizador() {
         guardarArray(VIAJES_KEY, guardados);
         renderizarPlanesGuardados();
     });
+    const planesGuardadosBox = byId("planes-guardados");
+    planesGuardadosBox === null || planesGuardadosBox === void 0 ? void 0 : planesGuardadosBox.addEventListener("click", (e) => {
+        const boton = e.target.closest(".btn-quitar");
+        if (!boton)
+            return;
+        const idx = Number(boton.dataset.idx);
+        const guardados = leerArray(VIAJES_KEY);
+        guardados.splice(idx, 1);
+        guardarArray(VIAJES_KEY, guardados);
+        renderizarPlanesGuardados();
+    });
     renderizarPlanesGuardados();
 }
 function renderizarPlanesGuardados() {
@@ -657,9 +681,10 @@ function renderizarPlanesGuardados() {
         return;
     }
     contenedor.innerHTML =
-        `<h3 class="org-subtitle">Mis planes guardados</h3>` +
-            `<ul class="budget-list" role="list">` +
-            guardados.map((p) => `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span><strong>$${p.totalGrupo}</strong></li>`).join("") +
+        `<ul class="budget-list" role="list">` +
+            guardados.map((p, i) => `<li><span>${p.destino} — ${p.dias} día(s), ${p.personas} viajero(s) (${p.fecha})</span>` +
+                `<span class="budget-list-actions"><strong>$${p.totalGrupo}</strong>` +
+                `<button type="button" class="btn-quitar" data-idx="${i}" aria-label="Quitar plan de ${p.destino}">Quitar</button></span></li>`).join("") +
             `</ul>`;
 }
 /* ----------------------------- Arranque --------------------------- */
