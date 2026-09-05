@@ -1,0 +1,11 @@
+/* =============================================================================
+   styles.css — Punto de entrada de estilos del playground de componentes.
+   Importa cada hoja de componente; el orden preserva la cascada.
+   ============================================================================= */
+@import url("variables.css");
+@import url("alerts.css");
+@import url("botones.css");
+@import url("checkboxes-radios.css");
+@import url("dialogs.css");
+@import url("menus.css");
+@import url("toasts.css");

@@ -1,0 +1,12 @@
+{
+  "name": "ecuador-turismo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal turístico semántico, accesible y responsive de Ecuador (proyecto ESPOL).",
+  "scripts": {
+    "build": "tsc -p ts/tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

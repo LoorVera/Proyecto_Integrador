@@ -1,0 +1,35 @@
+.c-check-group {
+    border: 1px solid var(--border);
+    background-color: var(--check-checked);
+    border-radius: var(--border);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 18px;
+   
+ }
+.c-check {
+    margin-right: 8px;
+    position: relative;
+ }
+.c-radio-group {
+     border: 1px solid var(--border);
+    background-color: var(--check-checked);
+    border-radius: var(--border);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 18px;
+ }
+.c-radio {
+    cursor: pointer;
+    position: center;
+    margin-left: 8px;
+   
+ }
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

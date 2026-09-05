@@ -1,0 +1,71 @@
+.c-alert {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-direction: row;
+    align-items: start;
+    border-radius: var(--border);
+    padding: 8px;
+ }
+
+.c-alert-icon {
+    padding: 10px;
+ } 
+
+.c-alert--error .c-alert-icon {
+    color: var(--semantic-error);
+ } 
+.c-alert--warning .c-alert-icon {
+    color: var(--semantic-warning);
+ }
+.c-alert--info .c-alert-icon {
+    color: var(--semantic-info);
+ }
+.c-alert--success .c-alert-icon { 
+    color: var(--semantic-success);
+}
+
+.c-alert--success {
+    border: 1px solid var(--semantic-success);
+    background-color: color-mix(in srgb, var(--semantic-success) 15%, transparent);
+  
+    padding: 8px;
+}
+.c-alert--error {
+    border: 1px solid var(--semantic-error);
+    background-color: color-mix(in srgb, var(--semantic-error) 15%, transparent);
+    padding: 8px;
+}
+.c-alert--warning {
+    border: 1px solid var(--semantic-warning);
+    background-color: color-mix(in srgb, var(--semantic-warning) 15%, transparent);
+    padding: 8px;
+}
+.c-alert--info {
+    border: 1px solid var(--semantic-info);
+    background-color: color-mix(in srgb, var(--semantic-info) 15%, transparent);
+    padding: 8px;
+}
+
+
+
+.c-alert-message {
+    margin: 0px ;
+ }
+.c-alert-close { 
+    padding: 2px 10px;
+    align-self: center;
+    color: var(--semantic-close);
+    background-color: transparent;
+    border-radius: var(--border);
+    cursor: pointer;
+
+
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}
+

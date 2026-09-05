@@ -1,0 +1,32 @@
+.c-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: var(--border);
+
+    cursor: pointer;
+ }
+.c-btn--primary {
+    border: 5px solid var(--border);
+    background-color: var(--btn-primary);
+ }
+.c-btn--secondary { 
+    border: 5px solid var(--border);
+    background-color: var(--btn-secondary);
+}
+.c-btn--destructive {
+    border: 5px solid var(--border);
+    background-color: var(--btn-destructive);
+ }
+.c-btn--icon {
+    padding: 2px 15px;
+    border: 5px solid var(--border);
+    background-color: var(--btn-icon);
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

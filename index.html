@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ===== SEO técnico ===== -->
+  <meta name="description"
+    content="Descubre los mejores lugares turísticos de Ecuador, experiencias de viajeros, planes de pago accesibles y reservas de hotel. Portal Oficial de Turismo Ecuador.">
+  <meta name="keywords" content="Turismo Ecuador, Galápagos, Quito, Cotopaxi, Baños, Viajes, Reserva Hotel">
+  <meta name="author" content="Ecuador Turismo Portal">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b1329">
+  <link rel="canonical" href="https://turismo-ecuador.example.com/">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
+  <meta property="og:site_name" content="Ecuador Turismo">
+  <meta property="og:title" content="Ecuador Turismo | Explora la Magia del Ecuador">
+  <meta property="og:description"
+    content="Lugares turísticos, experiencias de viajeros y planes de pago accesibles en Ecuador.">
+  <meta property="og:url" content="https://turismo-ecuador.example.com/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- ===== Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ecuador Turismo | Explora la Magia del Ecuador">
+  <meta name="twitter:description"
+    content="Lugares turísticos, experiencias de viajeros y planes de pago accesibles en Ecuador.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80">
+
+  <title>Ecuador Turismo | Explora la Magia del Ecuador</title>
+    <!-- Aplica el tema guardado antes de pintar la página -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("tema");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
+
+  <!-- SEO: datos estructurados Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": "Ecuador",
+    "description": "Portal oficial de turismo del Ecuador: Galápagos, Quito, Cotopaxi y Baños.",
+    "touristAttraction": [
+      { "@type": "TouristAttraction", "name": "Islas Galápagos" },
+      { "@type": "TouristAttraction", "name": "Centro Histórico de Quito" },
+      { "@type": "TouristAttraction", "name": "Volcán Cotopaxi" },
+      { "@type": "TouristAttraction", "name": "Baños de Agua Santa" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <div id="aria-announcer" class="sr-only" aria-live="polite" aria-atomic="true" role="status"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-top">
+        <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
+          <img class="logo-icon" src="img/logo.png" alt="" aria-hidden="true" width="40" height="40">
+          <span class="logo-text">TURISMO ECUADOR</span>
+        </a>
+
+        <div class="header-actions-group">
+          <div id="nav-sesion-box" class="header-session" hidden>
+            <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
+            <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
+          </div>
+
+          <div class="header-actions">
+            <!-- Toggle de tema claro / oscuro -->
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+              aria-label="Activar modo oscuro">
+              <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+
+            <!-- Botón hamburguesa (solo móvil) -->
+            <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
+              aria-controls="site-nav" aria-label="Abrir menú de navegación">
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="btn-nav btn-nav-secondary" aria-current="page">INICIO</a></li>
+          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
+          <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
+          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main-content" class="main-layout">
+
+    <!-- 1. CARRUSEL -->
+    <section class="hero-carousel-section" aria-roledescription="carrusel"
+      aria-label="Lugares turísticos destacados de Ecuador" aria-labelledby="carousel-main-title">
+      <div class="carousel-title-wrapper">
+        <h1 id="carousel-main-title" class="carousel-main-title">LUGARES CON SU DESCRIPCIÓN TURÍSTICA</h1>
+        <p class="carousel-subtitle">(ECUADOR - MARAVILLAS NATURALES Y CULTURALES)</p>
+      </div>
+
+      <div class="carousel-frame" tabindex="0" role="group"
+        aria-label="Carrusel interactivo. Usa las flechas izquierda y derecha para cambiar de lugar turístico.">
+        <button type="button" class="carousel-btn carousel-btn-prev" id="btn-prev"
+          aria-label="Lugar turístico anterior" aria-controls="carousel-slides">
+          <span aria-hidden="true">&#8592;</span>
+        </button>
+
+        <div class="carousel-slides-container" id="carousel-slides" aria-live="off">
+
+          <article class="carousel-slide active" role="group" aria-roledescription="diapositiva"
+            aria-label="Diapositiva 1 de 4: Islas Galápagos" aria-hidden="false" id="slide-1">
+            <img class="slide-img"
+              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+              alt="Tortuga gigante en las Islas Galápagos">
+            <div class="slide-content">
+              <span class="slide-badge">Región Insular</span>
+              <h2 class="slide-title">Islas Galápagos</h2>
+              <p class="slide-description">Un laboratorio natural único en el planeta. Descubre tortugas gigantes,
+                iguanas marinas y playas de arena blanca en un archipiélago de biodiversidad inigualable declarado
+                Patrimonio de la Humanidad.</p>
+              <ul class="slide-tags" aria-label="Etiquetas de Galápagos">
+                <li class="tag-item">Fauna Única</li>
+                <li class="tag-item">Buceo</li>
+                <li class="tag-item">Volcanes</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
+            aria-label="Diapositiva 2 de 4: Centro Histórico de Quito" aria-hidden="true" id="slide-2">
+            <img class="slide-img"
+              src="https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=1200&q=80"
+              alt="Centro Histórico de Quito con la Basílica del Voto Nacional" loading="lazy">
+            <div class="slide-content">
+              <span class="slide-badge">Región Sierra</span>
+              <h2 class="slide-title">Centro Histórico de Quito</h2>
+              <p class="slide-description">El centro histórico mejor conservado y menos alterado de toda América
+                Latina. Admira catedrales bañadas en pan de oro, plazas coloniales e historia vibrante a 2.800 metros
+                sobre el nivel del mar.</p>
+              <ul class="slide-tags" aria-label="Etiquetas de Quito">
+                <li class="tag-item">Arquitectura Colonial</li>
+                <li class="tag-item">Cultura</li>
+                <li class="tag-item">Gastronomía</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
+            aria-label="Diapositiva 3 de 4: Parque Nacional Cotopaxi" aria-hidden="true" id="slide-3">
+            <img class="slide-img"
+              src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80"
+              alt="Volcán Cotopaxi nevado entre nubes" loading="lazy">
+            <div class="slide-content">
+              <span class="slide-badge">Región Sierra</span>
+              <h2 class="slide-title">Volcán Cotopaxi</h2>
+              <p class="slide-description">Uno de los volcanes activos más altos del mundo (5.897m). Disfruta de
+                caminatas hacia el refugio, avistamiento de cóndores andinos y paisajes de páramo espectaculares.</p>
+              <ul class="slide-tags" aria-label="Etiquetas del Cotopaxi">
+                <li class="tag-item">Andinismo</li>
+                <li class="tag-item">Páramo</li>
+                <li class="tag-item">Aventura</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
+            aria-label="Diapositiva 4 de 4: Baños de Agua Santa" aria-hidden="true" id="slide-4">
+            <img class="slide-img"
+              src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80"
+              alt="Cascada Pailón del Diablo en Baños de Agua Santa" loading="lazy">
+            <div class="slide-content">
+              <span class="slide-badge">Puerta a la Amazonía</span>
+              <h2 class="slide-title">Baños de Agua Santa</h2>
+              <p class="slide-description">Capital de la aventura en Ecuador. Famosa por la imponente cascada Pailón
+                del Diablo, deportes de riesgo, termas curativas y el Columpio del Fin del Mundo.</p>
+              <ul class="slide-tags" aria-label="Etiquetas de Baños">
+                <li class="tag-item">Cascadas</li>
+                <li class="tag-item">Rafting</li>
+                <li class="tag-item">Termas</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+        <button type="button" class="carousel-btn carousel-btn-next" id="btn-next"
+          aria-label="Siguiente lugar turístico" aria-controls="carousel-slides">
+          <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+
+      <ol class="carousel-indicators" role="tablist" aria-label="Seleccionar diapositiva">
+        <li role="presentation"><button type="button" class="dot-btn active" role="tab" aria-selected="true"
+            aria-label="Ir a diapositiva 1: Islas Galápagos" aria-controls="slide-1" id="tab-1"></button></li>
+        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
+            aria-label="Ir a diapositiva 2: Centro Histórico de Quito" aria-controls="slide-2" id="tab-2"></button>
+        </li>
+        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
+            aria-label="Ir a diapositiva 3: Volcán Cotopaxi" aria-controls="slide-3" id="tab-3"></button></li>
+        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
+            aria-label="Ir a diapositiva 4: Baños de Agua Santa" aria-controls="slide-4" id="tab-4"></button></li>
+      </ol>
+    </section>
+
+    <!-- 2. CTA -->
+    <div class="cta-banner-wrapper">
+      <button type="button" class="btn-add-experience" id="btn-open-modal" aria-haspopup="dialog"
+        aria-controls="modal-experiencia">
+        <span class="btn-add-experience-icon" aria-hidden="true">&#10010;</span>
+        <span>AÑADIR EXPERIENCIA</span>
+      </button>
+    </div>
+
+    <!-- 3. GRID DOS COLUMNAS -->
+    <div class="content-grid">
+
+      <section class="grid-box" aria-labelledby="title-experiencias">
+        <header class="box-header">
+          <h2 id="title-experiencias" class="box-title">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              aria-hidden="true" focusable="false">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span>EXPERIENCIA DE USUARIOS</span>
+          </h2>
+          <span class="badge-live"><span aria-hidden="true">Estado:</span> En vivo</span>
+        </header>
+
+        <ul class="experiences-list" id="experiences-list-container" aria-live="polite" aria-relevant="additions">
+          <li class="experience-card">
+            <div class="user-avatar" aria-hidden="true">MC</div>
+            <div class="user-info">
+              <div class="user-name-wrapper">
+                <span class="user-name">Maria Cárdenas</span>
+                <span class="star-rating-static" role="img" aria-label="5 de 5 estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              </div>
+              <div class="user-place-tag">Islas Galápagos</div>
+              <blockquote class="user-comment">"Nadar con leones marinos en San Cristóbal fue el sueño de mi vida. La
+                organización del paquete de viaje fue impecable."</blockquote>
+            </div>
+          </li>
+          <li class="experience-card">
+            <div class="user-avatar" aria-hidden="true">JS</div>
+            <div class="user-info">
+              <div class="user-name-wrapper">
+                <span class="user-name">Jorge Silva</span>
+                <span class="star-rating-static" role="img" aria-label="5 de 5 estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              </div>
+              <div class="user-place-tag">Cotopaxi &amp; Quilotoa</div>
+              <blockquote class="user-comment">"Ver la laguna de Quilotoa desde el mirador de Shalalá supera cualquier
+                fotografía. ¡Recomendadísimo!"</blockquote>
+            </div>
+          </li>
+          <li class="experience-card">
+            <div class="user-avatar" aria-hidden="true">AL</div>
+            <div class="user-info">
+              <div class="user-name-wrapper">
+                <span class="user-name">Ana Lucía Mora</span>
+                <span class="star-rating-static" role="img" aria-label="4 de 5 estrellas">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+              </div>
+              <div class="user-place-tag">Baños de Agua Santa</div>
+              <blockquote class="user-comment">"Excelente ruta de cascadas en bicicleta. La comida local en Baños es
+                deliciosa y muy accesible."</blockquote>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="grid-box" aria-labelledby="title-planes" id="planes">
+        <header class="box-header">
+          <h2 id="title-planes" class="box-title">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              aria-hidden="true" focusable="false">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+            <span>PLANES DE PAGO</span>
+          </h2>
+          <span class="badge-live"><span aria-hidden="true">Vigencia:</span> Tarifas 2026</span>
+        </header>
+
+        <div class="table-container" role="region" aria-labelledby="title-planes" tabindex="0">
+          <table class="plans-table" aria-label="Tabla de paquetes turísticos y planes de pago">
+            <caption>Lista de opciones de alojamiento, tarifas por persona y duración del tour en Ecuador.</caption>
+            <thead>
+              <tr>
+                <th scope="col">HOTEL / DESTINO</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col">DURACIÓN</th>
+                <th scope="col">ACCIÓN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="hotel-name">Finch Bay Eco-Hotel</span><span class="hotel-location">Galápagos (Sta.
+                    Cruz)</span></td>
+                <td><span class="plan-price" aria-label="Precio: 450 dólares">$450</span></td>
+                <td><span class="plan-duration" aria-label="Duración: 4 días, 3 noches">4D / 3N</span></td>
+                <td><button type="button" class="btn-reserve"
+                    aria-label="Reservar Finch Bay Eco-Hotel en Galápagos">Reservar</button></td>
+              </tr>
+              <tr>
+                <td><span class="hotel-name">Hotel Plaza Grande</span><span class="hotel-location">Quito (C.
+                    Histórico)</span></td>
+                <td><span class="plan-price" aria-label="Precio: 220 dólares">$220</span></td>
+                <td><span class="plan-duration" aria-label="Duración: 3 días, 2 noches">3D / 2N</span></td>
+                <td><button type="button" class="btn-reserve"
+                    aria-label="Reservar Hotel Plaza Grande en Quito">Reservar</button></td>
+              </tr>
+              <tr>
+                <td><span class="hotel-name">Samari Spa Resort</span><span class="hotel-location">Baños de Agua
+                    Santa</span></td>
+                <td><span class="plan-price" aria-label="Precio: 130 dólares">$130</span></td>
+                <td><span class="plan-duration" aria-label="Duración: 2 días, 1 noche">2D / 1N</span></td>
+                <td><button type="button" class="btn-reserve"
+                    aria-label="Reservar Samari Spa Resort en Baños">Reservar</button></td>
+              </tr>
+              <tr>
+                <td><span class="hotel-name">Hacienda San Agustín</span><span class="hotel-location">Cotopaxi</span>
+                </td>
+                <td><span class="plan-price" aria-label="Precio: 180 dólares">$180</span></td>
+                <td><span class="plan-duration" aria-label="Duración: 2 días, 1 noche">2D / 1N</span></td>
+                <td><button type="button" class="btn-reserve"
+                    aria-label="Reservar Hacienda San Agustín en Cotopaxi">Reservar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="reservas-guardadas" class="org-resultado" aria-live="polite"></div>
+      </section>
+
+    </div>
+
+    <!-- 4. LOGIN -->
+    <section class="login-section" aria-labelledby="login-title" id="login">
+      <header class="form-title-box">
+        <h2 id="login-title" class="form-title">INICIO DE SESIÓN</h2>
+        <p class="form-subtitle">Ingresa a tu cuenta de viajero para gestionar tus reservas.</p>
+      </header>
+
+      <form id="login-form" class="stack-form" novalidate aria-label="Formulario de inicio de sesión">
+        <div class="form-group">
+          <label for="login-email" class="form-label">CORREO ELECTRÓNICO: <span aria-hidden="true">*</span></label>
+          <input type="email" id="login-email" name="email" class="form-input" placeholder="ejemplo@correo.com"
+            required autocomplete="email" aria-required="true"
+            aria-describedby="login-email-hint login-email-error" aria-invalid="false">
+          <small id="login-email-hint" class="form-hint">Ingresa tu correo registrado.</small>
+          <span id="login-email-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="form-label">CONTRASEÑA: <span aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••••••"
+              required autocomplete="current-password" aria-required="true"
+              aria-describedby="login-password-hint login-password-error" aria-invalid="false">
+            <button type="button" id="toggle-password" class="toggle-password-btn" aria-label="Mostrar contraseña"
+              aria-pressed="false">Mostrar</button>
+          </div>
+          <small id="login-password-hint" class="form-hint">Mínimo 6 caracteres, una letra y un número.</small>
+          <span id="login-password-error" class="form-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">INGRESAR A MI CUENTA</button>
+        <div id="login-message" class="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- 5. REGISTRO -->
+    <section class="login-section" aria-labelledby="register-title" id="registro">
+      <header class="form-title-box">
+        <h2 id="register-title" class="form-title">REGISTRO DE VIAJERO</h2>
+        <p class="form-subtitle">Crea tu cuenta para reservar planes y guardar favoritos.</p>
+      </header>
+
+      <form id="register-form" class="stack-form" novalidate aria-label="Formulario de registro de viajero">
+        <div class="form-group">
+          <label for="reg-name" class="form-label">NOMBRE COMPLETO: <span aria-hidden="true">*</span></label>
+          <input type="text" id="reg-name" name="name" class="form-input" placeholder="Ej. Ana Pérez"
+            autocomplete="name" required aria-required="true" aria-describedby="reg-name-hint reg-name-error"
+            aria-invalid="false">
+          <small id="reg-name-hint" class="form-hint">Nombre y apellido, mínimo 3 caracteres.</small>
+          <span id="reg-name-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email" class="form-label">CORREO ELECTRÓNICO: <span aria-hidden="true">*</span></label>
+          <input type="email" id="reg-email" name="email" class="form-input" placeholder="ejemplo@correo.com"
+            autocomplete="email" required aria-required="true" aria-describedby="reg-email-hint reg-email-error"
+            aria-invalid="false">
+          <small id="reg-email-hint" class="form-hint">Confirmaremos tu reserva por este correo.</small>
+          <span id="reg-email-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-phone" class="form-label">TELÉFONO / CELULAR: <span aria-hidden="true">*</span></label>
+          <input type="tel" id="reg-phone" name="phone" class="form-input" placeholder="09XXXXXXXX"
+            autocomplete="tel" inputmode="numeric" required aria-required="true"
+            aria-describedby="reg-phone-hint reg-phone-error" aria-invalid="false">
+          <small id="reg-phone-hint" class="form-hint">Celular ecuatoriano: 09XXXXXXXX o +5939XXXXXXXX.</small>
+          <span id="reg-phone-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password" class="form-label">CONTRASEÑA: <span aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="password" id="reg-password" name="new-password" class="form-input" placeholder="••••••••"
+              autocomplete="new-password" required aria-required="true"
+              aria-describedby="reg-password-hint reg-strength-text reg-password-error" aria-invalid="false">
+            <button type="button" id="reg-toggle-password" class="toggle-password-btn"
+              aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button>
+          </div>
+          <div class="strength-meter" aria-hidden="true">
+            <span id="reg-strength-bar" class="strength-bar" data-level="0"></span>
+          </div>
+          <small id="reg-strength-text" class="form-hint" role="status" aria-live="polite"></small>
+          <small id="reg-password-hint" class="form-hint">Mínimo 6 caracteres, con una letra y un número.</small>
+          <span id="reg-password-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="check-label" for="reg-terms">
+            <input type="checkbox" id="reg-terms" name="terms" required aria-required="true"
+              aria-describedby="reg-terms-error">
+            He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>
+            y los Términos y Condiciones.
+          </label>
+          <span id="reg-terms-error" class="form-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-submit btn-submit-gold">CREAR MI CUENTA</button>
+        <div id="register-form-message" class="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+
+        <!-- 6. CONTACTO -->
+    <section class="login-section" aria-labelledby="contact-title" id="contacto">
+      <header class="form-title-box">
+        <h2 id="contact-title" class="form-title">CONTÁCTANOS</h2>
+        <p class="form-subtitle">¿Necesitas ayuda para organizar tu viaje? Escríbenos.</p>
+      </header>
+
+      <form class="form-contacto" id="contact-form" novalidate aria-label="Formulario de contacto">
+        <div class="form-group">
+          <label for="nombre" class="form-label">NOMBRE: <span aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ej. Ana Pérez"
+            autocomplete="name" required aria-required="true" aria-describedby="nombre-hint nombre-error"
+            aria-invalid="false">
+          <small id="nombre-hint" class="form-hint">Escribe tu nombre completo.</small>
+          <span id="nombre-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">CORREO ELECTRÓNICO: <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="ejemplo@correo.com"
+            autocomplete="email" required aria-required="true" aria-describedby="email-hint email-error"
+            aria-invalid="false">
+          <small id="email-hint" class="form-hint">Te responderemos a este correo.</small>
+          <span id="email-error" class="form-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje" class="form-label">MENSAJE: <span aria-hidden="true">*</span></label>
+          <textarea id="mensaje" name="mensaje" class="feedback-textarea light" rows="4"
+            placeholder="Cuéntanos a dónde quieres viajar, fechas y número de personas..."
+            required aria-required="true" aria-describedby="mensaje-hint mensaje-error" aria-invalid="false"></textarea>
+          <small id="mensaje-hint" class="form-hint">Mínimo 10 caracteres, máximo 500.</small>
+          <span id="mensaje-error" class="form-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
+      </form>
+      <!-- Div requerido para el mensaje global de validación TypeScript -->
+      <div class="form-feedback" role="status" aria-live="polite"></div>
+    </section>
+      
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" id="valoracion">
+    <div class="footer-container">
+
+      <section class="rating-section" aria-labelledby="footer-rating-title">
+        <h2 id="footer-rating-title" class="rating-title">VALORACIÓN DE SU EXPERIENCIA</h2>
+        <p class="rating-subtitle">¿Cómo evaluaría su navegación en nuestro portal turístico?</p>
+
+        <form id="rating-form" aria-label="Formulario de valoración de la experiencia" novalidate>
+          <fieldset class="star-rating-fieldset" aria-label="Calificación en estrellas">
+            <legend>Seleccione su valoración de 1 a 5 estrellas</legend>
+            <input type="radio" id="star5" name="rating" value="5" aria-label="5 estrellas - Excelente" />
+            <label for="star5" title="5 estrellas - Excelente">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4" aria-label="4 estrellas - Muy buena" />
+            <label for="star4" title="4 estrellas - Muy buena">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3" aria-label="3 estrellas - Buena" />
+            <label for="star3" title="3 estrellas - Buena">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2" aria-label="2 estrellas - Regular" />
+            <label for="star2" title="2 estrellas - Regular">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1" aria-label="1 estrella - Mala" />
+            <label for="star1" title="1 estrella - Mala">&#9733;</label>
+          </fieldset>
+
+          <label for="feedback-text" class="sr-only">Comentarios sobre la experiencia de navegación</label>
+          <textarea id="feedback-text" class="feedback-textarea" maxlength="500"
+            placeholder="Escriba comentarios sobre su experiencia en la web (opcional)..."
+            aria-describedby="feedback-hint feedback-counter"></textarea>
+          <small id="feedback-counter" class="form-hint" aria-live="polite">0 / 500</small>
+          <span id="feedback-hint" class="sr-only">Campo opcional. Máximo 500 caracteres.</span>
+
+          <button type="submit" class="btn-submit-feedback">Enviar Valoración</button>
+        </form>
+        <div id="rating-message" class="form-status" role="status" aria-live="polite"></div>
+      </section>
+
+      <div class="footer-bottom">
+        <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small><a href="privacidad.html">Política de Privacidad</a></small>
+        <small>Accesibilidad:
+          <kbd aria-label="Tecla Tab">Tab</kbd> /
+          <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /
+          <kbd aria-label="Flechas izquierda y derecha">&#8592; &#8594;</kbd>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL ==================== -->
+  <dialog id="modal-experiencia" class="modal-dialog" aria-labelledby="modal-title" aria-modal="true">
+    <header class="modal-header">
+      <h2 id="modal-title" class="modal-title">AÑADIR MI EXPERIENCIA</h2>
+      <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Cerrar diálogo">&times;</button>
+    </header>
+
+    <form id="modal-form" class="stack-form" aria-label="Formulario para añadir experiencia turística" novalidate>
+      <div class="form-group">
+        <label for="exp-author" class="form-label">Tu Nombre:</label>
+        <input type="text" id="exp-author" name="exp-author" class="form-input" placeholder="Ej. Carlos Mendoza"
+          required aria-required="true" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="exp-place" class="form-label">Lugar Turístico:</label>
+        <input type="text" id="exp-place" name="exp-place" class="form-input" placeholder="Ej. Laguna de Quilotoa"
+          required aria-required="true">
+      </div>
+      <div class="form-group">
+        <label for="exp-rating" class="form-label">Calificación (1 a 5):</label>
+        <select id="exp-rating" name="exp-rating" class="form-input" required aria-required="true">
+          <option value="5">5 Estrellas (Excelente)</option>
+          <option value="4">4 Estrellas (Muy buena)</option>
+          <option value="3">3 Estrellas (Buena)</option>
+          <option value="2">2 Estrellas (Regular)</option>
+          <option value="1">1 Estrella (Deficiente)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exp-comment" class="form-label">Reseña de la experiencia:</label>
+        <textarea id="exp-comment" name="exp-comment" class="feedback-textarea light"
+          placeholder="Describe lo que más te gustó de tu viaje..." required aria-required="true"></textarea>
+      </div>
+      <button type="submit" class="btn-submit btn-submit-gold">PUBLICAR EXPERIENCIA</button>
+    </form>
+  </dialog>
+
+</body>
+
+</html>
