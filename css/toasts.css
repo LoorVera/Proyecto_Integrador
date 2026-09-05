@@ -1,7 +1,22 @@
-.c-toast-container { }
-.c-toast { }
-.c-toast--success { }
-.c-toast--error { }
+.c-toast-container {
+    text-align: center;
+    background-color: var(--tst-contedor);
+    
+ }
+.c-toast { 
+    margin-top: 0.5rem;
+    align-items: center;
+    justify-content: center;
+
+}
+.c-toast--success { 
+    color: var(--tst-success);
+}
+.c-toast--error { 
+    color: var(--tst-error);
+    margin-top: 0.5rem;
+
+}
 
 @media (max-width: 480px) {
 }

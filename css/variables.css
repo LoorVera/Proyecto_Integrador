@@ -33,18 +33,26 @@
   --semantic-info: #3b82f6;
   --semantic-close: #6b7280;
   --border: 15px;
+
   --btn-primary : #20cf0d;
   --btn-secondary : #f44d4d;
   --btn-destructive : #ff0000;
   --btn-icon : #0000ff;
-  --check-checked : #0c0c0c;
+  --check-checked : #170000;
+
+  --mnu-bg : #196dda;
+
+  --tst-contedor: #101720;
+  --tst-success: #04fdb6;
+  --tst-error: #ef4444;
+  --tst-toast: #fbbf24;
   --transition: 180ms ease-in-out;
 
 }
 
 /* ----- TEMA OSCURO manual (toggle) ----- */
 :root[data-theme="dark"] {
-  --color-bg: #2f3137; --color-surface: #131c36;
+  --color-bg: #050914; --color-surface: #131c36;
   --color-ink: #eef2f7; --color-muted: #a3adc2; --color-border: #5a6aa3;
   --color-heading: #eef2f7; --color-link: #7dd3fc; --color-ok-text: #6ee7b7;
   --color-gold-text: #fbbf24; --color-success-text: #6ee7b7; --color-danger-text: #fca5a5;
@@ -53,7 +61,7 @@
 /* ----- TEMA OSCURO automático si no hay JS ----- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg: #d3d9eb; --color-surface: #4a5167;
+    --color-bg: #343639; --color-surface: #4a5167;
     --color-ink: #eef2f7; --color-muted: #a3adc2; --color-border: #5a6aa3;
     --color-heading: #eef2f7; --color-link: #7dd3fc; --color-ok-text: #6ee7b7;
     --color-gold-text: #fbbf24; --color-success-text: #6ee7b7; --color-danger-text: #fca5a5;

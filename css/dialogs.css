@@ -1,6 +1,21 @@
-.c-dialog { }
-.c-dialog-title { }
-.c-dialog-actions { }
+.c-dialog {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+   
+ }
+.c-dialog-title {
+    background-color: var(--mnu-bg);
+    text-align: center;
+
+ }
+.c-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
 @media (max-width: 480px) {
 }

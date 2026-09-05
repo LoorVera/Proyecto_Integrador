@@ -1,5 +1,16 @@
-.c-menu-account { }
-.c-menu-account-toggle { }
+.c-menu-account {
+    text-align: left;
+  
+ }
+.c-menu-account-toggle {
+    margin-top: 0.5rem;
+    background-color: var(--mnu-bg);
+    color: var(--color-ink);
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+ }
 
 @media (max-width: 480px) {
 }
