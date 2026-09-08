@@ -66,9 +66,11 @@
 
           <div class="header-actions">
             <!-- Toggle de tema claro / oscuro -->
-            <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+            <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false"
               aria-label="Activar modo oscuro">
-              <span class="theme-icon" aria-hidden="true">🌙</span>
+              <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">☀</span>
+              <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">☾</span>
+              <span class="theme-toggle-knob" aria-hidden="true"></span>
             </button>
 
             <!-- Botón hamburguesa (solo móvil) -->
@@ -85,8 +87,8 @@
       <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="btn-nav btn-nav-secondary">INICIO</a></li>
-          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
           <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="mapa.html" class="btn-nav btn-nav-secondary">MAPA</a></li>
           <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
           <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
           <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>

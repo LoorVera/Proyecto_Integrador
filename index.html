@@ -61,6 +61,11 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
@@ -68,7 +73,7 @@
   <script src="js/main.js" defer></script>
 </head>
 
-<body>
+<body class="home-redesign">
 
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
@@ -91,9 +96,11 @@
 
           <div class="header-actions">
             <!-- Toggle de tema claro / oscuro -->
-            <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+            <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false"
               aria-label="Activar modo oscuro">
-              <span class="theme-icon" aria-hidden="true">🌙</span>
+              <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">☀</span>
+              <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">☾</span>
+              <span class="theme-toggle-knob" aria-hidden="true"></span>
             </button>
 
             <!-- Botón hamburguesa (solo móvil) -->
@@ -110,9 +117,8 @@
       <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="btn-nav btn-nav-secondary" aria-current="page">INICIO</a></li>
-          <li><a href="destinos.html" class="btn-nav btn-nav-secondary">DESTINOS</a></li>
-          <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
-          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR</a></li>
+          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLAN DE PAGO</a></li>
           <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
           <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
           <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
@@ -121,123 +127,27 @@
     </div>
   </header>
 
+  <!-- ==================== HERO DE VIDEO ==================== -->
+  <section class="hero-video-banner">
+    <video id="hero-video" autoplay loop muted playsinline>
+      <source src="paisaje.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay" aria-hidden="true"></div>
+    <div class="hero-video-content">
+      <h1 class="hero-video-title">EXPLORA LA MAGIA DEL ECUADOR</h1>
+      <p class="hero-video-subtitle">Playas, volcanes, selva amazónica e Islas Galápagos te esperan.</p>
+      <div class="hero-video-actions">
+        <a href="mapa.html" class="hero-video-cta">Descubre los destinos</a>
+        <a href="organizador.html" class="hero-video-cta hero-video-cta-secondary">Organiza tu viaje</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== MAIN ==================== -->
   <main id="main-content" class="main-layout">
 
-    <!-- 1. CARRUSEL -->
-    <section class="hero-carousel-section" aria-roledescription="carrusel"
-      aria-label="Lugares turísticos destacados de Ecuador" aria-labelledby="carousel-main-title">
-      <div class="carousel-title-wrapper">
-        <h1 id="carousel-main-title" class="carousel-main-title">LUGARES CON SU DESCRIPCIÓN TURÍSTICA</h1>
-        <p class="carousel-subtitle">(ECUADOR - MARAVILLAS NATURALES Y CULTURALES)</p>
-      </div>
-
-      <div class="carousel-frame" tabindex="0" role="group"
-        aria-label="Carrusel interactivo. Usa las flechas izquierda y derecha para cambiar de lugar turístico.">
-        <button type="button" class="carousel-btn carousel-btn-prev" id="btn-prev"
-          aria-label="Lugar turístico anterior" aria-controls="carousel-slides">
-          <span aria-hidden="true">&#8592;</span>
-        </button>
-
-        <div class="carousel-slides-container" id="carousel-slides" aria-live="off">
-
-          <article class="carousel-slide active" role="group" aria-roledescription="diapositiva"
-            aria-label="Diapositiva 1 de 4: Islas Galápagos" aria-hidden="false" id="slide-1">
-            <img class="slide-img"
-              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
-              alt="Tortuga gigante en las Islas Galápagos">
-            <div class="slide-content">
-              <span class="slide-badge">Región Insular</span>
-              <h2 class="slide-title">Islas Galápagos</h2>
-              <p class="slide-description">Un laboratorio natural único en el planeta. Descubre tortugas gigantes,
-                iguanas marinas y playas de arena blanca en un archipiélago de biodiversidad inigualable declarado
-                Patrimonio de la Humanidad.</p>
-              <ul class="slide-tags" aria-label="Etiquetas de Galápagos">
-                <li class="tag-item">Fauna Única</li>
-                <li class="tag-item">Buceo</li>
-                <li class="tag-item">Volcanes</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
-            aria-label="Diapositiva 2 de 4: Centro Histórico de Quito" aria-hidden="true" id="slide-2">
-            <img class="slide-img"
-              src="https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=1200&q=80"
-              alt="Centro Histórico de Quito con la Basílica del Voto Nacional" loading="lazy">
-            <div class="slide-content">
-              <span class="slide-badge">Región Sierra</span>
-              <h2 class="slide-title">Centro Histórico de Quito</h2>
-              <p class="slide-description">El centro histórico mejor conservado y menos alterado de toda América
-                Latina. Admira catedrales bañadas en pan de oro, plazas coloniales e historia vibrante a 2.800 metros
-                sobre el nivel del mar.</p>
-              <ul class="slide-tags" aria-label="Etiquetas de Quito">
-                <li class="tag-item">Arquitectura Colonial</li>
-                <li class="tag-item">Cultura</li>
-                <li class="tag-item">Gastronomía</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
-            aria-label="Diapositiva 3 de 4: Parque Nacional Cotopaxi" aria-hidden="true" id="slide-3">
-            <img class="slide-img"
-              src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80"
-              alt="Volcán Cotopaxi nevado entre nubes" loading="lazy">
-            <div class="slide-content">
-              <span class="slide-badge">Región Sierra</span>
-              <h2 class="slide-title">Volcán Cotopaxi</h2>
-              <p class="slide-description">Uno de los volcanes activos más altos del mundo (5.897m). Disfruta de
-                caminatas hacia el refugio, avistamiento de cóndores andinos y paisajes de páramo espectaculares.</p>
-              <ul class="slide-tags" aria-label="Etiquetas del Cotopaxi">
-                <li class="tag-item">Andinismo</li>
-                <li class="tag-item">Páramo</li>
-                <li class="tag-item">Aventura</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="carousel-slide" role="group" aria-roledescription="diapositiva"
-            aria-label="Diapositiva 4 de 4: Baños de Agua Santa" aria-hidden="true" id="slide-4">
-            <img class="slide-img"
-              src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80"
-              alt="Cascada Pailón del Diablo en Baños de Agua Santa" loading="lazy">
-            <div class="slide-content">
-              <span class="slide-badge">Puerta a la Amazonía</span>
-              <h2 class="slide-title">Baños de Agua Santa</h2>
-              <p class="slide-description">Capital de la aventura en Ecuador. Famosa por la imponente cascada Pailón
-                del Diablo, deportes de riesgo, termas curativas y el Columpio del Fin del Mundo.</p>
-              <ul class="slide-tags" aria-label="Etiquetas de Baños">
-                <li class="tag-item">Cascadas</li>
-                <li class="tag-item">Rafting</li>
-                <li class="tag-item">Termas</li>
-              </ul>
-            </div>
-          </article>
-
-        </div>
-
-        <button type="button" class="carousel-btn carousel-btn-next" id="btn-next"
-          aria-label="Siguiente lugar turístico" aria-controls="carousel-slides">
-          <span aria-hidden="true">&#8594;</span>
-        </button>
-      </div>
-
-      <ol class="carousel-indicators" role="tablist" aria-label="Seleccionar diapositiva">
-        <li role="presentation"><button type="button" class="dot-btn active" role="tab" aria-selected="true"
-            aria-label="Ir a diapositiva 1: Islas Galápagos" aria-controls="slide-1" id="tab-1"></button></li>
-        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
-            aria-label="Ir a diapositiva 2: Centro Histórico de Quito" aria-controls="slide-2" id="tab-2"></button>
-        </li>
-        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
-            aria-label="Ir a diapositiva 3: Volcán Cotopaxi" aria-controls="slide-3" id="tab-3"></button></li>
-        <li role="presentation"><button type="button" class="dot-btn" role="tab" aria-selected="false"
-            aria-label="Ir a diapositiva 4: Baños de Agua Santa" aria-controls="slide-4" id="tab-4"></button></li>
-      </ol>
-    </section>
-
-    <!-- 2. CTA -->
-    <div class="cta-banner-wrapper">
+    <!-- 1. CTA -->
+    <div class="cta-banner-wrapper scroll-reveal">
       <button type="button" class="btn-add-experience" id="btn-open-modal" aria-haspopup="dialog"
         aria-controls="modal-experiencia">
         <span class="btn-add-experience-icon" aria-hidden="true">&#10010;</span>
@@ -248,7 +158,7 @@
     <!-- 3. GRID DOS COLUMNAS -->
     <div class="content-grid">
 
-      <section class="grid-box" aria-labelledby="title-experiencias">
+      <section class="grid-box scroll-reveal" aria-labelledby="title-experiencias">
         <header class="box-header">
           <h2 id="title-experiencias" class="box-title">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -303,7 +213,7 @@
         </ul>
       </section>
 
-      <section class="grid-box" aria-labelledby="title-planes" id="planes">
+      <section class="grid-box scroll-reveal" aria-labelledby="title-planes" id="planes">
         <header class="box-header">
           <h2 id="title-planes" class="box-title">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -337,7 +247,7 @@
                     aria-label="Reservar Finch Bay Eco-Hotel en Galápagos">Reservar</button></td>
               </tr>
               <tr>
-                <td><span class="hotel-name">Hotel Plaza Grande</span><span class="hotel-location">Quito (C.
+                <td><span class="hotel-name">Hotel Plaza Grande <span class="badge-popular">MÁS RESERVADO</span></span><span class="hotel-location">Quito (C.
                     Histórico)</span></td>
                 <td><span class="plan-price" aria-label="Precio: 220 dólares">$220</span></td>
                 <td><span class="plan-duration" aria-label="Duración: 3 días, 2 noches">3D / 2N</span></td>
@@ -370,7 +280,7 @@
     </div>
 
     <!-- 4. LOGIN -->
-    <section class="login-section" aria-labelledby="login-title" id="login">
+    <section class="login-section scroll-reveal" aria-labelledby="login-title" id="login">
       <header class="form-title-box">
         <h2 id="login-title" class="form-title">INICIO DE SESIÓN</h2>
         <p class="form-subtitle">Ingresa a tu cuenta de viajero para gestionar tus reservas.</p>
@@ -405,7 +315,7 @@
     </section>
 
     <!-- 5. REGISTRO -->
-    <section class="login-section" aria-labelledby="register-title" id="registro">
+    <section class="login-section scroll-reveal" aria-labelledby="register-title" id="registro">
       <header class="form-title-box">
         <h2 id="register-title" class="form-title">REGISTRO DE VIAJERO</h2>
         <p class="form-subtitle">Crea tu cuenta para reservar planes y guardar favoritos.</p>
@@ -473,7 +383,7 @@
 
 
         <!-- 6. CONTACTO -->
-    <section class="login-section" aria-labelledby="contact-title" id="contacto">
+    <section class="login-section scroll-reveal" aria-labelledby="contact-title" id="contacto">
       <header class="form-title-box">
         <h2 id="contact-title" class="form-title">CONTÁCTANOS</h2>
         <p class="form-subtitle">¿Necesitas ayuda para organizar tu viaje? Escríbenos.</p>
@@ -520,7 +430,7 @@
   <footer class="site-footer" id="valoracion">
     <div class="footer-container">
 
-      <section class="rating-section" aria-labelledby="footer-rating-title">
+      <section class="rating-section scroll-reveal" aria-labelledby="footer-rating-title">
         <h2 id="footer-rating-title" class="rating-title">VALORACIÓN DE SU EXPERIENCIA</h2>
         <p class="rating-subtitle">¿Cómo evaluaría su navegación en nuestro portal turístico?</p>
 

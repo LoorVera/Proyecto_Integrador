@@ -271,20 +271,38 @@ function initMenu(): void {
   });
 }
 
+/* ---- index.html: al hacer scroll, la fila de enlaces colapsa a hamburguesa ---- */
+function initHeaderScroll(): void {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const marcaIndex = document.querySelector<HTMLElement>(".hero-video-banner");
+  if (!header || !marcaIndex) return;
+
+  let ticking = false;
+  const actualizar = (): void => {
+    header.classList.toggle("scrolled", window.scrollY > 80);
+    ticking = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(actualizar);
+      ticking = true;
+    }
+  }, { passive: true });
+  actualizar();
+}
+
 /* =============== MODO CLARO / OSCURO con persistencia ============== */
 function initTheme(): void {
   const btn = byId<HTMLButtonElement>("theme-toggle");
-  const icon = btn ? btn.querySelector<HTMLElement>(".theme-icon") : null;
   const root = document.documentElement;
 
   const aplicar = (oscuro: boolean): void => {
     root.setAttribute("data-theme", oscuro ? "dark" : "light");
     try { window.localStorage.setItem("tema", oscuro ? "dark" : "light"); } catch (err) { /* navegación privada */ }
     if (btn) {
-      btn.setAttribute("aria-pressed", String(oscuro));
+      btn.setAttribute("aria-checked", String(oscuro));
       btn.setAttribute("aria-label", oscuro ? "Activar modo claro" : "Activar modo oscuro");
     }
-    if (icon) icon.textContent = oscuro ? "☀️" : "🌙";
   };
 
   // Sincroniza el botón con el tema aplicado por el script del <head>
@@ -375,49 +393,60 @@ function initPasswordToggles(): void {
   }
 }
 
-/* --------------- Carrusel con autoplay accesible ------------------ */
-function initCarousel(): void {
-  const slides = Array.from(document.querySelectorAll<HTMLElement>(".carousel-slide"));
-  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>(".dot-btn"));
-  const frame = document.querySelector<HTMLElement>(".carousel-frame");
-  if (slides.length === 0) return;
-
-  let actual = 0;
-  const irA = (i: number): void => {
-    actual = (i + slides.length) % slides.length;
-    slides.forEach((s, idx) => {
-      s.classList.toggle("active", idx === actual);
-      s.setAttribute("aria-hidden", String(idx !== actual));
-    });
-    dots.forEach((d, idx) => {
-      d.classList.toggle("active", idx === actual);
-      d.setAttribute("aria-selected", String(idx === actual));
-    });
-  };
-
-  const prev = byId<HTMLButtonElement>("btn-prev");
-  const next = byId<HTMLButtonElement>("btn-next");
-  if (prev) prev.addEventListener("click", () => irA(actual - 1));
-  if (next) next.addEventListener("click", () => irA(actual + 1));
-  dots.forEach((d, idx) => d.addEventListener("click", () => irA(idx)));
-
-  const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let timer: number | undefined;
-  const parar = (): void => { window.clearInterval(timer); };
-  const jugar = (): void => { if (!reducido) { parar(); timer = window.setInterval(() => irA(actual + 1), 6000); } };
-
-  if (frame) {
-    frame.addEventListener("mouseenter", parar);
-    frame.addEventListener("mouseleave", jugar);
-    frame.addEventListener("focusin", parar);
-    frame.addEventListener("focusout", jugar);
-    frame.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") { e.preventDefault(); irA(actual - 1); }
-      else if (e.key === "ArrowRight") { e.preventDefault(); irA(actual + 1); }
-    });
+/* ------------------- Hero de video (index.html) --------------------- */
+function initHeroVideo(): void {
+  const video = byId<HTMLVideoElement>("hero-video");
+  if (!video) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    video.pause();
+    video.removeAttribute("autoplay");
   }
-  document.addEventListener("visibilitychange", () => (document.hidden ? parar() : jugar()));
-  jugar();
+}
+
+/* --------------- Parallax del hero de video ------------------------- */
+function initHeroParallax(): void {
+  const hero = document.querySelector<HTMLElement>(".hero-video-banner");
+  const video = byId<HTMLVideoElement>("hero-video");
+  if (!hero || !video) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let ticking = false;
+  const actualizar = (): void => {
+    const offset = window.scrollY;
+    if (offset <= hero.offsetHeight) {
+      video.style.transform = `translateY(${offset * 0.35}px) scale(1.15)`;
+    }
+    ticking = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(actualizar);
+      ticking = true;
+    }
+  }, { passive: true });
+  actualizar();
+}
+
+/* ------------- Animación de aparición al hacer scroll ---------------- */
+function initScrollReveal(): void {
+  const elementos = Array.from(document.querySelectorAll<HTMLElement>(".scroll-reveal"));
+  if (elementos.length === 0) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    elementos.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+
+  elementos.forEach((el) => observer.observe(el));
 }
 
 /* ----------------------------- Modal ------------------------------ */
@@ -551,31 +580,6 @@ function initReservas(): void {
   renderizarReservas();
 }
 
-/* ================== DESTINOS: filtro por región ==================== */
-function initDestinosFilter(): void {
-  const botones = Array.from(document.querySelectorAll<HTMLButtonElement>(".filter-btn"));
-  const cards = Array.from(document.querySelectorAll<HTMLElement>(".destino-card"));
-  const vacio = byId<HTMLElement>("destinos-vacio");
-  if (botones.length === 0) return;
-
-  botones.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      botones.forEach((b) => {
-        b.classList.toggle("active", b === btn);
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      const region = btn.dataset.region ?? "all";
-      let visibles = 0;
-      cards.forEach((c) => {
-        const mostrar = region === "all" || c.dataset.region === region;
-        c.hidden = !mostrar;
-        if (mostrar) visibles++;
-      });
-      if (vacio) vacio.hidden = visibles !== 0;
-    });
-  });
-}
-
 /* ============ ORGANIZADOR: presupuesto + itinerario ================ */
 const DESTINOS: Record<string, DestinoData> = {
   galapagos: { nombre: "Islas Galápagos", costoDia: 120, highlight: "Snorkel con leones marinos y visita a la Estación Darwin" },
@@ -700,17 +704,19 @@ function renderizarPlanesGuardados(): void {
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initMenu();
+  initHeaderScroll();
   refrescarNavSesion();
   initTerminos();
   initForms();
   initContacto();
   initPasswordToggles();
   initCharCounter();
-  initCarousel();
+  initHeroVideo();
+  initHeroParallax();
+  initScrollReveal();
   initModal();
   cargarExperienciasGuardadas();
   initRating();
-  initDestinosFilter();
   initReservas();
   initOrganizador();
 });

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="description"
+    content="Mapa interactivo de las regiones del Ecuador (Costa, Sierra, Oriente e Insular) con los mejores hoteles disponibles en cada zona.">
+  <meta name="keywords" content="Turismo Ecuador, Mapa Ecuador, Regiones, Costa, Sierra, Oriente, Galápagos, Hoteles">
+  <meta name="author" content="Ecuador Turismo Portal">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b1329">
+  <link rel="canonical" href="https://turismo-ecuador.example.com/mapa.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_EC">
+  <meta property="og:site_name" content="Ecuador Turismo">
+  <meta property="og:title" content="Mapa Interactivo | Ecuador Turismo">
+  <meta property="og:description" content="Explora las regiones del Ecuador y descubre los mejores hoteles para tu viaje.">
+  <meta property="og:url" content="https://turismo-ecuador.example.com/mapa.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mapa Interactivo | Ecuador Turismo">
+  <meta name="twitter:description" content="Explora las regiones del Ecuador y descubre los mejores hoteles para tu viaje.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
+
+  <title>Mapa Interactivo | Ecuador Turismo</title>
+
+  <!-- Aplica el tema guardado antes de pintar la página -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("tema");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <div id="aria-announcer" class="sr-only" aria-live="polite" aria-atomic="true" role="status"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-top">
+        <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
+          <img class="logo-icon" src="img/logo.png" alt="" aria-hidden="true" width="40" height="40">
+          <span class="logo-text">TURISMO ECUADOR</span>
+        </a>
+
+        <div class="header-actions-group">
+          <div id="nav-sesion-box" class="header-session" hidden>
+            <span class="btn-nav btn-nav-secondary" id="nav-sesion-nombre"></span>
+            <button type="button" id="btn-logout" class="btn-nav btn-nav-primary">CERRAR SESIÓN</button>
+          </div>
+
+          <div class="header-actions">
+            <!-- Toggle de tema claro / oscuro -->
+            <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false"
+              aria-label="Activar modo oscuro">
+              <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">☀</span>
+              <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">☾</span>
+              <span class="theme-toggle-knob" aria-hidden="true"></span>
+            </button>
+
+            <!-- Botón hamburguesa (solo móvil) -->
+            <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false"
+              aria-controls="site-nav" aria-label="Abrir menú de navegación">
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+              <span class="menu-bar" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="btn-nav btn-nav-secondary">INICIO</a></li>
+          <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
+          <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
+          <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main-content" class="main-layout">
+
+    <section class="page-hero" aria-labelledby="mapa-title">
+      <h1 id="mapa-title" class="page-title">MAPA INTERACTIVO DEL ECUADOR</h1>
+      <p class="page-subtitle">Haz clic en una provincia para ver solo los hoteles disponibles en esa zona.</p>
+    </section>
+
+    <div class="mapa-layout">
+
+      <div class="mapa-map-col">
+        <div class="grid-box mapa-map-card">
+          <div id="mapdiv" role="img" aria-label="Mapa del Ecuador dividido por provincias, coloreadas por región. Haz clic en una provincia para ver los hoteles disponibles en ella."></div>
+        </div>
+
+        <section class="grid-box mapa-legend" aria-labelledby="mapa-legend-title">
+          <h2 id="mapa-legend-title" class="box-title"><span>Regiones del Ecuador</span></h2>
+          <ul class="mapa-legend-items" role="list">
+            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#FF6B6B"></span>Costa</li>
+            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#4ECDC4"></span>Sierra</li>
+            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#45B7D1"></span>Oriente /
+              Amazonía</li>
+            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#96CEB4"></span>Insular
+              (Galápagos)</li>
+          </ul>
+        </section>
+      </div>
+
+      <aside class="grid-box mapa-info-panel" id="mapaInfoPanel" aria-live="polite" aria-labelledby="mapa-panel-title">
+        <div id="mapaPanelContent">
+          <div class="mapa-placeholder">
+            <p>Haz clic en una provincia del mapa para ver los hoteles disponibles ahí.</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <small>&copy; <time datetime="2026">2026</time> Portal Oficial de Turismo Ecuador.</small>
+        <small><a href="privacidad.html">Política de Privacidad</a></small>
+        <small>Accesibilidad:
+          <kbd aria-label="Tecla Tab">Tab</kbd> /
+          <kbd aria-label="Teclas Shift más Tab">Shift + Tab</kbd> /
+          <kbd aria-label="Flechas izquierda y derecha">&#8592; &#8594;</kbd>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- amCharts (mapa interactivo) -->
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/geodata/ecuadorLow.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="js/mapa.js" defer></script>
+
+</body>
+
+</html>

@@ -2,7 +2,6 @@
    9. MEDIA QUERIES (mobile-first → min-width)
    ========================================================================== */
 @media (min-width: 400px) { .form-row { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 640px) { .destinos-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 768px) {
   /* En escritorio: hamburguesa desaparece, nav siempre visible en fila */
   .menu-toggle { display: none; }
@@ -13,24 +12,31 @@
   .nav-links { flex-direction: row; flex-wrap: wrap; }
   .nav-links .btn-nav { width: auto; }
   .cta-banner-wrapper { justify-content: flex-end; }
-  .carousel-frame { min-height: 360px; margin: 0 var(--space-4) var(--space-4); }
-  .slide-description { font-size: var(--fs-md); }
 }
 @media (min-width: 900px) {
   .content-grid, .org-grid { grid-template-columns: 1fr 1fr; }
   .main-layout { padding: var(--space-7) var(--space-6); }
-  .carousel-frame { min-height: 420px; }
 }
-@media (min-width: 1024px) { .destinos-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) {
+  /* index.html: al hacer scroll, la fila de enlaces se esconde y aparece la hamburguesa */
+  body.home-redesign .site-header.scrolled .menu-toggle { display: inline-flex; }
+  body.home-redesign .site-header.scrolled .site-nav { display: none; }
+  body.home-redesign .site-header.scrolled .site-nav.open { display: block; }
+}
+@media (min-width: 1024px) {
+  .mapa-layout { grid-template-columns: 1fr 380px; }
+  #mapdiv { height: 560px; }
+  .mapa-info-panel { max-height: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   html { scroll-behavior: auto; }
 }
 @media (forced-colors: active) {
-  .btn-submit, .btn-reserve, .btn-nav, .btn-add-experience, .filter-btn, .menu-toggle, .theme-toggle { border: 1px solid currentColor; }
+  .btn-submit, .btn-reserve, .btn-nav, .btn-add-experience, .menu-toggle, .theme-toggle { border: 1px solid currentColor; }
 }
 @media print {
-  .site-header, .cta-banner-wrapper, .carousel-btn, .carousel-indicators, .login-section, .rating-section, dialog, .region-filter { display: none; }
+  .site-header, .cta-banner-wrapper, .login-section, .rating-section, dialog, .mapa-layout, .hero-video-banner { display: none; }
   body { background: #fff; color: #000; }
 }

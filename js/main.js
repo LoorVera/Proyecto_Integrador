@@ -252,10 +252,28 @@ function initMenu() {
             cerrar();
     });
 }
+/* ---- index.html: al hacer scroll, la fila de enlaces colapsa a hamburguesa ---- */
+function initHeaderScroll() {
+    const header = document.querySelector(".site-header");
+    const marcaIndex = document.querySelector(".hero-video-banner");
+    if (!header || !marcaIndex)
+        return;
+    let ticking = false;
+    const actualizar = () => {
+        header.classList.toggle("scrolled", window.scrollY > 60);
+        ticking = false;
+    };
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            window.requestAnimationFrame(actualizar);
+            ticking = true;
+        }
+    }, { passive: true });
+    actualizar();
+}
 /* =============== MODO CLARO / OSCURO con persistencia ============== */
 function initTheme() {
     const btn = byId("theme-toggle");
-    const icon = btn ? btn.querySelector(".theme-icon") : null;
     const root = document.documentElement;
     const aplicar = (oscuro) => {
         root.setAttribute("data-theme", oscuro ? "dark" : "light");
@@ -264,11 +282,9 @@ function initTheme() {
         }
         catch (err) { /* navegación privada */ }
         if (btn) {
-            btn.setAttribute("aria-pressed", String(oscuro));
+            btn.setAttribute("aria-checked", String(oscuro));
             btn.setAttribute("aria-label", oscuro ? "Activar modo claro" : "Activar modo oscuro");
         }
-        if (icon)
-            icon.textContent = oscuro ? "☀️" : "🌙";
     };
     // Sincroniza el botón con el tema aplicado por el script del <head>
     aplicar(root.getAttribute("data-theme") === "dark");
@@ -362,57 +378,58 @@ function initPasswordToggles() {
         });
     }
 }
-/* --------------- Carrusel con autoplay accesible ------------------ */
-function initCarousel() {
-    const slides = Array.from(document.querySelectorAll(".carousel-slide"));
-    const dots = Array.from(document.querySelectorAll(".dot-btn"));
-    const frame = document.querySelector(".carousel-frame");
-    if (slides.length === 0)
+/* ------------------- Hero de video (index.html) --------------------- */
+function initHeroVideo() {
+    const video = byId("hero-video");
+    if (!video)
         return;
-    let actual = 0;
-    const irA = (i) => {
-        actual = (i + slides.length) % slides.length;
-        slides.forEach((s, idx) => {
-            s.classList.toggle("active", idx === actual);
-            s.setAttribute("aria-hidden", String(idx !== actual));
-        });
-        dots.forEach((d, idx) => {
-            d.classList.toggle("active", idx === actual);
-            d.setAttribute("aria-selected", String(idx === actual));
-        });
-    };
-    const prev = byId("btn-prev");
-    const next = byId("btn-next");
-    if (prev)
-        prev.addEventListener("click", () => irA(actual - 1));
-    if (next)
-        next.addEventListener("click", () => irA(actual + 1));
-    dots.forEach((d, idx) => d.addEventListener("click", () => irA(idx)));
-    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let timer;
-    const parar = () => { window.clearInterval(timer); };
-    const jugar = () => { if (!reducido) {
-        parar();
-        timer = window.setInterval(() => irA(actual + 1), 6000);
-    } };
-    if (frame) {
-        frame.addEventListener("mouseenter", parar);
-        frame.addEventListener("mouseleave", jugar);
-        frame.addEventListener("focusin", parar);
-        frame.addEventListener("focusout", jugar);
-        frame.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") {
-                e.preventDefault();
-                irA(actual - 1);
-            }
-            else if (e.key === "ArrowRight") {
-                e.preventDefault();
-                irA(actual + 1);
-            }
-        });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        video.pause();
+        video.removeAttribute("autoplay");
     }
-    document.addEventListener("visibilitychange", () => (document.hidden ? parar() : jugar()));
-    jugar();
+}
+/* --------------- Parallax del hero de video ------------------------- */
+function initHeroParallax() {
+    const hero = document.querySelector(".hero-video-banner");
+    const video = byId("hero-video");
+    if (!hero || !video)
+        return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        return;
+    let ticking = false;
+    const actualizar = () => {
+        const offset = window.scrollY;
+        if (offset <= hero.offsetHeight) {
+            video.style.transform = `translateY(${offset * 0.35}px) scale(1.15)`;
+        }
+        ticking = false;
+    };
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            window.requestAnimationFrame(actualizar);
+            ticking = true;
+        }
+    }, { passive: true });
+    actualizar();
+}
+/* ------------- Animación de aparición al hacer scroll ---------------- */
+function initScrollReveal() {
+    const elementos = Array.from(document.querySelectorAll(".scroll-reveal"));
+    if (elementos.length === 0)
+        return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+        elementos.forEach((el) => el.classList.add("is-visible"));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+    elementos.forEach((el) => observer.observe(el));
 }
 /* ----------------------------- Modal ------------------------------ */
 function initModal() {
@@ -548,33 +565,6 @@ function initReservas() {
     });
     renderizarReservas();
 }
-/* ================== DESTINOS: filtro por región ==================== */
-function initDestinosFilter() {
-    const botones = Array.from(document.querySelectorAll(".filter-btn"));
-    const cards = Array.from(document.querySelectorAll(".destino-card"));
-    const vacio = byId("destinos-vacio");
-    if (botones.length === 0)
-        return;
-    botones.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            var _a;
-            botones.forEach((b) => {
-                b.classList.toggle("active", b === btn);
-                b.setAttribute("aria-pressed", String(b === btn));
-            });
-            const region = (_a = btn.dataset.region) !== null && _a !== void 0 ? _a : "all";
-            let visibles = 0;
-            cards.forEach((c) => {
-                const mostrar = region === "all" || c.dataset.region === region;
-                c.hidden = !mostrar;
-                if (mostrar)
-                    visibles++;
-            });
-            if (vacio)
-                vacio.hidden = visibles !== 0;
-        });
-    });
-}
 /* ============ ORGANIZADOR: presupuesto + itinerario ================ */
 const DESTINOS = {
     galapagos: { nombre: "Islas Galápagos", costoDia: 120, highlight: "Snorkel con leones marinos y visita a la Estación Darwin" },
@@ -691,17 +681,19 @@ function renderizarPlanesGuardados() {
 document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     initMenu();
+    initHeaderScroll();
     refrescarNavSesion();
     initTerminos();
     initForms();
     initContacto();
     initPasswordToggles();
     initCharCounter();
-    initCarousel();
+    initHeroVideo();
+    initHeroParallax();
+    initScrollReveal();
     initModal();
     cargarExperienciasGuardadas();
     initRating();
-    initDestinosFilter();
     initReservas();
     initOrganizador();
 });
