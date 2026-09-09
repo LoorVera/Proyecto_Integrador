@@ -88,6 +88,7 @@
   }
 
   function reservarHotel(nombre, precio) {
+    if (typeof mixpanel !== "undefined") mixpanel.track("hotel_book_clicked", { name: nombre });
     var reservas = leerArray(RESERVAS_KEY);
     reservas.push({ hotel: nombre, precio: precio, duracion: "Por noche", fecha: new Date().toLocaleDateString("es-EC") });
     guardarArray(RESERVAS_KEY, reservas);
@@ -190,6 +191,7 @@
       ev.target.states.applyAnimate("active");
       activePolygon = ev.target;
 
+      if (typeof mixpanel !== "undefined") mixpanel.track("province_clicked", { provincia: name });
       mostrarHoteles(regionId, name);
     });
 

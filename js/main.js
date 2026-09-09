@@ -139,6 +139,8 @@ function initForms() {
         var _b;
         const email = (_b = (_a = byId("login-email")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _b !== void 0 ? _b : "";
         guardarSesion(email.split("@")[0] || "Viajero");
+        if (typeof mixpanel !== "undefined")
+            mixpanel.track("login_success");
     });
     bindForm("register-form", buildFields([
         ["reg-name", "reg-name-error", [required("El nombre"), minLength(3, "El nombre")]],
@@ -149,6 +151,8 @@ function initForms() {
         var _a;
         const nombre = ((_a = byId("reg-name")) === null || _a === void 0 ? void 0 : _a.value.trim()) || "Viajero";
         guardarSesion(nombre);
+        if (typeof mixpanel !== "undefined")
+            mixpanel.track("register_success");
     });
     const regPass = byId("reg-password");
     if (regPass)
@@ -213,6 +217,8 @@ function initContacto() {
         const correo = fields[1].input.value.trim();
         feedback.className = "form-feedback success";
         feedback.textContent = `✅ ¡Gracias, ${nombre}! Tu mensaje fue enviado. Te responderemos a ${correo}.`;
+        if (typeof mixpanel !== "undefined")
+            mixpanel.track("contact_form_submitted");
         form.reset();
         for (const cfg of fields)
             clearError(cfg.input, cfg.error);
@@ -260,7 +266,7 @@ function initHeaderScroll() {
         return;
     let ticking = false;
     const actualizar = () => {
-        header.classList.toggle("scrolled", window.scrollY > 60);
+        header.classList.toggle("scrolled", window.scrollY > 80);
         ticking = false;
     };
     window.addEventListener("scroll", () => {
@@ -547,6 +553,8 @@ function initReservas() {
             const hotel = (_g = (_b = (_a = fila === null || fila === void 0 ? void 0 : fila.querySelector(".hotel-name")) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _g !== void 0 ? _g : "Plan seleccionado";
             const precio = (_h = (_d = (_c = fila === null || fila === void 0 ? void 0 : fila.querySelector(".plan-price")) === null || _c === void 0 ? void 0 : _c.textContent) === null || _d === void 0 ? void 0 : _d.trim()) !== null && _h !== void 0 ? _h : "";
             const duracion = (_j = (_f = (_e = fila === null || fila === void 0 ? void 0 : fila.querySelector(".plan-duration")) === null || _e === void 0 ? void 0 : _e.textContent) === null || _f === void 0 ? void 0 : _f.trim()) !== null && _j !== void 0 ? _j : "";
+            if (typeof mixpanel !== "undefined")
+                mixpanel.track("plan_clicked", { name: hotel });
             const reservas = leerArray(RESERVAS_KEY);
             reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
             guardarArray(RESERVAS_KEY, reservas);
@@ -554,11 +562,15 @@ function initReservas() {
         });
     });
     contenedor.addEventListener("click", (e) => {
+        var _a;
+        var _b;
         const boton = e.target.closest(".btn-quitar");
         if (!boton)
             return;
         const idx = Number(boton.dataset.idx);
         const reservas = leerArray(RESERVAS_KEY);
+        if (typeof mixpanel !== "undefined")
+            mixpanel.track("reservation_removed", { name: (_b = (_a = reservas[idx]) === null || _a === void 0 ? void 0 : _a.hotel) !== null && _b !== void 0 ? _b : "" });
         reservas.splice(idx, 1);
         guardarArray(RESERVAS_KEY, reservas);
         renderizarReservas();

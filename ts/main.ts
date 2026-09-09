@@ -3,6 +3,8 @@
    Compilar:  cd ts && tsc   → genera ../js/main.js
    ============================================================================= */
 
+declare const mixpanel: { track: (event: string, properties?: Record<string, unknown>) => void } | undefined;
+
 type Validator = (value: string) => string | null;
 
 interface FieldConfig { input: HTMLInputElement | HTMLTextAreaElement; error: HTMLElement; rules: Validator[]; }
@@ -151,6 +153,7 @@ function initForms(): void {
   ]), "login-message", "✅ Sesión iniciada correctamente. ¡Bienvenido de nuevo!", () => {
     const email = byId<HTMLInputElement>("login-email")?.value.trim() ?? "";
     guardarSesion(email.split("@")[0] || "Viajero");
+    if (typeof mixpanel !== "undefined") mixpanel.track("login_success");
   });
 
   bindForm("register-form", buildFields([
@@ -161,6 +164,7 @@ function initForms(): void {
   ]), "register-form-message", "✅ Cuenta creada con éxito. Revisa tu correo para confirmarla.", () => {
     const nombre = byId<HTMLInputElement>("reg-name")?.value.trim() || "Viajero";
     guardarSesion(nombre);
+    if (typeof mixpanel !== "undefined") mixpanel.track("register_success");
   });
 
   const regPass = byId<HTMLInputElement>("reg-password");
@@ -232,6 +236,7 @@ function initContacto(): void {
     const correo = fields[1].input.value.trim();
     feedback.className = "form-feedback success";
     feedback.textContent = `✅ ¡Gracias, ${nombre}! Tu mensaje fue enviado. Te responderemos a ${correo}.`;
+    if (typeof mixpanel !== "undefined") mixpanel.track("contact_form_submitted");
     form.reset();
     for (const cfg of fields) clearError(cfg.input, cfg.error);
   });
@@ -560,6 +565,7 @@ function initReservas(): void {
       const hotel = fila?.querySelector<HTMLElement>(".hotel-name")?.textContent?.trim() ?? "Plan seleccionado";
       const precio = fila?.querySelector<HTMLElement>(".plan-price")?.textContent?.trim() ?? "";
       const duracion = fila?.querySelector<HTMLElement>(".plan-duration")?.textContent?.trim() ?? "";
+      if (typeof mixpanel !== "undefined") mixpanel.track("plan_clicked", { name: hotel });
       const reservas = leerArray<ReservaGuardada>(RESERVAS_KEY);
       reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
       guardarArray(RESERVAS_KEY, reservas);
@@ -572,6 +578,7 @@ function initReservas(): void {
     if (!boton) return;
     const idx = Number(boton.dataset.idx);
     const reservas = leerArray<ReservaGuardada>(RESERVAS_KEY);
+    if (typeof mixpanel !== "undefined") mixpanel.track("reservation_removed", { name: reservas[idx]?.hotel ?? "" });
     reservas.splice(idx, 1);
     guardarArray(RESERVAS_KEY, reservas);
     renderizarReservas();
