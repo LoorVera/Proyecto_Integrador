@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: #0369a1; }
+    a:hover { color: #075985; }
+  </style>
+</helmet>
+
+<div style="background:#f4f7fb; min-height:100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color:#1f2937; padding:48px;">
+
+  <div style="margin-bottom:32px;">
+    <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#5b6472; margin-bottom:8px;">Backoffice · Sistema de diseño</div>
+    <h1 style="margin:0; font-size:28px; line-height:34px; font-weight:700; color:#1f2937;">Design tokens</h1>
+    <p style="margin:8px 0 0; font-size:14px; line-height:20px; color:#5b6472; max-width:640px;">Paleta semántica, escala tipográfica, espaciado de 4px y radios base para los componentes del backoffice.</p>
+  </div>
+
+  <!-- ============================== PALETA SEMÁNTICA ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:20px; line-height:26px; font-weight:600; color:#1f2937;">Paleta semántica</h2>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Acciones</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#0ea5e9;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">primary-500</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#0EA5E9</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Acciones primarias, enlaces, foco</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#0369a1;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">primary-700</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#0369A1</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Hover / estado activo</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#075985;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">primary-900</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#075985</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto sobre fondos claros de marca</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Éxito</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#10b981;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">success-500</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#10B981</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Confirmaciones, estados positivos</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#047857;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">success-700</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#047857</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Hover de botones de éxito</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#065f46;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">success-900</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#065F46</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto sobre fondos claros de éxito</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#ecfdf5; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">success-50</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#ECFDF5</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de alertas y toasts de éxito</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#a7f3d0;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">success-200</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#A7F3D0</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Borde de alertas de éxito</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Advertencia</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#f59e0b;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">warning-500</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#F59E0B</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Alertas de precaución</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#d97706;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">warning-700</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#D97706</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Hover de elementos de advertencia</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#b45309;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">warning-text</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#B45309</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto sobre fondos claros de advertencia</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#fffbeb; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">warning-50</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#FFFBEB</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de alertas de advertencia</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#fde68a;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">warning-200</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#FDE68A</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Borde de alertas de advertencia</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Peligro</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#dc2626;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">danger-500</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#DC2626</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Acciones destructivas, errores</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#991b1b;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">danger-700</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#991B1B</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto sobre fondos claros de error</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#fef2f2; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">danger-50</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#FEF2F2</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de alertas de error</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#fecaca;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">danger-200</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#FECACA</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Borde de alertas de error</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Información</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#3b82f6;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">info-500</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#3B82F6</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Mensajes informativos</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#1d4ed8;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">info-700</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#1D4ED8</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto sobre fondos claros informativos</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#eff6ff; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">info-50</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#EFF6FF</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de alertas y estados activos de menú</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#bfdbfe;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">info-200</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#BFDBFE</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Borde de alertas informativas</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:1px; background:rgba(138,148,166,0.2); margin:8px 0 24px;"></div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Neutrales</div>
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#f4f7fb; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">bg</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#F4F7FB</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de página</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#ffffff; border:1px solid rgba(138,148,166,0.3);"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">surface</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#FFFFFF</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Fondo de tarjetas y paneles</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#1f2937;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">ink</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#1F2937</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto principal</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#5b6472;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">muted</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#5B6472</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Texto secundario</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#8a94a6;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">border</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#8A94A6</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Bordes y separadores</div>
+        </div>
+        <div style="width:176px; padding:12px; background:#ffffff; border:1px solid rgba(138,148,166,0.2); border-radius:8px;">
+          <div style="height:56px; border-radius:8px; background:#0b1329;"></div>
+          <div style="margin-top:12px; font-size:13px; line-height:16px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">dark</div>
+          <div style="margin-top:4px; font-size:12px; line-height:16px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#5b6472;">#0B1329</div>
+          <div style="margin-top:8px; font-size:11px; line-height:14px; color:#5b6472;">Superficies invertidas / barra lateral</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ESCALA TIPOGRÁFICA ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:20px; line-height:26px; font-weight:600; color:#1f2937;">Escala tipográfica</h2>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:12px; line-height:16px; font-weight:400; color:#1f2937;">Actualizado hace 2 minutos</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">caption</div>
+        <div style="font-size:12px; color:#5b6472;">12 / 16 · 400</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:13px; line-height:18px; font-weight:400; color:#1f2937;">245 reservas activas</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">body-sm</div>
+        <div style="font-size:12px; color:#5b6472;">13 / 18 · 400</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:14px; line-height:20px; font-weight:400; color:#1f2937;">Selecciona un rango de fechas para filtrar</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">body</div>
+        <div style="font-size:12px; color:#5b6472;">14 / 20 · 400</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:16px; line-height:24px; font-weight:400; color:#1f2937;">Nombre del destino</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">body-lg</div>
+        <div style="font-size:12px; color:#5b6472;">16 / 24 · 400</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Reservas del mes</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">heading-sm</div>
+        <div style="font-size:12px; color:#5b6472;">18 / 24 · 600</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0; border-bottom:1px solid rgba(138,148,166,0.15);">
+      <div style="font-size:22px; line-height:28px; font-weight:600; color:#1f2937;">Gestión de hospedajes</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">heading-md</div>
+        <div style="font-size:12px; color:#5b6472;">22 / 28 · 600</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 0;">
+      <div style="font-size:28px; line-height:34px; font-weight:700; color:#1f2937;">Panel de administración</div>
+      <div style="flex:0 0 220px; text-align:right;">
+        <div style="font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">heading-lg</div>
+        <div style="font-size:12px; color:#5b6472;">28 / 34 · 700</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ESPACIADO (4px) ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 4px; font-size:20px; line-height:26px; font-weight:600; color:#1f2937;">Espaciado (base 4px)</h2>
+    <p style="margin:0 0 20px; font-size:12px; line-height:16px; color:#5b6472;">Barras a escala ×3 para referencia visual.</p>
+
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-1</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">4px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:12px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-2</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">8px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:24px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-3</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">12px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:36px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-4</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">16px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:48px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-5</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">20px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:60px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-6</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">24px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:72px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-7</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">32px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:96px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-8</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">40px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:120px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-9</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">48px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:144px;"></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; padding:8px 0;">
+      <div style="width:90px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">space-10</div>
+      <div style="width:44px; font-size:12px; color:#5b6472;">64px</div>
+      <div style="height:16px; border-radius:999px; background:#0ea5e9; width:192px;"></div>
+    </div>
+  </section>
+
+  <!-- ============================== RADIOS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px;">
+    <h2 style="margin:0 0 20px; font-size:20px; line-height:26px; font-weight:600; color:#1f2937;">Radios</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:24px;">
+      <div style="width:160px;">
+        <div style="width:160px; height:120px; background:#0ea5e9; border-radius:8px;"></div>
+        <div style="margin-top:12px; font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">radius-sm</div>
+        <div style="font-size:12px; color:#5b6472;">8px · botones, inputs, chips, alertas</div>
+      </div>
+      <div style="width:160px;">
+        <div style="width:160px; height:120px; background:#0ea5e9; border-radius:12px;"></div>
+        <div style="margin-top:12px; font-size:13px; font-weight:600; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#1f2937;">radius-md</div>
+        <div style="font-size:12px; color:#5b6472;">12px · tarjetas, paneles, diálogos</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>

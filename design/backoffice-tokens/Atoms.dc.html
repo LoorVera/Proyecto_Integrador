@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: #0369a1; }
+    a:hover { color: #075985; }
+    input[type="checkbox"].tk-check, input[type="radio"].tk-radio { accent-color: #0ea5e9; width: 16px; height: 16px; }
+    input::placeholder, textarea::placeholder { color: #5b6472; opacity: 1; }
+    select.tk-select { appearance: none; -webkit-appearance: none; }
+    input.tk-switch { position: absolute; inset: 0; width: 40px; height: 22px; margin: 0; opacity: 0; cursor: pointer; }
+    input.tk-switch + span.tk-track { position: absolute; inset: 0; background: rgba(138,148,166,0.35); border-radius: 999px; transition: background 120ms ease-in-out; pointer-events: none; }
+    input.tk-switch:checked + span.tk-track { background: #0ea5e9; }
+    input.tk-switch ~ span.tk-knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 999px; background: #ffffff; box-shadow: 0 2px 8px rgba(11,19,41,0.08); transition: left 120ms ease-in-out; pointer-events: none; }
+    input.tk-switch:checked ~ span.tk-knob { left: 20px; }
+  </style>
+</helmet>
+
+<div style="background:#f4f7fb; min-height:100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color:#1f2937; padding:48px;">
+
+  <div style="margin-bottom:32px;">
+    <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#5b6472; margin-bottom:8px;">Backoffice · Sistema de diseño</div>
+    <h1 style="margin:0; font-size:28px; line-height:34px; font-weight:700; color:#1f2937;">Componentes atómicos</h1>
+    <p style="margin:8px 0 0; font-size:14px; line-height:20px; color:#5b6472; max-width:640px;">Botones, inputs, selección y estados construidos con la paleta, tipografía, espaciado y radios de Main. Íconos SVG trazados a 24px, mismo estilo en todos los componentes.</p>
+  </div>
+
+  <!-- ============================== BOTONES ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Botones</h2>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Variantes</div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+        <button type="button" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 20px; border-radius:8px; border:none; background:#0ea5e9; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Guardar
+        </button>
+        <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Cancelar</button>
+        <button type="button" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 20px; border-radius:8px; border:none; background:#dc2626; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Eliminar
+        </button>
+        <button type="button" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 20px; border-radius:8px; border:none; background:transparent; color:#0369a1; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+          Ver detalle
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+        <button type="button" aria-label="Más opciones" style="width:40px; height:40px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="5" cy="12" r="2" fill="currentColor"></circle>
+            <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+            <circle cx="19" cy="12" r="2" fill="currentColor"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Tamaños</div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+        <button type="button" style="height:32px; padding:0 16px; border-radius:8px; border:none; background:#0ea5e9; color:#ffffff; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;">Guardar</button>
+        <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:none; background:#0ea5e9; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Guardar</button>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Deshabilitado</div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+        <button type="button" disabled style="height:40px; padding:0 20px; border-radius:8px; border:none; background:#0ea5e9; opacity:0.45; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:not-allowed;">Guardar</button>
+        <button type="button" disabled style="height:40px; padding:0 20px; border-radius:8px; border:1px solid rgba(138,148,166,0.5); background:#ffffff; color:#5b6472; font-size:14px; font-weight:600; font-family:inherit; cursor:not-allowed;">Cancelar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== INPUTS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Inputs</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:24px;">
+
+      <div>
+        <label for="tk-input-nombre" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Nombre del destino</label>
+        <input type="text" id="tk-input-nombre" placeholder="Ej. Baños de Agua Santa" style="width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit;">
+        <div style="margin-top:4px; font-size:12px; line-height:16px; color:#5b6472;">Así aparecerá en el listado público.</div>
+      </div>
+
+      <div>
+        <label for="tk-input-correo" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Correo de contacto</label>
+        <input type="text" id="tk-input-correo" value="admin@turismo" aria-invalid="true" aria-describedby="tk-input-correo-error" style="width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid #dc2626; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit;">
+        <div id="tk-input-correo-error" style="margin-top:4px; font-size:12px; line-height:16px; color:#991b1b;">Ingresa un correo válido.</div>
+      </div>
+
+      <div>
+        <label for="tk-input-buscar" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Buscar destino</label>
+        <div style="position:relative;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); color:#5b6472; pointer-events:none;">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M21 21l-4.35-4.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <input type="text" id="tk-input-buscar" placeholder="Nombre, provincia o región" style="width:100%; height:40px; padding:0 12px 0 40px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit;">
+        </div>
+      </div>
+
+      <div>
+        <label for="tk-input-fecha" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Fecha de publicación</label>
+        <div style="position:relative;">
+          <input type="text" id="tk-input-fecha" placeholder="dd/mm/aaaa" style="width:100%; height:40px; padding:0 40px 0 12px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="position:absolute; top:50%; right:12px; transform:translateY(-50%); color:#5b6472; pointer-events:none;">
+            <rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+            <path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <label for="tk-input-region" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Región</label>
+        <div style="position:relative;">
+          <select id="tk-input-region" class="tk-select" style="width:100%; height:40px; padding:0 40px 0 12px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit;">
+            <option>Costa</option>
+            <option selected>Sierra</option>
+            <option>Oriente</option>
+            <option>Galápagos</option>
+          </select>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="position:absolute; top:50%; right:12px; transform:translateY(-50%); color:#5b6472; pointer-events:none;">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div style="margin-top:4px; font-size:12px; line-height:16px; color:#5b6472;">Selecciona la región del destino.</div>
+      </div>
+
+      <div>
+        <label for="tk-input-usuario" style="display:block; font-size:13px; font-weight:600; color:#5b6472; margin-bottom:8px;">Nombre de usuario</label>
+        <input type="text" id="tk-input-usuario" value="usuario_admin" disabled style="width:100%; height:40px; padding:0 12px; border-radius:8px; border:1px solid rgba(138,148,166,0.4); background:#f4f7fb; color:#5b6472; font-size:14px; font-family:inherit; cursor:not-allowed;">
+        <div style="margin-top:4px; font-size:12px; line-height:16px; color:#5b6472;">Asignado automáticamente, no editable.</div>
+      </div>
+
+      <div style="grid-column:1 / -1;">
+        <label for="tk-input-descripcion" style="display:block; font-size:13px; font-weight:600; color:#1f2937; margin-bottom:8px;">Descripción</label>
+        <textarea id="tk-input-descripcion" placeholder="Escribe una descripción breve del destino..." style="width:100%; height:96px; padding:12px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-family:inherit; resize:vertical;"></textarea>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== CHECKBOX / RADIO / SWITCH ======================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Checkbox, radio y switch</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:48px;">
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Checkbox</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input class="tk-check" type="checkbox" id="tk-atom-check-off">
+            <label for="tk-atom-check-off" style="font-size:14px; color:#1f2937;">Sin marcar</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input class="tk-check" type="checkbox" id="tk-atom-check-on" checked>
+            <label for="tk-atom-check-on" style="font-size:14px; color:#1f2937;">Marcado</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Radio</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input class="tk-radio" type="radio" name="tk-atom-radio" id="tk-atom-radio-off">
+            <label for="tk-atom-radio-off" style="font-size:14px; color:#1f2937;">Sin seleccionar</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input class="tk-radio" type="radio" name="tk-atom-radio" id="tk-atom-radio-on" checked>
+            <label for="tk-atom-radio-on" style="font-size:14px; color:#1f2937;">Seleccionado</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472;">Switch</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <label style="position:relative; display:inline-block; width:40px; height:22px;">
+              <input class="tk-switch" type="checkbox" id="tk-atom-switch-off">
+              <span class="tk-track"></span>
+              <span class="tk-knob"></span>
+            </label>
+            <label for="tk-atom-switch-off" style="font-size:14px; color:#1f2937;">Inactivo</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <label style="position:relative; display:inline-block; width:40px; height:22px;">
+              <input class="tk-switch" type="checkbox" id="tk-atom-switch-on" checked>
+              <span class="tk-track"></span>
+              <span class="tk-knob"></span>
+            </label>
+            <label for="tk-atom-switch-on" style="font-size:14px; color:#1f2937;">Activo</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================== BADGES ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Badges</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+      <span style="display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:999px; background:#ecfdf5; color:#065f46; font-size:12px; font-weight:600;">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M8 12l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Activo
+      </span>
+      <span style="display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:999px; background:#fffbeb; color:#b45309; font-size:12px; font-weight:600;">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Pendiente
+      </span>
+      <span style="display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:999px; background:rgba(138,148,166,0.15); color:#5b6472; font-size:12px; font-weight:600;">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8M10 13h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Archivado
+      </span>
+      <span style="display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:999px; background:#fef2f2; color:#991b1b; font-size:12px; font-weight:600;">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 3l10 18H2L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        Error
+      </span>
+    </div>
+  </section>
+
+  <!-- ============================== AVATARES ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Avatares</h2>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+      <span style="display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:999px; background:#0b1329; color:#ffffff; font-size:12px; font-weight:600;">AM</span>
+      <span style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; background:#0b1329; color:#ffffff; font-size:14px; font-weight:600;">JP</span>
+      <span style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; background:rgba(138,148,166,0.15); color:#5b6472;">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============================== MENÚ — ESTADOS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Menú — estados</h2>
+    <button type="button" id="tk-atom-menu-trigger" aria-haspopup="true" aria-expanded="true" aria-controls="tk-atom-menu" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 20px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+      Opciones
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <ul id="tk-atom-menu" role="menu" aria-labelledby="tk-atom-menu-trigger" style="margin:8px 0 0; list-style:none; width:220px; background:#ffffff; border:1px solid rgba(138,148,166,0.3); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:8px;">
+      <li role="none">
+        <a href="#" role="menuitem" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; text-decoration:none;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="flex-shrink:0;"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Editar (predeterminado)
+        </a>
+      </li>
+      <li role="none">
+        <a href="#" role="menuitem" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:#eff6ff; font-size:14px; color:#1f2937; text-decoration:none;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="flex-shrink:0;"><rect x="9" y="9" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+          Duplicar (resaltado)
+        </a>
+      </li>
+      <li role="none">
+        <span role="menuitem" aria-disabled="true" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; font-size:14px; color:#5b6472; cursor:not-allowed;">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" style="flex-shrink:0;"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 1 12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Eliminar (deshabilitado)
+        </span>
+      </li>
+    </ul>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>

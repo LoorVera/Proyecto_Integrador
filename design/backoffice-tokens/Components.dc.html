@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: #0369a1; }
+    a:hover { color: #075985; }
+    input[type="checkbox"], input[type="radio"] { accent-color: #0ea5e9; width: 16px; height: 16px; }
+  </style>
+</helmet>
+
+<div style="background:#f4f7fb; min-height:100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color:#1f2937; padding:48px;">
+
+  <div style="margin-bottom:32px;">
+    <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#5b6472; margin-bottom:8px;">Backoffice · Sistema de diseño</div>
+    <h1 style="margin:0; font-size:28px; line-height:34px; font-weight:700; color:#1f2937;">Componentes con los nuevos tokens</h1>
+    <p style="margin:8px 0 0; font-size:14px; line-height:20px; color:#5b6472; max-width:640px;">Los 6 componentes de playground.html, restilizados con la paleta, tipografía, espaciado y radios definidos en Main.</p>
+  </div>
+
+  <!-- ============================== BOTONES ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Botones</h2>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+      <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:none; background:#0ea5e9; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Guardar</button>
+      <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Cancelar</button>
+      <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:none; background:#dc2626; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Eliminar</button>
+      <button type="button" aria-label="Más opciones" style="width:40px; height:40px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <circle cx="5" cy="12" r="2" fill="currentColor"></circle>
+          <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+          <circle cx="19" cy="12" r="2" fill="currentColor"></circle>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================== ALERTS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Alerts</h2>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+
+      <div role="status" style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:#ecfdf5; border:1px solid #a7f3d0;">
+        <span style="flex:0 0 24px; width:24px; height:24px; border-radius:999px; background:#10b981; color:#ffffff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">✓</span>
+        <p style="flex:1; margin:0; font-size:14px; line-height:20px; color:#1f2937;">Los cambios se guardaron correctamente.</p>
+        <button type="button" aria-label="Cerrar alerta" style="border:none; background:transparent; color:#5b6472; font-size:16px; cursor:pointer; line-height:1;">×</button>
+      </div>
+
+      <div role="alert" style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:#fef2f2; border:1px solid #fecaca;">
+        <span style="flex:0 0 24px; width:24px; height:24px; border-radius:999px; background:#dc2626; color:#ffffff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">✕</span>
+        <p style="flex:1; margin:0; font-size:14px; line-height:20px; color:#1f2937;">No se pudo eliminar el recurso. Intenta de nuevo.</p>
+        <button type="button" aria-label="Cerrar alerta" style="border:none; background:transparent; color:#5b6472; font-size:16px; cursor:pointer; line-height:1;">×</button>
+      </div>
+
+      <div role="alert" style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:#fffbeb; border:1px solid #fde68a;">
+        <span style="flex:0 0 24px; width:24px; height:24px; border-radius:999px; background:#f59e0b; color:#ffffff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">⚠</span>
+        <p style="flex:1; margin:0; font-size:14px; line-height:20px; color:#1f2937;">Tu sesión está por expirar en 5 minutos.</p>
+        <button type="button" aria-label="Cerrar alerta" style="border:none; background:transparent; color:#5b6472; font-size:16px; cursor:pointer; line-height:1;">×</button>
+      </div>
+
+      <div role="status" style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:#eff6ff; border:1px solid #bfdbfe;">
+        <span style="flex:0 0 24px; width:24px; height:24px; border-radius:999px; background:#3b82f6; color:#ffffff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">ℹ</span>
+        <p style="flex:1; margin:0; font-size:14px; line-height:20px; color:#1f2937;">El mantenimiento programado inicia a las 22:00.</p>
+        <button type="button" aria-label="Cerrar alerta" style="border:none; background:transparent; color:#5b6472; font-size:16px; cursor:pointer; line-height:1;">×</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== CHECKBOXES / RADIOS ======================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Checkboxes / Radios</h2>
+    <div style="display:flex; flex-direction:column; gap:20px;">
+
+      <fieldset style="border:none; margin:0; padding:0;">
+        <legend style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472; padding:0 0 8px;">Filtrar tabla por estado</legend>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" id="tk-filtro-activos" checked>
+            <label for="tk-filtro-activos" style="font-size:14px; color:#1f2937;">Activos</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" id="tk-filtro-pendientes">
+            <label for="tk-filtro-pendientes" style="font-size:14px; color:#1f2937;">Pendientes</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" id="tk-filtro-archivados">
+            <label for="tk-filtro-archivados" style="font-size:14px; color:#1f2937;">Archivados</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset style="border:none; margin:0; padding:0;">
+        <legend style="font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#5b6472; padding:0 0 8px;">Ordenar por</legend>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="radio" id="tk-orden-fecha" name="tk-orden-tabla" checked>
+            <label for="tk-orden-fecha" style="font-size:14px; color:#1f2937;">Fecha</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="radio" id="tk-orden-nombre" name="tk-orden-tabla">
+            <label for="tk-orden-nombre" style="font-size:14px; color:#1f2937;">Nombre</label>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="radio" id="tk-orden-estado" name="tk-orden-tabla">
+            <label for="tk-orden-estado" style="font-size:14px; color:#1f2937;">Estado</label>
+          </div>
+        </div>
+      </fieldset>
+
+    </div>
+  </section>
+
+  <!-- ============================== DIALOG ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Dialog</h2>
+    <div style="display:flex; justify-content:center; padding:32px; border-radius:12px; background:rgba(11,19,41,0.45);">
+      <div role="dialog" aria-modal="true" aria-labelledby="tk-dialog-title" style="width:360px; background:#ffffff; border-radius:12px; padding:24px; box-shadow:0 8px 22px rgba(11,19,41,0.14);">
+        <h3 id="tk-dialog-title" style="margin:0 0 8px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">¿Eliminar este recurso?</h3>
+        <p style="margin:0; font-size:14px; line-height:20px; color:#5b6472;">Esta acción no se puede deshacer. El recurso se eliminará de forma permanente.</p>
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Cancelar</button>
+          <button type="button" style="height:40px; padding:0 20px; border-radius:8px; border:none; background:#dc2626; color:#ffffff; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== MENÚS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px; margin-bottom:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Menús</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:48px;">
+
+      <div>
+        <button type="button" id="tk-menu-trigger-text" aria-haspopup="true" aria-expanded="true" aria-controls="tk-menu-text" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 20px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;">
+          Cuenta
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+        <ul id="tk-menu-text" role="menu" aria-labelledby="tk-menu-trigger-text" style="margin:8px 0 0; list-style:none; width:180px; background:#ffffff; border:1px solid rgba(138,148,166,0.3); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:8px;">
+          <li role="none"><a href="#" role="menuitem" style="display:block; padding:8px 12px; border-radius:8px; background:#eff6ff; font-size:14px; color:#1f2937; text-decoration:none;">Perfil</a></li>
+          <li role="none"><a href="#" role="menuitem" style="display:block; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; text-decoration:none;">Configuración</a></li>
+          <li role="none"><button type="button" role="menuitem" style="display:block; width:100%; text-align:left; border:none; background:transparent; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; font-family:inherit; cursor:pointer;">Cerrar sesión</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <button type="button" id="tk-menu-trigger-icon" aria-haspopup="true" aria-expanded="true" aria-controls="tk-menu-icon" aria-label="Abrir menú de cuenta" style="width:40px; height:40px; border-radius:8px; border:1px solid #8a94a6; background:#ffffff; color:#1f2937; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <circle cx="5" cy="12" r="2" fill="currentColor"></circle>
+            <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+            <circle cx="19" cy="12" r="2" fill="currentColor"></circle>
+          </svg>
+        </button>
+        <ul id="tk-menu-icon" role="menu" aria-labelledby="tk-menu-trigger-icon" style="margin:8px 0 0; list-style:none; width:180px; background:#ffffff; border:1px solid rgba(138,148,166,0.3); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:8px;">
+          <li role="none"><a href="#" role="menuitem" style="display:block; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; text-decoration:none;">Perfil</a></li>
+          <li role="none"><a href="#" role="menuitem" style="display:block; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; text-decoration:none;">Configuración</a></li>
+          <li role="none"><button type="button" role="menuitem" style="display:block; width:100%; text-align:left; border:none; background:transparent; padding:8px 12px; border-radius:8px; font-size:14px; color:#1f2937; font-family:inherit; cursor:pointer;">Cerrar sesión</button></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================== TOASTS ============================== -->
+  <section style="background:#ffffff; border:1px solid rgba(138,148,166,0.25); border-radius:12px; box-shadow:0 2px 8px rgba(11,19,41,0.08); padding:32px;">
+    <h2 style="margin:0 0 20px; font-size:18px; line-height:24px; font-weight:600; color:#1f2937;">Toasts</h2>
+    <div aria-live="polite" style="display:flex; flex-direction:column; gap:12px; width:320px;">
+      <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:12px; background:#0b1329; box-shadow:0 8px 22px rgba(11,19,41,0.14);">
+        <span style="flex:0 0 8px; width:8px; height:8px; border-radius:999px; background:#10b981;"></span>
+        <p style="margin:0; font-size:14px; line-height:20px; color:#ffffff;">Los cambios se guardaron correctamente.</p>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:12px; background:#0b1329; box-shadow:0 8px 22px rgba(11,19,41,0.14);">
+        <span style="flex:0 0 8px; width:8px; height:8px; border-radius:999px; background:#dc2626;"></span>
+        <p style="margin:0; font-size:14px; line-height:20px; color:#ffffff;">No se pudo completar la acción.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>
