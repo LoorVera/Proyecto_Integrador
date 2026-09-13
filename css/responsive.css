@@ -1,7 +1,7 @@
 /* ==========================================================================
    9. MEDIA QUERIES (mobile-first → min-width)
    ========================================================================== */
-@media (min-width: 400px) { .form-row { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 400px) { .form-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 @media (min-width: 768px) {
   /* En escritorio: hamburguesa desaparece, nav siempre visible en fila */
   .menu-toggle { display: none; }
@@ -14,7 +14,7 @@
   .cta-banner-wrapper { justify-content: flex-end; }
 }
 @media (min-width: 900px) {
-  .content-grid, .org-grid { grid-template-columns: 1fr 1fr; }
+  .content-grid, .org-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .main-layout { padding: var(--space-7) var(--space-6); }
 }
 @media (min-width: 768px) {
@@ -24,7 +24,7 @@
   body.home-redesign .site-header.scrolled .site-nav.open { display: block; }
 }
 @media (min-width: 1024px) {
-  .mapa-layout { grid-template-columns: 1fr 380px; }
+  .mapa-layout { grid-template-columns: minmax(0, 1fr) 380px; }
   #mapdiv { height: 560px; }
   .mapa-info-panel { max-height: none; }
 }
