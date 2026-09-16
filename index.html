@@ -107,8 +107,14 @@
     <div class="header-container">
       <div class="header-top">
         <a href="index.html" class="logo-box" aria-label="Ecuador Turismo - Ir a Inicio">
-          <img class="logo-icon" src="img/logo.png" alt="" aria-hidden="true" width="40" height="40">
-          <span class="logo-text">TURISMO ECUADOR</span>
+          <svg class="logo-icon" viewBox="0 0 100 60" role="img" aria-hidden="true" focusable="false" width="40" height="40">
+            <path d="M50,14 C40,14 36,20 32,24 C20,26 8,32 2,40 C16,38 30,36 42,34 C46,33 49,33 50,32 C51,33 54,33 58,34 C70,36 84,38 98,40 C92,32 80,26 68,24 C64,20 60,14 50,14 Z" fill="var(--color-dark)" />
+            <ellipse cx="50" cy="21" rx="7" ry="2.4" fill="var(--color-gold)" />
+          </svg>
+          <span class="logo-text">
+            <span class="logo-text-line">Turismo</span>
+            <span class="logo-text-line logo-text-line-strong">Ecuador</span>
+          </span>
         </a>
 
         <div class="header-actions-group">
@@ -142,7 +148,7 @@
           <li><a href="index.html" class="btn-nav btn-nav-secondary" aria-current="page">INICIO</a></li>
           <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR</a></li>
           <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLAN DE PAGO</a></li>
-          <li><a href="index.html#login" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="login.html" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
           <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
           <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
         </ul>
@@ -155,6 +161,9 @@
     <video id="hero-video" autoplay loop muted playsinline>
       <source src="paisaje.mp4" type="video/mp4">
     </video>
+    <svg id="hero-condor" class="hero-condor" viewBox="0 0 100 60" aria-hidden="true" focusable="false">
+      <path d="M50,14 C40,14 36,20 32,24 C20,26 8,32 2,40 C16,38 30,36 42,34 C46,33 49,33 50,32 C51,33 54,33 58,34 C70,36 84,38 98,40 C92,32 80,26 68,24 C64,20 60,14 50,14 Z" />
+    </svg>
     <div class="hero-video-overlay" aria-hidden="true"></div>
     <div class="hero-video-content">
       <h1 class="hero-video-title">EXPLORA LA MAGIA DEL ECUADOR</h1>
@@ -301,41 +310,6 @@
       </section>
 
     </div>
-
-    <!-- 4. LOGIN -->
-    <section class="login-section scroll-reveal" aria-labelledby="login-title" id="login">
-      <header class="form-title-box">
-        <h2 id="login-title" class="form-title">INICIO DE SESIÓN</h2>
-        <p class="form-subtitle">Ingresa a tu cuenta de viajero para gestionar tus reservas.</p>
-      </header>
-
-      <form id="login-form" class="stack-form" novalidate aria-label="Formulario de inicio de sesión">
-        <div class="form-group">
-          <label for="login-email" class="form-label">CORREO ELECTRÓNICO: <span aria-hidden="true">*</span></label>
-          <input type="email" id="login-email" name="email" class="form-input" placeholder="ejemplo@correo.com"
-            required autocomplete="email" aria-required="true"
-            aria-describedby="login-email-hint login-email-error" aria-invalid="false">
-          <small id="login-email-hint" class="form-hint">Ingresa tu correo registrado.</small>
-          <span id="login-email-error" class="form-error" role="alert"></span>
-        </div>
-
-        <div class="form-group">
-          <label for="login-password" class="form-label">CONTRASEÑA: <span aria-hidden="true">*</span></label>
-          <div class="input-wrapper">
-            <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••••••"
-              required autocomplete="current-password" aria-required="true"
-              aria-describedby="login-password-hint login-password-error" aria-invalid="false">
-            <button type="button" id="toggle-password" class="toggle-password-btn" aria-label="Mostrar contraseña"
-              aria-pressed="false">Mostrar</button>
-          </div>
-          <small id="login-password-hint" class="form-hint">Mínimo 6 caracteres, una letra y un número.</small>
-          <span id="login-password-error" class="form-error" role="alert"></span>
-        </div>
-
-        <button type="submit" class="btn-submit">INGRESAR A MI CUENTA</button>
-        <div id="login-message" class="form-status" role="status" aria-live="polite"></div>
-      </form>
-    </section>
 
     <!-- 5. REGISTRO -->
     <section class="login-section scroll-reveal" aria-labelledby="register-title" id="registro">

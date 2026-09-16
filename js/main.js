@@ -407,6 +407,7 @@ function initHeroVideo() {
 function initHeroParallax() {
     const hero = document.querySelector(".hero-video-banner");
     const video = byId("hero-video");
+    const condor = byId("hero-condor");
     if (!hero || !video)
         return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
@@ -416,6 +417,11 @@ function initHeroParallax() {
         const offset = window.scrollY;
         if (offset <= hero.offsetHeight) {
             video.style.transform = `translateY(${offset * 0.35}px) scale(1.15)`;
+            if (condor) {
+                const progreso = offset / hero.offsetHeight;
+                condor.style.transform = `translate(calc(-50% + ${offset * 0.5}px), ${offset * -0.6}px) scale(${1 + progreso * 0.25})`;
+                condor.style.opacity = String(Math.max(0, 0.8 - progreso * 1.2));
+            }
         }
         ticking = false;
     };

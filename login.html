@@ -16,27 +16,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <meta name="description"
-    content="Mapa interactivo de las regiones del Ecuador (Costa, Sierra, Oriente e Insular) con los mejores hoteles disponibles en cada zona.">
-  <meta name="keywords" content="Turismo Ecuador, Mapa Ecuador, Regiones, Costa, Sierra, Oriente, Galápagos, Hoteles">
+    content="Inicia sesión en tu cuenta de viajero de Ecuador Turismo para gestionar tus reservas y planes de viaje.">
+  <meta name="keywords" content="Turismo Ecuador, Iniciar sesión, Cuenta de viajero">
   <meta name="author" content="Ecuador Turismo Portal">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0b1329">
-  <link rel="canonical" href="https://turismo-ecuador.example.com/mapa.html">
+  <link rel="canonical" href="https://turismo-ecuador.example.com/login.html">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_EC">
   <meta property="og:site_name" content="Ecuador Turismo">
-  <meta property="og:title" content="Mapa Interactivo | Ecuador Turismo">
-  <meta property="og:description" content="Explora las regiones del Ecuador y descubre los mejores hoteles para tu viaje.">
-  <meta property="og:url" content="https://turismo-ecuador.example.com/mapa.html">
+  <meta property="og:title" content="Iniciar Sesión | Ecuador Turismo">
+  <meta property="og:description" content="Ingresa a tu cuenta de viajero de Ecuador Turismo.">
+  <meta property="og:url" content="https://turismo-ecuador.example.com/login.html">
   <meta property="og:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mapa Interactivo | Ecuador Turismo">
-  <meta name="twitter:description" content="Explora las regiones del Ecuador y descubre los mejores hoteles para tu viaje.">
+  <meta name="twitter:title" content="Iniciar Sesión | Ecuador Turismo">
+  <meta name="twitter:description" content="Ingresa a tu cuenta de viajero de Ecuador Turismo.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80">
 
-  <title>Mapa Interactivo | Ecuador Turismo</title>
+  <title>Iniciar Sesión | Ecuador Turismo</title>
 
   <!-- Aplica el tema guardado antes de pintar la página -->
   <script>
@@ -72,9 +72,6 @@
 
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-  <div id="aria-announcer" class="sr-only" aria-live="polite" aria-atomic="true" role="status"></div>
-
-  <!-- ==================== HEADER ==================== -->
   <header class="site-header">
     <div class="header-container">
       <div class="header-top">
@@ -119,8 +116,9 @@
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="btn-nav btn-nav-secondary">INICIO</a></li>
           <li><a href="organizador.html" class="btn-nav btn-nav-secondary">ORGANIZADOR DE VIAJE</a></li>
+          <li><a href="mapa.html" class="btn-nav btn-nav-secondary">MAPA</a></li>
           <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
-          <li><a href="login.html" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
+          <li><a href="login.html" class="btn-nav btn-nav-secondary" aria-current="page">INICIO DE SESIÓN</a></li>
           <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
           <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
         </ul>
@@ -128,47 +126,53 @@
     </div>
   </header>
 
-  <!-- ==================== MAIN ==================== -->
   <main id="main-content" class="main-layout">
 
-    <section class="page-hero" aria-labelledby="mapa-title">
-      <h1 id="mapa-title" class="page-title">MAPA INTERACTIVO DEL ECUADOR</h1>
-      <p class="page-subtitle">Haz clic en una provincia para ver solo los hoteles disponibles en esa zona.</p>
+    <section class="page-hero" aria-labelledby="login-page-title">
+      <h1 id="login-page-title" class="page-title">INICIO DE SESIÓN</h1>
+      <p class="page-subtitle">Ingresa a tu cuenta de viajero para gestionar tus reservas.</p>
     </section>
 
-    <div class="mapa-layout">
+    <section class="login-section" aria-labelledby="login-title" id="login">
+      <header class="form-title-box">
+        <h2 id="login-title" class="form-title">INICIO DE SESIÓN</h2>
+        <p class="form-subtitle">Ingresa a tu cuenta de viajero para gestionar tus reservas.</p>
+      </header>
 
-      <div class="mapa-map-col">
-        <div class="grid-box mapa-map-card">
-          <div id="mapdiv" role="img" aria-label="Mapa del Ecuador dividido por provincias, coloreadas por región. Haz clic en una provincia para ver los hoteles disponibles en ella."></div>
+      <form id="login-form" class="stack-form" novalidate aria-label="Formulario de inicio de sesión">
+        <div class="form-group">
+          <label for="login-email" class="form-label">CORREO ELECTRÓNICO: <span aria-hidden="true">*</span></label>
+          <input type="email" id="login-email" name="email" class="form-input" placeholder="ejemplo@correo.com"
+            required autocomplete="email" aria-required="true"
+            aria-describedby="login-email-hint login-email-error" aria-invalid="false">
+          <small id="login-email-hint" class="form-hint">Ingresa tu correo registrado.</small>
+          <span id="login-email-error" class="form-error" role="alert"></span>
         </div>
 
-        <section class="grid-box mapa-legend" aria-labelledby="mapa-legend-title">
-          <h2 id="mapa-legend-title" class="box-title"><span>Regiones del Ecuador</span></h2>
-          <ul class="mapa-legend-items" role="list">
-            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#FF6B6B"></span>Costa</li>
-            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#4ECDC4"></span>Sierra</li>
-            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#45B7D1"></span>Oriente /
-              Amazonía</li>
-            <li class="mapa-legend-item"><span class="mapa-legend-color" style="background:#96CEB4"></span>Insular
-              (Galápagos)</li>
-          </ul>
-        </section>
-      </div>
-
-      <aside class="grid-box mapa-info-panel" id="mapaInfoPanel" aria-live="polite" aria-labelledby="mapa-panel-title">
-        <div id="mapaPanelContent">
-          <div class="mapa-placeholder">
-            <p>Haz clic en una provincia del mapa para ver los hoteles disponibles ahí.</p>
+        <div class="form-group">
+          <label for="login-password" class="form-label">CONTRASEÑA: <span aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••••••"
+              required autocomplete="current-password" aria-required="true"
+              aria-describedby="login-password-hint login-password-error" aria-invalid="false">
+            <button type="button" id="toggle-password" class="toggle-password-btn" aria-label="Mostrar contraseña"
+              aria-pressed="false">Mostrar</button>
           </div>
+          <small id="login-password-hint" class="form-hint">Mínimo 6 caracteres, una letra y un número.</small>
+          <span id="login-password-error" class="form-error" role="alert"></span>
         </div>
-      </aside>
 
-    </div>
+        <button type="submit" class="btn-submit">INGRESAR A MI CUENTA</button>
+        <div id="login-message" class="form-status" role="status" aria-live="polite"></div>
+      </form>
+
+      <p class="form-subtitle" style="text-align:center; margin-top: var(--space-5);">
+        ¿No tienes cuenta? <a href="index.html#registro">Regístrate aquí</a>.
+      </p>
+    </section>
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-bottom">
@@ -182,13 +186,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- amCharts (mapa interactivo) -->
-  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/geodata/ecuadorLow.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-  <script src="js/mapa.js" defer></script>
 
 </body>
 

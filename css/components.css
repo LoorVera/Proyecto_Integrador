@@ -19,7 +19,7 @@
 .user-name-wrapper { display: flex; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-1); }
 .user-name { font-weight: 700; }
 .star-rating-static { color: var(--color-gold); letter-spacing: 2px; }
-.user-place-tag { display: inline-block; font-size: var(--fs-xs); font-weight: 600; color: var(--color-link); margin-bottom: var(--space-1); }
+.user-place-tag { display: inline-block; font-size: var(--fs-xs); font-weight: 600; color: var(--color-terracota); margin-bottom: var(--space-1); }
 .user-comment { color: var(--color-muted); font-style: italic; font-size: var(--fs-sm); }
 
 .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -143,7 +143,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-primary)
 .mapa-info-panel { display: flex; flex-direction: column; max-height: 640px; overflow-y: auto; }
 .mapa-placeholder { text-align: center; color: var(--color-muted); padding: var(--space-6) var(--space-4); font-style: italic; }
 .mapa-region-header { text-align: center; padding-bottom: var(--space-4); margin-bottom: var(--space-4); border-bottom: 2px solid var(--color-border); }
-.mapa-region-tag { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-muted); }
+.mapa-region-tag { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-terracota); }
 .mapa-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-bottom: var(--space-5); }
 .mapa-stat-item { background: var(--color-bg); border-radius: var(--radius-md); padding: var(--space-3); text-align: center; }
 .mapa-stat-value { display: block; font-size: var(--fs-xl); font-weight: 800; color: var(--color-primary); }
@@ -178,12 +178,17 @@ body.home-redesign .btn-submit,
 body.home-redesign .btn-reserve { border-radius: var(--radius-full); }
 body.home-redesign .experience-card { border-radius: var(--radius-lg); }
 
+/* Header transparente sobre el hero de video: se mantiene así siempre, no se solidifica al hacer scroll */
+body.home-redesign .site-header { background: linear-gradient(180deg, rgba(11, 19, 41, .22), rgba(11, 19, 41, 0)); box-shadow: none; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
 /* ==========================================================================
    11. HERO DE VIDEO (index.html)
    ========================================================================== */
 .hero-video-banner { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--color-dark); }
 .hero-video-banner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.hero-video-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(11, 19, 41, .55), rgba(11, 19, 41, .8)); }
+.hero-condor { position: absolute; top: 5%; left: 50%; width: min(45vw, 440px); height: auto; transform: translateX(-50%); z-index: 0; opacity: .65; pointer-events: none; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .35)); }
+.hero-condor path { fill: rgba(255, 255, 255, .92); }
+.hero-video-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(11, 19, 41, .28), rgba(11, 19, 41, .55)); }
 .hero-video-content { position: relative; z-index: 2; text-align: center; color: #fff; padding: var(--space-6) var(--space-4); max-width: 760px; }
 .hero-video-title { font-family: "Space Grotesk", var(--font-body); font-size: clamp(2.2rem, 1.5rem + 3.2vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-4); }
 .hero-video-subtitle { font-size: var(--fs-lg); opacity: .92; margin-bottom: var(--space-6); }
