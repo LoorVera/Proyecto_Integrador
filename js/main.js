@@ -261,9 +261,18 @@ function initMenu() {
 /* ---- index.html: al hacer scroll, la fila de enlaces colapsa a hamburguesa ---- */
 function initHeaderScroll() {
     const header = document.querySelector(".site-header");
-    const marcaIndex = document.querySelector(".hero-video-banner");
-    if (!header || !marcaIndex)
+    if (!header)
         return;
+    // El header es fixed: se reserva su alto real como padding-top del body
+    // para que el contenido no quede tapado debajo.
+    const ajustarEspacio = () => {
+        document.body.style.paddingTop = `${header.offsetHeight}px`;
+    };
+    ajustarEspacio();
+    window.addEventListener("resize", ajustarEspacio);
+    if (typeof ResizeObserver !== "undefined") {
+        new ResizeObserver(ajustarEspacio).observe(header);
+    }
     let ticking = false;
     const actualizar = () => {
         header.classList.toggle("scrolled", window.scrollY > 80);

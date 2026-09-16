@@ -1,7 +1,7 @@
 /* ==========================================================================
    3. HEADER + MENÚ HAMBURGUESA + TOGGLE DE TEMA
    ========================================================================== */
-.site-header { background: var(--color-dark); color: #fff; padding: var(--space-3) var(--space-5); position: sticky; top: 0; z-index: 50; box-shadow: var(--shadow-sm); }
+.site-header { background: var(--color-dark); color: #fff; padding: var(--space-3) var(--space-5); position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 50; box-shadow: var(--shadow-sm); }
 .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-3); }
 .header-top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
 .logo-box { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; font-weight: 700; font-size: var(--fs-lg); z-index: 1; }
