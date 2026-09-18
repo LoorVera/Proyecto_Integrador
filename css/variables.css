@@ -3,10 +3,15 @@
    ========================================================================== */
 :root {
   --color-primary: #0ea5e9; --color-primary-dark: #0369a1; --color-primary-darker: #075985;
+  --color-primary-tint-05: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  --color-primary-tint-10: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  --color-primary-tint-18: color-mix(in srgb, var(--color-primary) 18%, transparent);
   --color-secondary: #10b981; --color-secondary-dark: #047857; --color-secondary-darker: #065f46;
+  --color-secondary-tint-12: color-mix(in srgb, var(--color-secondary) 12%, transparent);
   --color-gold: #f59e0b; --color-gold-dark: #d97706;
   --color-terracota: #c2571b; --color-terracota-dark: #9c4315;
   --color-danger: #dc2626;
+  --color-oncolor-text: #1a1a1a;
   --color-bg: #f4f7fb; --color-surface: #ffffff; --color-dark: #0b1329;
   --color-ink: #1f2937; --color-muted: #5b6472; --color-border: #8a94a6;
   /* Tokens que cambian con el tema */
@@ -76,7 +81,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-ink); line-height: 1.6; min-height: 100vh; width: 100%; display: flex; flex-direction: column; overflow-x: hidden; transition: background var(--transition), color var(--transition); }
-a { color: var(--color-link); }
+a { color: var(--color-link); text-underline-offset: 2px; }
+a:hover, a:focus-visible { color: var(--color-primary-dark); text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--color-primary-dark); outline-offset: 2px; border-radius: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .skip-link { position: absolute; top: -60px; left: var(--space-4); background: var(--color-primary-dark); color: #fff; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); text-decoration: none; z-index: 100; transition: top var(--transition); }

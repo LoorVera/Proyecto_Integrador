@@ -2,14 +2,14 @@
    4. TARJETAS + TABLA DE PLANES
    ========================================================================== */
 .cta-banner-wrapper { display: flex; justify-content: center; }
-.btn-add-experience { display: inline-flex; align-items: center; gap: var(--space-3); background: var(--color-gold); color: #1a1a1a; font-weight: 700; font-size: var(--fs-md); padding: var(--space-4) var(--space-6); border: none; border-radius: var(--radius-full); cursor: pointer; box-shadow: var(--shadow-sm); transition: var(--transition); }
+.btn-add-experience { display: inline-flex; align-items: center; gap: var(--space-3); background: var(--color-gold); color: var(--color-oncolor-text); font-weight: 700; font-size: var(--fs-md); padding: var(--space-4) var(--space-6); border: none; border-radius: var(--radius-full); cursor: pointer; box-shadow: var(--shadow-sm); transition: var(--transition); }
 .btn-add-experience:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--color-gold-dark); }
 .btn-add-experience-icon { font-size: var(--fs-lg); line-height: 1; }
 
 .grid-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: var(--space-5); }
 .box-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-4); margin-bottom: var(--space-5); }
 .box-title { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-lg); color: var(--color-heading); margin-bottom: var(--space-5); }
-.badge-live { font-size: var(--fs-xs); font-weight: 600; color: var(--color-ok-text); background: rgba(16, 185, 129, .12); padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); }
+.badge-live { font-size: var(--fs-xs); font-weight: 600; color: var(--color-ok-text); background: var(--color-secondary-tint-12); padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); }
 
 .experiences-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
 .experience-card { display: flex; gap: var(--space-4); align-items: flex-start; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-4); transition: var(--transition); }
@@ -27,13 +27,14 @@
 .plans-table caption { text-align: left; font-size: var(--fs-xs); color: var(--color-muted); font-style: italic; padding-bottom: var(--space-3); }
 .plans-table th, .plans-table td { text-align: left; padding: var(--space-3); border-bottom: 1px solid var(--color-border); }
 .plans-table th { background: var(--color-bg); color: var(--color-muted); text-transform: uppercase; font-size: var(--fs-xs); letter-spacing: .05em; }
-.plans-table tbody tr:hover { background: rgba(14, 165, 233, .05); }
+.plans-table tbody tr:hover { background: var(--color-primary-tint-05); }
 .hotel-name { font-weight: 700; display: block; }
 .hotel-location { font-size: var(--fs-xs); color: var(--color-muted); }
 .plan-price { font-weight: 800; color: var(--color-ok-text); font-size: var(--fs-lg); }
-.plan-duration { background: rgba(14, 165, 233, .1); color: var(--color-link); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
+.plan-duration { background: var(--color-primary-tint-10); color: var(--color-link); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
 .btn-reserve { display: inline-block; background: var(--color-secondary-dark); color: #fff; border: none; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: background var(--transition); text-decoration: none; font-size: var(--fs-sm); }
 .btn-reserve:hover { background: var(--color-secondary-darker); }
+.btn-reserve:disabled { opacity: .7; cursor: not-allowed; }
 
 /* ==========================================================================
    5. FORMULARIOS
@@ -48,7 +49,7 @@
 .form-group:focus-within > .form-label, .form-group:focus-within > legend { color: var(--color-link); }
 .input-wrapper { position: relative; display: flex; align-items: center; }
 .form-input { width: 100%; padding: var(--space-3) var(--space-4); border: 1.5px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--fs-md); background: var(--color-bg); color: var(--color-ink); font-family: inherit; transition: border-color var(--transition), box-shadow var(--transition); }
-.form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(14, 165, 233, .18); }
+.form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-tint-18); }
 .form-input[aria-invalid="true"] { border-color: var(--color-danger); background: rgba(220, 38, 38, .04); }
 .toggle-password-btn { position: absolute; right: var(--space-3); background: none; border: none; color: var(--color-muted); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; }
 .toggle-password-btn:hover { color: var(--color-link); }
@@ -64,11 +65,11 @@
 .strength-bar[data-level="4"] { width: 100%; background: var(--color-secondary-dark); }
 .btn-submit { background: var(--color-primary-dark); color: #fff; border: none; padding: var(--space-4); border-radius: var(--radius-md); font-size: var(--fs-md); font-weight: 700; cursor: pointer; transition: background var(--transition); }
 .btn-submit:hover { background: var(--color-primary-darker); }
-.btn-submit-gold { background: var(--color-gold); color: #1a1a1a; }
+.btn-submit-gold { background: var(--color-gold); color: var(--color-oncolor-text); }
 .btn-submit-gold:hover { background: var(--color-gold-dark); }
 .form-status, .form-feedback { display: none; padding: var(--space-3); border-radius: var(--radius-sm); font-size: var(--fs-sm); text-align: center; }
 .form-feedback { margin-top: var(--space-4); }
-.form-status.success, .form-feedback.success { display: block; background: rgba(16, 185, 129, .12); border: 1px solid var(--color-secondary); color: var(--color-success-text); }
+.form-status.success, .form-feedback.success { display: block; background: var(--color-secondary-tint-12); border: 1px solid var(--color-secondary); color: var(--color-success-text); }
 .form-status.error, .form-feedback.error { display: block; background: rgba(220, 38, 38, .08); border: 1px solid var(--color-danger); color: var(--color-danger-text); }
 
 /* ==========================================================================
@@ -80,14 +81,14 @@
 .star-rating-fieldset { border: none; display: flex; flex-direction: row-reverse; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-5); }
 .star-rating-fieldset legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
 .star-rating-fieldset input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.star-rating-fieldset label { font-size: 2rem; color: #8b93a3; cursor: pointer; transition: var(--transition); }
+.star-rating-fieldset label { font-size: var(--fs-2xl); color: #8b93a3; cursor: pointer; transition: var(--transition); }
 .star-rating-fieldset label:hover, .star-rating-fieldset label:hover ~ label, .star-rating-fieldset input[type="radio"]:checked ~ label { color: var(--color-gold); }
 .star-rating-fieldset input[type="radio"]:focus-visible + label { outline: 3px solid var(--color-primary); border-radius: 4px; }
 .feedback-textarea { width: 100%; min-height: 90px; padding: var(--space-3); border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, .2); background: rgba(0, 0, 0, .25); color: #fff; font-family: inherit; font-size: var(--fs-sm); resize: vertical; margin-bottom: var(--space-4); }
 .feedback-textarea.light { background: var(--color-bg); color: var(--color-ink); border-color: var(--color-border); }
 .feedback-textarea::placeholder { color: #9ca3af; }
 .feedback-textarea.light::placeholder { color: #6b7280; }
-.btn-submit-feedback { background: var(--color-gold); color: #1a1a1a; border: none; padding: var(--space-3) var(--space-5); border-radius: var(--radius-full); font-weight: 700; cursor: pointer; transition: background var(--transition); }
+.btn-submit-feedback { background: var(--color-gold); color: var(--color-oncolor-text); border: none; padding: var(--space-3) var(--space-5); border-radius: var(--radius-full); font-weight: 700; cursor: pointer; transition: background var(--transition); }
 .btn-submit-feedback:hover { background: var(--color-gold-dark); }
 kbd { background: rgba(255, 255, 255, .12); border-radius: 4px; padding: 2px 6px; font-family: monospace; }
 
@@ -98,7 +99,7 @@ dialog.modal-dialog { border: none; border-radius: var(--radius-lg); box-shadow:
 dialog.modal-dialog::backdrop { background: rgba(11, 19, 41, .6); backdrop-filter: blur(4px); }
 .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-4); margin-bottom: var(--space-5); }
 .modal-title { font-size: var(--fs-lg); color: var(--color-gold-text); }
-.modal-close-btn { background: none; border: none; font-size: 1.6rem; line-height: 1; color: var(--color-muted); cursor: pointer; border-radius: 4px; }
+.modal-close-btn { background: none; border: none; font-size: var(--fs-xl); line-height: 1; color: var(--color-muted); cursor: pointer; border-radius: 4px; }
 .modal-close-btn:hover { color: var(--color-ink); background: var(--color-bg); }
 
 /* ==========================================================================
@@ -121,6 +122,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-primary)
 .btn-quitar:hover { color: var(--color-danger); }
 .budget-total { font-size: var(--fs-md); }
 .budget-total strong { color: var(--color-ok-text); font-size: var(--fs-lg); }
+.budget-total-secondary strong { color: var(--color-muted); font-size: var(--fs-md); font-weight: 600; }
 .itinerario-list { margin: var(--space-3) 0 0 var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--fs-sm); }
 
 .policy-updated { color: var(--color-muted); font-size: var(--fs-xs); font-style: italic; margin-bottom: var(--space-5); }
@@ -152,7 +154,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-primary)
 .mapa-hotel-card { background: var(--color-bg); border-left: 4px solid var(--color-primary); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3); transition: var(--transition); }
 .mapa-hotel-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 .mapa-hotel-header { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1); }
-.mapa-hotel-price { background: var(--color-secondary-dark); color: #fff; padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; }
+.mapa-hotel-price { background: var(--color-secondary-dark); color: #fff; padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--fs-lg); font-weight: 800; white-space: nowrap; }
 .mapa-hotel-rating { color: var(--color-gold); letter-spacing: 2px; font-size: var(--fs-sm); margin-bottom: var(--space-2); }
 .mapa-hotel-features { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
 .mapa-feature { background: var(--color-surface); border: 1px solid var(--color-border); padding: 2px var(--space-2); border-radius: var(--radius-full); font-size: var(--fs-xs); color: var(--color-muted); }
@@ -193,12 +195,12 @@ body.home-redesign .site-header { background: linear-gradient(180deg, rgba(11, 1
 .hero-video-title { font-family: "Space Grotesk", var(--font-body); font-size: clamp(2.2rem, 1.5rem + 3.2vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-4); }
 .hero-video-subtitle { font-size: var(--fs-lg); opacity: .92; margin-bottom: var(--space-6); }
 .hero-video-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
-.hero-video-cta { display: inline-flex; align-items: center; gap: var(--space-2); background: #fff; color: #111827; font-weight: 700; padding: var(--space-4) var(--space-6); border-radius: var(--radius-full); text-decoration: none; border: 2px solid #fff; transition: var(--transition); }
+.hero-video-cta { display: inline-flex; align-items: center; gap: var(--space-2); background: #fff; color: var(--color-oncolor-text); font-weight: 700; padding: var(--space-4) var(--space-6); border-radius: var(--radius-full); text-decoration: none; border: 2px solid #fff; transition: var(--transition); }
 .hero-video-cta:hover { background: var(--color-bg); transform: translateY(-2px); }
 .hero-video-cta-secondary { background: transparent; color: #fff; }
 .hero-video-cta-secondary:hover { background: rgba(255, 255, 255, .15); }
 
-.badge-popular { display: inline-block; background: var(--color-gold); color: #1a1a1a; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .03em; padding: 2px var(--space-2); border-radius: var(--radius-full); vertical-align: middle; margin-left: var(--space-2); }
+.badge-popular { display: inline-block; background: var(--color-gold); color: var(--color-oncolor-text); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .03em; padding: 2px var(--space-2); border-radius: var(--radius-full); vertical-align: middle; margin-left: var(--space-2); }
 
 /* ==========================================================================
    12. ANIMACIÓN AL HACER SCROLL (index.html)

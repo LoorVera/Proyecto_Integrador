@@ -54,6 +54,13 @@ const minLength = (min: number, campo: string): Validator =>
 const maxLength = (max: number, campo: string): Validator =>
   (v) => (v.trim().length <= max ? null : `⚠ ${campo} no puede superar los ${max} caracteres.`);
 
+const numberRange = (min: number, max: number, campo: string): Validator =>
+  (v) => {
+    const n = Number(v);
+    return v.trim() !== "" && !Number.isNaN(n) && n >= min && n <= max
+      ? null : `⚠ ${campo} debe estar entre ${min} y ${max}.`;
+  };
+
 const emailFormat: Validator = (v) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? null : "⚠ Correo inválido. Ejemplo: ana@correo.com";
 
@@ -490,18 +497,28 @@ function initModal(): void {
   modal.addEventListener("click", (e: MouseEvent) => { if (e.target === modal) cerrarModal(); });
 
   if (form) {
+    const fields = buildFields([
+      ["exp-author", "exp-author-error", [required("Tu nombre")]],
+      ["exp-place", "exp-place-error", [required("El lugar turístico")]],
+      ["exp-comment", "exp-comment-error", [required("La reseña"), minLength(10, "La reseña")]],
+    ]);
+    for (const cfg of fields) {
+      cfg.input.addEventListener("blur", () => checkField(cfg));
+      cfg.input.addEventListener("input", debounce(() => checkField(cfg), 300));
+    }
+
     form.addEventListener("submit", (e: Event) => {
       e.preventDefault();
+      const idx = fields.map(checkField).findIndex((ok) => !ok);
+      if (idx !== -1) { fields[idx].input.focus(); return; }
+
       const autor = byId<HTMLInputElement>("exp-author")?.value.trim() ?? "";
       const lugar = byId<HTMLInputElement>("exp-place")?.value.trim() ?? "";
       const nota = Number(byId<HTMLSelectElement>("exp-rating")?.value ?? 5);
       const texto = byId<HTMLTextAreaElement>("exp-comment")?.value.trim() ?? "";
-      if (!autor || !lugar || !texto) {
-        byId<HTMLInputElement | HTMLTextAreaElement>(!autor ? "exp-author" : !lugar ? "exp-place" : "exp-comment")?.focus();
-        return;
-      }
       addExperienceCard(autor, lugar, nota, texto);
       form.reset();
+      for (const cfg of fields) clearError(cfg.input, cfg.error);
       cerrarModal();
     });
   }
@@ -586,6 +603,8 @@ function initReservas(): void {
       reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
       guardarArray(RESERVAS_KEY, reservas);
       renderizarReservas();
+      const status = byId<HTMLElement>("reservas-status");
+      if (status) { status.className = "form-status success"; status.textContent = `✅ ${hotel} reservado. Revisa el detalle abajo.`; }
     });
   });
 
@@ -631,21 +650,27 @@ function initOrganizador(): void {
   const pre = params.get("destino");
   if (pre && DESTINOS[pre]) select.value = pre;
 
+  const fields = buildFields([
+    ["org-destino", "org-destino-error", [required("El destino")]],
+    ["org-dias", "org-dias-error", [required("Los días"), numberRange(1, 15, "Los días")]],
+    ["org-personas", "org-personas-error", [required("Los viajeros"), numberRange(1, 12, "Los viajeros")]],
+  ]);
+  for (const cfg of fields) {
+    cfg.input.addEventListener("blur", () => checkField(cfg));
+    cfg.input.addEventListener("input", debounce(() => checkField(cfg), 300));
+  }
+
   let ultimoPlan: PlanGuardado | null = null;
 
   form.addEventListener("submit", (e: Event) => {
     e.preventDefault();
+    const idx = fields.map(checkField).findIndex((ok) => !ok);
+    if (idx !== -1) { fields[idx].input.focus(); ultimoPlan = null; return; }
+
     const data = DESTINOS[select.value];
     const dias = Number(byId<HTMLInputElement>("org-dias")?.value ?? 0);
     const personas = Number(byId<HTMLInputElement>("org-personas")?.value ?? 0);
-
-    if (!data || dias < 1 || dias > 15 || personas < 1 || personas > 12) {
-      resultado.innerHTML =
-        `<p class="form-feedback error" role="alert">⚠ Revisa los datos: elige un destino, ` +
-        `días entre 1 y 15 y viajeros entre 1 y 12.</p>`;
-      ultimoPlan = null;
-      return;
-    }
+    if (!data) { ultimoPlan = null; return; }
 
     const hotelKey = form.querySelector<HTMLInputElement>("input[name='org-hotel']:checked")?.value ?? "hostal";
     const hotel = HOSPEDAJE[hotelKey];
@@ -678,11 +703,12 @@ function initOrganizador(): void {
       `<li><span>Actividades ($${data.costoDia} × ${dias} días)</span><strong>$${cActividades}</strong></li>` +
       `<li><span>Extras por persona</span><strong>$${extras}</strong></li>` +
       `</ul>` +
-      `<p class="budget-total">Total por persona: <strong>$${totalPersona}</strong></p>` +
+      `<p class="budget-total budget-total-secondary">Total por persona: <strong>$${totalPersona}</strong></p>` +
       `<p class="budget-total">Total del grupo (${personas} viajero${personas > 1 ? "s" : ""}): <strong>$${totalGrupo}</strong></p>` +
       `<h3 class="org-subtitle">Itinerario sugerido</h3>` +
       `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>` +
-      `<button type="button" id="btn-guardar-plan" class="btn-submit">GUARDAR MI PLAN</button>`;
+      `<button type="button" id="btn-guardar-plan" class="btn-submit-gold">GUARDAR MI PLAN</button>` +
+      `<div id="plan-status" class="form-status" role="status" aria-live="polite"></div>`;
   });
 
   resultado.addEventListener("click", (e: Event) => {
@@ -691,6 +717,8 @@ function initOrganizador(): void {
     guardados.push(ultimoPlan);
     guardarArray(VIAJES_KEY, guardados);
     renderizarPlanesGuardados();
+    const status = byId<HTMLElement>("plan-status");
+    if (status) { status.className = "form-status success"; status.textContent = `✅ Plan guardado en "Mis planes de viaje guardados".`; }
   });
 
   const planesGuardadosBox = byId<HTMLElement>("planes-guardados");

@@ -167,7 +167,7 @@
     return "★".repeat(rating) + "☆".repeat(5 - rating);
   }
 
-  function reservarHotel(nombre, precio) {
+  function reservarHotel(btn, nombre, precio) {
     if (typeof mixpanel !== "undefined") mixpanel.track("hotel_book_clicked", { name: nombre });
     var reservas = leerArray(RESERVAS_KEY);
     reservas.push({ hotel: nombre, precio: precio, duracion: "Por noche", fecha: new Date().toLocaleDateString("es-EC") });
@@ -175,6 +175,13 @@
 
     var anunciador = document.getElementById("aria-announcer");
     if (anunciador) anunciador.textContent = "Reserva de " + nombre + " guardada. Revísala en tus reservas.";
+
+    if (btn) {
+      var textoOriginal = btn.textContent;
+      btn.textContent = "✅ Reservado";
+      btn.disabled = true;
+      window.setTimeout(function () { btn.textContent = textoOriginal; btn.disabled = false; }, 2200);
+    }
   }
 
   function mostrarHoteles(regionId, provincia) {
@@ -217,7 +224,7 @@
 
     panel.querySelectorAll(".mapa-book-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        reservarHotel(btn.dataset.hotel, btn.dataset.precio);
+        reservarHotel(btn, btn.dataset.hotel, btn.dataset.precio);
       });
     });
 
@@ -230,7 +237,8 @@
   function resetMapa() {
     if (activePolygon) { activePolygon.states.applyAnimate("default"); activePolygon = null; }
     var panel = document.getElementById("mapaPanelContent");
-    if (panel) panel.innerHTML = "<div class=\"mapa-placeholder\"><p>Haz clic en una provincia del mapa para ver los hoteles de su región.</p></div>";
+    if (panel) panel.innerHTML = "<h2 id=\"mapa-panel-title\" class=\"sr-only\">Detalle de hoteles por provincia</h2>" +
+      "<div class=\"mapa-placeholder\"><p>Haz clic en una provincia del mapa para ver los hoteles de su región.</p></div>";
   }
 
   function initMapa() {

@@ -116,11 +116,8 @@
       <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
         <ul class="nav-links" role="list">
           <li><a href="index.html" class="btn-nav btn-nav-secondary" >INICIO</a></li>
-          <li><a href="organizador.html" class="btn-nav btn-nav-secondary" aria-current="page">ORGANIZADOR DE VIAJE</a></li>
           <li><a href="mapa.html" class="btn-nav btn-nav-secondary">MAPA</a></li>
-          <li><a href="index.html#planes" class="btn-nav btn-nav-secondary">PLANES DE PAGO</a></li>
           <li><a href="login.html" class="btn-nav btn-nav-secondary">INICIO DE SESIÓN</a></li>
-          <li><a href="index.html#registro" class="btn-nav btn-nav-primary">REGISTRO</a></li>
           <li><a href="index.html#contacto" class="btn-nav btn-nav-secondary">CONTACTO</a></li>
         </ul>
       </nav>
@@ -143,7 +140,8 @@
         <form id="org-form" class="stack-form" novalidate aria-label="Formulario de planificación de viaje">
           <div class="form-group">
             <label for="org-destino" class="form-label">DESTINO: <span aria-hidden="true">*</span></label>
-            <select id="org-destino" name="destino" class="form-input" required aria-required="true">
+            <select id="org-destino" name="destino" class="form-input" required aria-required="true"
+              aria-describedby="org-destino-error" aria-invalid="false">
               <option value="">Selecciona un destino…</option>
               <option value="galapagos">Islas Galápagos</option>
               <option value="quito">Quito</option>
@@ -152,18 +150,23 @@
               <option value="banos">Baños de Agua Santa</option>
               <option value="montanita">Montañita</option>
             </select>
+            <span id="org-destino-error" class="form-error" role="alert"></span>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="org-dias" class="form-label">DÍAS: <span aria-hidden="true">*</span></label>
               <input type="number" id="org-dias" name="dias" class="form-input" min="1" max="15" value="3"
-                required aria-required="true">
+                required aria-required="true"
+                aria-describedby="org-dias-error" aria-invalid="false">
+              <span id="org-dias-error" class="form-error" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="org-personas" class="form-label">VIAJEROS: <span aria-hidden="true">*</span></label>
               <input type="number" id="org-personas" name="personas" class="form-input" min="1" max="12" value="2"
-                required aria-required="true">
+                required aria-required="true"
+                aria-describedby="org-personas-error" aria-invalid="false">
+              <span id="org-personas-error" class="form-error" role="alert"></span>
             </div>
           </div>
 

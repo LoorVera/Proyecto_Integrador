@@ -3,6 +3,7 @@
 
 <head>
   <script async src="https://t.contentsquare.net/uxa/376a6bf28de2b.js"></script>
+  
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1ZM5Y9V5G"></script>
   <script>
@@ -306,6 +307,7 @@
           </table>
         </div>
 
+        <div id="reservas-status" class="form-status" role="status" aria-live="polite"></div>
         <div id="reservas-guardadas" class="org-resultado" aria-live="polite"></div>
       </section>
 
@@ -481,12 +483,16 @@
       <div class="form-group">
         <label for="exp-author" class="form-label">Tu Nombre:</label>
         <input type="text" id="exp-author" name="exp-author" class="form-input" placeholder="Ej. Carlos Mendoza"
-          required aria-required="true" autocomplete="name">
+          required autocomplete="name" aria-required="true"
+          aria-describedby="exp-author-error" aria-invalid="false">
+        <span id="exp-author-error" class="form-error" role="alert"></span>
       </div>
       <div class="form-group">
         <label for="exp-place" class="form-label">Lugar Turístico:</label>
         <input type="text" id="exp-place" name="exp-place" class="form-input" placeholder="Ej. Laguna de Quilotoa"
-          required aria-required="true">
+          required aria-required="true"
+          aria-describedby="exp-place-error" aria-invalid="false">
+        <span id="exp-place-error" class="form-error" role="alert"></span>
       </div>
       <div class="form-group">
         <label for="exp-rating" class="form-label">Calificación (1 a 5):</label>
@@ -501,7 +507,9 @@
       <div class="form-group">
         <label for="exp-comment" class="form-label">Reseña de la experiencia:</label>
         <textarea id="exp-comment" name="exp-comment" class="feedback-textarea light"
-          placeholder="Describe lo que más te gustó de tu viaje..." required aria-required="true"></textarea>
+          placeholder="Describe lo que más te gustó de tu viaje..." required aria-required="true"
+          aria-describedby="exp-comment-error" aria-invalid="false"></textarea>
+        <span id="exp-comment-error" class="form-error" role="alert"></span>
       </div>
       <button type="submit" class="btn-submit btn-submit-gold">PUBLICAR EXPERIENCIA</button>
     </form>

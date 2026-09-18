@@ -32,6 +32,11 @@ function guardarArray(key, arr) {
 const required = (campo) => (v) => (v.trim() !== "" ? null : `⚠ ${campo} es obligatorio.`);
 const minLength = (min, campo) => (v) => (v.trim().length >= min ? null : `⚠ ${campo} debe tener al menos ${min} caracteres.`);
 const maxLength = (max, campo) => (v) => (v.trim().length <= max ? null : `⚠ ${campo} no puede superar los ${max} caracteres.`);
+const numberRange = (min, max, campo) => (v) => {
+    const n = Number(v);
+    return v.trim() !== "" && !Number.isNaN(n) && n >= min && n <= max
+        ? null : `⚠ ${campo} debe estar entre ${min} y ${max}.`;
+};
 const emailFormat = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? null : "⚠ Correo inválido. Ejemplo: ana@correo.com";
 const phoneFormat = (v) => /^(09\d{8}|\+5939\d{8})$/.test(v.replace(/[\s()-]/g, ""))
     ? null : "⚠ Teléfono inválido. Usa 09XXXXXXXX o +5939XXXXXXXX.";
@@ -476,20 +481,32 @@ function initModal() {
     modal.addEventListener("click", (e) => { if (e.target === modal)
         cerrarModal(); });
     if (form) {
+        const fields = buildFields([
+            ["exp-author", "exp-author-error", [required("Tu nombre")]],
+            ["exp-place", "exp-place-error", [required("El lugar turístico")]],
+            ["exp-comment", "exp-comment-error", [required("La reseña"), minLength(10, "La reseña")]],
+        ]);
+        for (const cfg of fields) {
+            cfg.input.addEventListener("blur", () => checkField(cfg));
+            cfg.input.addEventListener("input", debounce(() => checkField(cfg), 300));
+        }
         form.addEventListener("submit", (e) => {
-            var _a, _b, _c, _d, _e;
-            var _f, _g, _h, _j;
+            var _a, _b, _c, _d;
+            var _e, _f, _g, _h;
             e.preventDefault();
-            const autor = (_f = (_a = byId("exp-author")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _f !== void 0 ? _f : "";
-            const lugar = (_g = (_b = byId("exp-place")) === null || _b === void 0 ? void 0 : _b.value.trim()) !== null && _g !== void 0 ? _g : "";
-            const nota = Number((_h = (_c = byId("exp-rating")) === null || _c === void 0 ? void 0 : _c.value) !== null && _h !== void 0 ? _h : 5);
-            const texto = (_j = (_d = byId("exp-comment")) === null || _d === void 0 ? void 0 : _d.value.trim()) !== null && _j !== void 0 ? _j : "";
-            if (!autor || !lugar || !texto) {
-                (_e = byId(!autor ? "exp-author" : !lugar ? "exp-place" : "exp-comment")) === null || _e === void 0 ? void 0 : _e.focus();
+            const idx = fields.map(checkField).findIndex((ok) => !ok);
+            if (idx !== -1) {
+                fields[idx].input.focus();
                 return;
             }
+            const autor = (_e = (_a = byId("exp-author")) === null || _a === void 0 ? void 0 : _a.value.trim()) !== null && _e !== void 0 ? _e : "";
+            const lugar = (_f = (_b = byId("exp-place")) === null || _b === void 0 ? void 0 : _b.value.trim()) !== null && _f !== void 0 ? _f : "";
+            const nota = Number((_g = (_c = byId("exp-rating")) === null || _c === void 0 ? void 0 : _c.value) !== null && _g !== void 0 ? _g : 5);
+            const texto = (_h = (_d = byId("exp-comment")) === null || _d === void 0 ? void 0 : _d.value.trim()) !== null && _h !== void 0 ? _h : "";
             addExperienceCard(autor, lugar, nota, texto);
             form.reset();
+            for (const cfg of fields)
+                clearError(cfg.input, cfg.error);
             cerrarModal();
         });
     }
@@ -574,6 +591,11 @@ function initReservas() {
             reservas.push({ hotel, precio, duracion, fecha: new Date().toLocaleDateString("es-EC") });
             guardarArray(RESERVAS_KEY, reservas);
             renderizarReservas();
+            const status = byId("reservas-status");
+            if (status) {
+                status.className = "form-status success";
+                status.textContent = `✅ ${hotel} reservado. Revisa el detalle abajo.`;
+            }
         });
     });
     contenedor.addEventListener("click", (e) => {
@@ -617,18 +639,30 @@ function initOrganizador() {
     const pre = params.get("destino");
     if (pre && DESTINOS[pre])
         select.value = pre;
+    const fields = buildFields([
+        ["org-destino", "org-destino-error", [required("El destino")]],
+        ["org-dias", "org-dias-error", [required("Los días"), numberRange(1, 15, "Los días")]],
+        ["org-personas", "org-personas-error", [required("Los viajeros"), numberRange(1, 12, "Los viajeros")]],
+    ]);
+    for (const cfg of fields) {
+        cfg.input.addEventListener("blur", () => checkField(cfg));
+        cfg.input.addEventListener("input", debounce(() => checkField(cfg), 300));
+    }
     let ultimoPlan = null;
     form.addEventListener("submit", (e) => {
         var _a, _b, _c;
         var _d, _e, _f;
         e.preventDefault();
+        const idx = fields.map(checkField).findIndex((ok) => !ok);
+        if (idx !== -1) {
+            fields[idx].input.focus();
+            ultimoPlan = null;
+            return;
+        }
         const data = DESTINOS[select.value];
         const dias = Number((_d = (_a = byId("org-dias")) === null || _a === void 0 ? void 0 : _a.value) !== null && _d !== void 0 ? _d : 0);
         const personas = Number((_e = (_b = byId("org-personas")) === null || _b === void 0 ? void 0 : _b.value) !== null && _e !== void 0 ? _e : 0);
-        if (!data || dias < 1 || dias > 15 || personas < 1 || personas > 12) {
-            resultado.innerHTML =
-                `<p class="form-feedback error" role="alert">⚠ Revisa los datos: elige un destino, ` +
-                    `días entre 1 y 15 y viajeros entre 1 y 12.</p>`;
+        if (!data) {
             ultimoPlan = null;
             return;
         }
@@ -661,11 +695,12 @@ function initOrganizador() {
                 `<li><span>Actividades ($${data.costoDia} × ${dias} días)</span><strong>$${cActividades}</strong></li>` +
                 `<li><span>Extras por persona</span><strong>$${extras}</strong></li>` +
                 `</ul>` +
-                `<p class="budget-total">Total por persona: <strong>$${totalPersona}</strong></p>` +
+                `<p class="budget-total budget-total-secondary">Total por persona: <strong>$${totalPersona}</strong></p>` +
                 `<p class="budget-total">Total del grupo (${personas} viajero${personas > 1 ? "s" : ""}): <strong>$${totalGrupo}</strong></p>` +
                 `<h3 class="org-subtitle">Itinerario sugerido</h3>` +
                 `<ol class="itinerario-list">${plan.map((p) => `<li>${p}</li>`).join("")}</ol>` +
-                `<button type="button" id="btn-guardar-plan" class="btn-submit">GUARDAR MI PLAN</button>`;
+                `<button type="button" id="btn-guardar-plan" class="btn-submit-gold">GUARDAR MI PLAN</button>` +
+                `<div id="plan-status" class="form-status" role="status" aria-live="polite"></div>`;
     });
     resultado.addEventListener("click", (e) => {
         if (!e.target.closest("#btn-guardar-plan") || !ultimoPlan)
@@ -674,6 +709,11 @@ function initOrganizador() {
         guardados.push(ultimoPlan);
         guardarArray(VIAJES_KEY, guardados);
         renderizarPlanesGuardados();
+        const status = byId("plan-status");
+        if (status) {
+            status.className = "form-status success";
+            status.textContent = `✅ Plan guardado en "Mis planes de viaje guardados".`;
+        }
     });
     const planesGuardadosBox = byId("planes-guardados");
     planesGuardadosBox === null || planesGuardadosBox === void 0 ? void 0 : planesGuardadosBox.addEventListener("click", (e) => {
