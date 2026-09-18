@@ -161,6 +161,7 @@ function initForms(): void {
     const email = byId<HTMLInputElement>("login-email")?.value.trim() ?? "";
     guardarSesion(email.split("@")[0] || "Viajero");
     if (typeof mixpanel !== "undefined") mixpanel.track("login_success");
+    window.location.replace("index.html");
   });
 
   bindForm("register-form", buildFields([

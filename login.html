@@ -48,6 +48,13 @@
     })();
   </script>
 
+  <!-- Si ya hay una sesión activa, esta página no debe mostrarse: redirige a inicio -->
+  <script>
+    if (localStorage.getItem("sesion-usuario")) {
+      window.location.replace("index.html");
+    }
+  </script>
+
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪</text></svg>">
   <link rel="stylesheet" href="css/variables.css">

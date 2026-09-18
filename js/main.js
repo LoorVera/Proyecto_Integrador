@@ -146,6 +146,7 @@ function initForms() {
         guardarSesion(email.split("@")[0] || "Viajero");
         if (typeof mixpanel !== "undefined")
             mixpanel.track("login_success");
+        window.location.replace("index.html");
     });
     bindForm("register-form", buildFields([
         ["reg-name", "reg-name-error", [required("El nombre"), minLength(3, "El nombre")]],

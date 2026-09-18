@@ -167,6 +167,18 @@
     return "★".repeat(rating) + "☆".repeat(5 - rating);
   }
 
+  function slugify(texto) {
+    return texto
+      .toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  }
+
+  function imagenHotel(nombre) {
+    return "https://picsum.photos/seed/" + slugify(nombre) + "/320/200";
+  }
+
   function reservarHotel(btn, nombre, precio) {
     if (typeof mixpanel !== "undefined") mixpanel.track("hotel_book_clicked", { name: nombre });
     var reservas = leerArray(RESERVAS_KEY);
@@ -196,6 +208,7 @@
           var featuresHtml = hotel.features.map(function (f) { return "<span class=\"mapa-feature\">" + f + "</span>"; }).join("");
           return (
             "<div class=\"mapa-hotel-card\">" +
+            "<img class=\"mapa-hotel-img\" src=\"" + imagenHotel(hotel.nombre) + "\" alt=\"" + hotel.nombre.replace(/"/g, "&quot;") + "\" loading=\"lazy\" width=\"320\" height=\"200\">" +
             "<div class=\"mapa-hotel-header\">" +
             "<span class=\"hotel-name\">" + hotel.nombre + "</span>" +
             "<span class=\"mapa-hotel-price\">" + hotel.precio + "</span>" +

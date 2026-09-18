@@ -11,7 +11,6 @@
   .logo-text { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: var(--fs-lg); }
   .nav-links { flex-direction: row; flex-wrap: wrap; }
   .nav-links .btn-nav { width: auto; }
-  .cta-banner-wrapper { justify-content: flex-end; }
   /* Al hacer scroll, la fila de enlaces se esconde y aparece la hamburguesa */
   body.home-redesign .site-header.scrolled .menu-toggle { display: inline-flex; }
   body.home-redesign .site-header.scrolled .site-nav { display: none; }
